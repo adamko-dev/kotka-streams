@@ -1,4 +1,4 @@
-package kotka.convention.release
+package kotka.convention
 
 plugins {
   `maven-publish`

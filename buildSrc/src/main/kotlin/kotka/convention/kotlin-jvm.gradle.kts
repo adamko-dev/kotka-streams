@@ -1,4 +1,4 @@
-package kotka.convention.lang
+package kotka.convention
 
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 

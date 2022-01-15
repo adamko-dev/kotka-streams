@@ -1,15 +1,24 @@
+
 plugins {
   base
   `project-report`
   `build-dashboard`
-  kotka.convention.lang.`kotlin-jvm`
-  kotka.convention.release.`maven-publish`
-  kotka.convention.versioning
+  kotka.convention.`kotlin-jvm`
+  kotka.convention.`maven-publish`
+  id("me.qoomon.git-versioning")
 }
 
 group = "dev.adamko.kotka"
-// NOTE: version is configured by `kotka.convention.versioning` plugin
 version = "0.0.0-SNAPSHOT"
+gitVersioning.apply {
+  refs {
+    branch(".+") { version = "\${ref}-SNAPSHOT" }
+    tag("v(?<version>.*)") { version = "\${ref.version}" }
+  }
+
+  // optional fallback configuration in case of no matching ref configuration
+  rev { version = "\${commit}" }
+}
 
 dependencies {
   api(projects.modules.kotkaStreamsTopicData)

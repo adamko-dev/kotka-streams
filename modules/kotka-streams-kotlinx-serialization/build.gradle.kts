@@ -1,7 +1,7 @@
 plugins {
-  kotka.convention.lang.`kotlin-jvm`
+  kotka.convention.`kotlin-jvm`
   kotlin("plugin.serialization")
-  kotka.convention.release.`maven-publish`
+  kotka.convention.`maven-publish`
 }
 
 dependencies {
