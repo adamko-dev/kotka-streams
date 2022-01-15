@@ -1,3 +1,5 @@
+[![](https://jitpack.io/v/adamko-dev/kotka-streams.svg)](https://jitpack.io/#adamko-dev/kotka-streams)
+
 # Kotka Streams - Kotlin for Kafka Streams
 
 Using [Kotka](https://github.com/adamko-dev/kotka-streams) means a more pleasant experience while
