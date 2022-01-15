@@ -1,11 +1,11 @@
-
 plugins {
-  base
-  `project-report`
-  `build-dashboard`
   kotka.convention.`kotlin-jvm`
+
   kotka.convention.`maven-publish`
   id("me.qoomon.git-versioning")
+
+  `project-report`
+  `build-dashboard`
 }
 
 group = "dev.adamko.kotka"
