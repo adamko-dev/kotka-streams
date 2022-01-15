@@ -21,7 +21,7 @@ repositories {
 }
 
 dependencies {
-  implementation("com.github.adamko-dev:kotka-streams-extensions:$kotkaVersion")
+  implementation("com.github.adamko-dev.kotka-streams:kotka-streams-extensions:$kotkaVersion")
 }
 ```
 
@@ -32,7 +32,7 @@ all at once
 
 ```kotlin
 dependencies {
-  implementation("com.github.adamko-dev:kotka-streams:$kotkaVersion")
+  implementation("com.github.adamko-dev.kotka-streams:kotka-streams:$kotkaVersion")
 }
 ```
 
@@ -41,7 +41,7 @@ dependencies {
 Contains the basic extension functions to make Kafka Streams more Kotlin-esque.
 
 ```kotlin
-  implementation("dev.adamko.kotka-streams:kotka-streams-extensions:$kotkaVersion")
+  implementation("com.github.adamko-dev.kotka-streams:kotka-streams-extensions:$kotkaVersion")
 ```
 
 ```kotlin
@@ -62,7 +62,7 @@ builder.stream<String, MusicalBand>("musical-bands")
 A light framework for structuring topics and records.
 
 ```kotlin
-  implementation("com.github.adamko-dev:kotka-streams-topic-data:$kotkaVersion")
+  implementation("com.github.adamko-dev.kotka-streams:kotka-streams-topic-data:$kotkaVersion")
 ```
 
 Use `TopicRecord` to standardise the data on each topic. Records can now easily be converted from
@@ -112,7 +112,7 @@ Use [Kotlinx Serialization](https://github.com/Kotlin/kotlinx.serialization/) fo
 serdes.
 
 ```kotlin
-implementation("com.github.adamko-dev:kotka-streams-kotlinx-serialization:$kotkaVersion")
+implementation("com.github.adamko-dev.kotka-streams:kotka-streams-kotlinx-serialization:$kotkaVersion")
 ```
 
 ```kotlin
