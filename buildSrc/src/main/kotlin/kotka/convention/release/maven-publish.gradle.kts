@@ -11,5 +11,12 @@ plugins.withType(JavaPlugin::class.java) {
         from(components["java"])
       }
     }
+    repositories {
+      maven {
+        name = "GitHubPackages"
+        url = uri("https://maven.pkg.github.com/adamko-dev/kotka-streams")
+        credentials(PasswordCredentials::class)
+      }
+    }
   }
 }

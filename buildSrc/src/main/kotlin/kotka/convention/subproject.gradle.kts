@@ -4,5 +4,5 @@ plugins {
   base
 }
 
-group = "${rootProject.group}.${project.name}"
+group = rootProject.group
 version = rootProject.version
