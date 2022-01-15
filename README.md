@@ -21,18 +21,18 @@ repositories {
 }
 
 dependencies {
-  implementation("dev.adamko.kotka-streams:kotka-streams-extensions:$kotkaVersion")
+  implementation("com.github.adamko-dev:kotka-streams-extensions:$kotkaVersion")
 }
 ```
 
 ## Modules
 
-There are three modules. Add a dependency on `dev.adamko.kotka-streams:kotka-streams` to get them
+There are three modules. Add a dependency on `com.github.adamko-dev:kotka-streams` to get them
 all at once
 
 ```kotlin
 dependencies {
-  implementation("dev.adamko.kotka-streams:kotka-streams:$kotkaVersion")
+  implementation("com.github.adamko-dev:kotka-streams:$kotkaVersion")
 }
 ```
 
@@ -62,7 +62,7 @@ builder.stream<String, MusicalBand>("musical-bands")
 A light framework for structuring topics and records.
 
 ```kotlin
-  implementation("dev.adamko.kotka-streams:kotka-streams-topic-data:$kotkaVersion")
+  implementation("com.github.adamko-dev:kotka-streams-topic-data:$kotkaVersion")
 ```
 
 Use `TopicRecord` to standardise the data on each topic. Records can now easily be converted from
@@ -112,7 +112,7 @@ Use [Kotlinx Serialization](https://github.com/Kotlin/kotlinx.serialization/) fo
 serdes.
 
 ```kotlin
-implementation("dev.adamko.kotka-streams:kotka-streams-kotlinx-serialization:$kotkaVersion")
+implementation("com.github.adamko-dev:kotka-streams-kotlinx-serialization:$kotkaVersion")
 ```
 
 ```kotlin
