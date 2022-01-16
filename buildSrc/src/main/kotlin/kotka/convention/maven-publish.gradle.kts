@@ -20,3 +20,11 @@ plugins.withType(JavaPlugin::class.java) {
     }
   }
 }
+
+tasks
+  .matching { it.name in listOf("publish", "publishToMavenLocal") }
+  .configureEach {
+    doLast {
+      logger.lifecycle("[${this.name}] ${project.group}:${project.name}:${project.version}")
+    }
+  }
