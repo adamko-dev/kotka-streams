@@ -1,5 +1,7 @@
-package dev.adamko.kotka.extensions
+package dev.adamko.kotka.extensions.streams
 
+import dev.adamko.kotka.extensions.namedAs
+import dev.adamko.kotka.extensions.toKeyValue
 import org.apache.kafka.common.utils.Bytes
 import org.apache.kafka.streams.kstream.BranchedKStream
 import org.apache.kafka.streams.kstream.Grouped
@@ -21,14 +23,14 @@ inline fun <inK, inV, reified outK, reified outV> KStream<inK, inV>.map(
 
 
 /** @see [KStream.mapValues] */
-inline fun <K, inV, outV> KStream<K, inV>.mapValues(
+fun <K, inV, outV> KStream<K, inV>.mapValues(
   name: String,
-  crossinline mapper: (key: K, value: inV) -> outV
-): KStream<K, outV> = mapValues({ k, v -> mapper(k, v) }, namedAs(name))
+  mapper: (key: K, value: inV) -> outV
+): KStream<K, outV> = mapValues(mapper, namedAs(name))
 
 
 /** @see KStream.flatMap */
-inline fun <reified inK, inV, reified outK, reified outV> KStream<inK, inV>.flatMap(
+inline fun <inK, inV, reified outK, reified outV> KStream<inK, inV>.flatMap(
   name: String? = null,
   crossinline mapper: (key: inK, value: inV) -> Iterable<Pair<outK, outV>>
 ): KStream<outK, outV> {
@@ -83,7 +85,9 @@ fun <K, V> KStream<K, V>.toTable(
 }
 
 
-fun <K, V> KStream<K, V>.split(name: String? = null): BranchedKStream<K, V> =
+fun <K, V> KStream<K, V>.split(
+  name: String? = null
+): BranchedKStream<K, V> =
   when (name) {
     null -> split()
     else -> split(namedAs(name))

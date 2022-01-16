@@ -91,4 +91,5 @@ fun <Key, Val> consumedAs(
     .withTimestampExtractor(timestampExtractor)
 
 
-fun <Key, Val> branchedAs(name: String): Branched<Key, Val> = Branched.`as`(name)
+fun <Key, Val> branchedAs(name: String): Branched<Key, Val> =
+  Branched.`as`(name)

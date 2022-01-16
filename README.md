@@ -12,7 +12,7 @@ This project is a proof-of-concept and is untested. Contributions are welcomed!
 ## Quickstart
 
 Add [JitPack](https://jitpack.io/) as a repository, and add a dependency
-on `kotka-streams-extensions`.
+on `kotka-streams-extensions` for the basics.
 
 ```kotlin
 // build.gradle.kts
@@ -27,8 +27,8 @@ dependencies {
 
 ## Modules
 
-There are three modules. Add a dependency on `com.github.adamko-dev:kotka-streams` to get them
-all at once
+There are three modules. Add a dependency on `com.github.adamko-dev:kotka-streams` to get them all
+at once
 
 ```kotlin
 dependencies {
@@ -45,6 +45,10 @@ Contains the basic extension functions to make Kafka Streams more Kotlin-esque.
 ```
 
 ```kotlin
+import dev.adamko.kotka.extensions.tables.*
+import dev.adamko.kotka.extensions.streams.*
+import dev.adamko.kotka.extensions.*
+
 data class MusicalBand(
   val name: String,
   val memberNames: List<String>,
@@ -69,6 +73,11 @@ Use `TopicRecord` to standardise the data on each topic. Records can now easily 
 one type, to another.
 
 ```kotlin
+import dev.adamko.kotka.extensions.tables.*
+import dev.adamko.kotka.extensions.streams.*
+import dev.adamko.kotka.extensions.*
+import dev.adamko.kotka.topicdata.*
+
 data class Animal(
   val id: Long,
   val name: String,
@@ -116,6 +125,12 @@ implementation("com.github.adamko-dev.kotka-streams:kotka-streams-kotlinx-serial
 ```
 
 ```kotlin
+import dev.adamko.kotka.extensions.tables.*
+import dev.adamko.kotka.extensions.streams.*
+import dev.adamko.kotka.extensions.*
+import dev.adamko.kotka.topicdata.*
+import dev.adamko.kotka.kxs.*
+
 val jsonMapper = Json {}
 
 @Serializable

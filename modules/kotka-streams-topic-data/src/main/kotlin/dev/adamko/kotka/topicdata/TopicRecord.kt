@@ -1,6 +1,9 @@
 package dev.adamko.kotka.topicdata
 
+import dev.adamko.kotka.extensions.namedAs
+import dev.adamko.kotka.topicdata.TopicRecord.Companion.toKeyValue
 import org.apache.kafka.streams.KeyValue
+import org.apache.kafka.streams.kstream.KStream
 import org.apache.kafka.streams.state.ValueAndTimestamp
 
 interface TopicRecord<K> {
@@ -8,6 +11,7 @@ interface TopicRecord<K> {
   val topicKey: K
 
   companion object {
+
     fun <K, V : TopicRecord<K>> V.toPair(): Pair<K, V> = topicKey to this
     fun <K, V : TopicRecord<K>> V.toKeyValue(): KeyValue<K, V> = KeyValue.pair(topicKey, this)
 
@@ -19,3 +23,21 @@ interface TopicRecord<K> {
 
   }
 }
+
+/** @see KStream.map */
+fun <inK, inV, outK, outV : TopicRecord<outK>> KStream<inK, inV>.mapTopicRecords(
+  name: String,
+  mapper: (key: inK, value: inV) -> outV
+): KStream<outK, outV> =
+  map({ k, v -> mapper(k, v).toKeyValue() }, namedAs(name))
+
+
+/** @see KStream.flatMap */
+fun <inK, outK, inV, outV : TopicRecord<outK>> KStream<inK, inV>.flatMapTopicRecords(
+  name: String,
+  mapper: (key: inK, value: inV) -> Iterable<outV>
+): KStream<outK, outV> =
+  flatMap(
+    { k, v -> mapper(k, v).map { a: outV -> a.toKeyValue() } },
+    namedAs(name)
+  )
