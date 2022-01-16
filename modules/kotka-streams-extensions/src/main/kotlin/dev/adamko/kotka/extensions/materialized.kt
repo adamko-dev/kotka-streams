@@ -104,6 +104,20 @@ fun <Key, Val> materializedAs(
 }
 
 
+fun <Key, Val, Store : StateStore> materializedWith(
+  keySerde: Serde<Key>? = null,
+  valueSerde: Serde<Val>? = null,
+  loggingConfig: Map<String, String>? = null,
+  cachingEnabled: Boolean = true,
+  retention: Duration? = null,
+): Materialized<Key, Val, Store> = Materialized.with<Key, Val, Store>(keySerde, valueSerde)
+  .withConfig(
+    loggingConfig = loggingConfig,
+    cachingEnabled = cachingEnabled,
+    retention = retention,
+  )
+
+
 /** @see Materialized */
 fun <Key, Val, Store : StateStore> Materialized<Key, Val, Store>.withConfig(
   keySerde: Serde<Key>? = null,
@@ -113,8 +127,12 @@ fun <Key, Val, Store : StateStore> Materialized<Key, Val, Store>.withConfig(
   retention: Duration? = null,
 ): Materialized<Key, Val, Store> {
   var materialized: Materialized<Key, Val, Store> = this
-    .withKeySerde(keySerde)
-    .withValueSerde(valueSerde)
+
+  if (keySerde != null)
+    materialized = materialized.withKeySerde(keySerde)
+
+  if (valueSerde != null)
+    materialized = materialized.withValueSerde(valueSerde)
 
   if (retention != null)
     materialized = materialized.withRetention(retention.toJavaDuration())
