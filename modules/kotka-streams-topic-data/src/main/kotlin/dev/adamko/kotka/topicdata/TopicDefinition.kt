@@ -1,7 +1,8 @@
 package dev.adamko.kotka.topicdata;
 
+
 /**
- * A definition for any topic that is Kafka.
+ * A definition for any Kafka topic.
  *
  * These can be used to create
  * [KTopic][org.apache.kafka.streams.kstream.KStream]s,

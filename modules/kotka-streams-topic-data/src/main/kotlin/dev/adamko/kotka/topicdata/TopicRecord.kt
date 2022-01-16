@@ -8,6 +8,7 @@ interface TopicRecord<K> {
   val topicKey: K
 
   companion object {
+
     fun <K, V : TopicRecord<K>> V.toPair(): Pair<K, V> = topicKey to this
     fun <K, V : TopicRecord<K>> V.toKeyValue(): KeyValue<K, V> = KeyValue.pair(topicKey, this)
 
