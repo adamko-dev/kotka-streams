@@ -25,7 +25,7 @@ interface TopicRecord<K> {
 }
 
 /** @see KStream.map */
-fun <inK, inV, outK, outV : TopicRecord<outK>> KStream<inK, inV>.mapToTopicRecords(
+fun <inK, inV, outK, outV : TopicRecord<outK>> KStream<inK, inV>.mapTopicRecords(
   name: String,
   mapper: (key: inK, value: inV) -> outV
 ): KStream<outK, outV> =
@@ -33,7 +33,7 @@ fun <inK, inV, outK, outV : TopicRecord<outK>> KStream<inK, inV>.mapToTopicRecor
 
 
 /** @see KStream.flatMap */
-fun <inK, outK, inV, outV : TopicRecord<outK>> KStream<inK, inV>.flatMapToTopicRecords(
+fun <inK, outK, inV, outV : TopicRecord<outK>> KStream<inK, inV>.flatMapTopicRecords(
   name: String,
   mapper: (key: inK, value: inV) -> Iterable<outV>
 ): KStream<outK, outV> =
