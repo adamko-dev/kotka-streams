@@ -2,9 +2,12 @@ package dev.adamko.kotka.extensions.streams
 
 import dev.adamko.kotka.extensions.namedAs
 import org.apache.kafka.common.utils.Bytes
+import org.apache.kafka.streams.kstream.Aggregator
+import org.apache.kafka.streams.kstream.Initializer
 import org.apache.kafka.streams.kstream.KGroupedStream
 import org.apache.kafka.streams.kstream.KTable
 import org.apache.kafka.streams.kstream.Materialized
+import org.apache.kafka.streams.kstream.Reducer
 import org.apache.kafka.streams.state.KeyValueStore
 
 
@@ -21,12 +24,41 @@ fun <K> KGroupedStream<K, *>.count(
 }
 
 
+// note: 'aggregate' and 'reduce' each have two extensions rather than one with
+// default values. This is so the 'name' param will be the first param - I
+// don't think it's as natural otherwise if it's not first, or a named
+// parameter is required.
+
+
+fun <K, inV, outV> KGroupedStream<K, inV>.aggregate(
+  initializer: Initializer<outV>,
+  materialized: Materialized<K, outV, KeyValueStore<Bytes, ByteArray>>,
+  aggregator: Aggregator<K, inV, outV>,
+): KTable<K, outV> = aggregate(initializer, aggregator, materialized)
+
+
+fun <K, inV, outV> KGroupedStream<K, inV>.aggregate(
+  name: String,
+  materialized: Materialized<K, outV, KeyValueStore<Bytes, ByteArray>>,
+  initializer: Initializer<outV>,
+  aggregator: Aggregator<K, inV, outV>,
+): KTable<K, outV> = aggregate(initializer, aggregator, namedAs(name), materialized)
+
+
+fun <K, V> KGroupedStream<K, V>.reduce(
+  materialized: Materialized<K, V, KeyValueStore<Bytes, ByteArray>>,
+  reducer: Reducer<V>,
+): KTable<K, V> = reduce(reducer, materialized)
+
+
+fun <K, V> KGroupedStream<K, V>.reduce(
+  name: String,
+  materialized: Materialized<K, V, KeyValueStore<Bytes, ByteArray>>,
+  reducer: Reducer<V>,
+): KTable<K, V> = reduce(reducer, namedAs(name), materialized)
+
+
 //<VOut> CogroupedKStream<K, VOut> cogroup(final Aggregator<? super K, ? super V, VOut> aggregator);
-//<VR> KTable<K, VR> aggregate(final Initializer<VR> initializer,final Aggregator<? super K, ? super V, VR> aggregator, final Named named, final Materialized<K, VR, KeyValueStore<Bytes, byte[]>> materialized);
 //<W extends Window> TimeWindowedKStream<K, V> windowedBy(final Windows<W> windows);
-//KTable<K, Long> count(final Materialized<K, Long, KeyValueStore<Bytes, byte[]>> materialized);
-//KTable<K, V> reduce(final Reducer<V> reducer);
-//KTable<K, V> reduce(final Reducer<V> reducer, final Named named, final Materialized<K, V, KeyValueStore<Bytes, byte[]>> materialized);
-//KTable<K, V> reduce(final Reducer<V> reducer,final Materialized<K, V, KeyValueStore<Bytes, byte[]>> materialized);
 //SessionWindowedKStream<K, V> windowedBy(final SessionWindows windows);
 //TimeWindowedKStream<K, V> windowedBy(final SlidingWindows windows);
