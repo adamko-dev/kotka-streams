@@ -25,7 +25,7 @@ open class KeyValueSerdes<K, V>(
   open val valueSerde: Serde<V>,
 ) {
 
-    fun consumer(
+  fun consumer(
     name: String? = null,
     keySerde: Serde<K>? = this.keySerde,
     valueSerde: Serde<V>? = this.valueSerde,
