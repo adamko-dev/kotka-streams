@@ -1,5 +1,6 @@
 package dev.adamko.kotka.kxs
 
+import dev.adamko.kotka.topicdata.KeyValueSerdes
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -51,3 +52,11 @@ inline fun <reified T> Json.serde() = object : Serde<T> {
   override fun deserializer(): Deserializer<T> = kafkaDeserializer()
 
 }
+
+inline fun <reified K, reified V> KeyValueSerdes<K, V>.kxsJson(
+  jsonMapper: Json
+): KeyValueSerdes<K, V> =
+  KeyValueSerdes(
+    jsonMapper.serde(),
+    jsonMapper.serde(),
+  )

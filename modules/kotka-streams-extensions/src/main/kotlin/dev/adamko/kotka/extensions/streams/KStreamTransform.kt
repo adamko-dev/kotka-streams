@@ -1,4 +1,4 @@
-package dev.adamko.kotka.extensions
+package dev.adamko.kotka.extensions.streams
 
 //import kotlin.experimental.ExperimentalTypeInference
 //import org.apache.kafka.streams.KeyValue

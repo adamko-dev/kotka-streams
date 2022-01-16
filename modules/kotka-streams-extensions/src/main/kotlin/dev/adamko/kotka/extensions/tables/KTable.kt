@@ -1,5 +1,6 @@
-package dev.adamko.kotka.extensions
+package dev.adamko.kotka.extensions.tables
 
+import dev.adamko.kotka.extensions.namedAs
 import org.apache.kafka.streams.KeyValue
 import org.apache.kafka.streams.kstream.Grouped
 import org.apache.kafka.streams.kstream.KGroupedTable
@@ -11,11 +12,7 @@ import org.apache.kafka.streams.kstream.KeyValueMapper
 fun <K, inV, outV> KTable<K, inV>.mapValues(
   name: String,
   mapper: (readOnlyKey: K, value: inV) -> outV
-): KTable<K, outV> =
-  mapValues(
-    { k, v -> mapper(k, v) },
-    namedAs(name)
-  )
+): KTable<K, outV> = mapValues(mapper, namedAs(name))
 
 
 /** @See [KTable.groupBy] */

@@ -1,4 +1,4 @@
-package dev.adamko.kotka.extensions
+package dev.adamko.kotka.extensions.streams
 
 import org.apache.kafka.streams.kstream.Branched
 import org.apache.kafka.streams.kstream.BranchedKStream

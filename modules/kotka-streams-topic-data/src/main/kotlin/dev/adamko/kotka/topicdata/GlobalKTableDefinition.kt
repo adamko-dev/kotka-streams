@@ -1,6 +1,9 @@
 package dev.adamko.kotka.topicdata
 
 import dev.adamko.kotka.extensions.TimestampedQueryStoreType
+import dev.adamko.kotka.extensions.materializedAs
+import org.apache.kafka.streams.kstream.Materialized
+import org.apache.kafka.streams.processor.StateStore
 import org.apache.kafka.streams.state.QueryableStoreTypes.timestampedKeyValueStore
 
 /**
@@ -30,3 +33,12 @@ abstract class GlobalKTableDefinition<K, V>(
     topicNames = setOf(tableName, topicName)
   }
 }
+
+
+fun <Key, Val, Store : StateStore> materializeGlobalKTable(
+  tableDefinition: GlobalKTableDefinition<Key, Val>
+): Materialized<Key, Val, Store> = materializedAs(
+  tableDefinition.globalStoreName,
+  tableDefinition.serdes.keySerde,
+  tableDefinition.serdes.valueSerde
+)

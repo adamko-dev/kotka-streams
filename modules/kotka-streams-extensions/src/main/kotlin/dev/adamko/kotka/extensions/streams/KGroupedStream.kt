@@ -1,5 +1,6 @@
-package dev.adamko.kotka.extensions
+package dev.adamko.kotka.extensions.streams
 
+import dev.adamko.kotka.extensions.namedAs
 import org.apache.kafka.common.utils.Bytes
 import org.apache.kafka.streams.kstream.KGroupedStream
 import org.apache.kafka.streams.kstream.KTable
