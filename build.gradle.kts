@@ -21,8 +21,8 @@ gitVersioning.apply {
 }
 
 dependencies {
-  api(projects.modules.kotkaStreamsTopicData)
   api(projects.modules.kotkaStreamsExtensions)
+  api(projects.modules.kotkaStreamsFramework)
   api(projects.modules.kotkaStreamsKotlinxSerialization)
 }
 

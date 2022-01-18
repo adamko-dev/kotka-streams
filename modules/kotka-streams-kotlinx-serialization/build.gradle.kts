@@ -6,7 +6,7 @@ plugins {
 
 dependencies {
   api(projects.modules.kotkaStreamsExtensions)
-  api(projects.modules.kotkaStreamsTopicData)
+  api(projects.modules.kotkaStreamsFramework)
 
   api("org.apache.kafka:kafka-streams:3.0.0")
 
