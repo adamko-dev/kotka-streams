@@ -61,12 +61,12 @@ builder.stream<String, MusicalBand>("musical-bands")
   .groupByKey(groupedAs("map-of-band-member-to-band-names"))
 ```
 
-### `kotka-streams-topic-data`
+### `kotka-streams-framework`
 
 A light framework for structuring topics and records.
 
 ```kotlin
-  implementation("com.github.adamko-dev.kotka-streams:kotka-streams-topic-data:$kotkaVersion")
+  implementation("com.github.adamko-dev.kotka-streams:kotka-streams-framework:$kotkaVersion")
 ```
 
 Use `TopicRecord` to standardise the data on each topic. Records can now easily be converted from
