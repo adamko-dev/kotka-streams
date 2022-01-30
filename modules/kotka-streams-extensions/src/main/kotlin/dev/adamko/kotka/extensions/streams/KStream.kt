@@ -4,12 +4,16 @@ import dev.adamko.kotka.extensions.namedAs
 import dev.adamko.kotka.extensions.toKeyValue
 import org.apache.kafka.common.utils.Bytes
 import org.apache.kafka.streams.kstream.BranchedKStream
+import org.apache.kafka.streams.kstream.GlobalKTable
 import org.apache.kafka.streams.kstream.Grouped
+import org.apache.kafka.streams.kstream.Joined
 import org.apache.kafka.streams.kstream.KGroupedStream
 import org.apache.kafka.streams.kstream.KStream
 import org.apache.kafka.streams.kstream.KTable
+import org.apache.kafka.streams.kstream.KeyValueMapper
 import org.apache.kafka.streams.kstream.Materialized
 import org.apache.kafka.streams.kstream.Produced
+import org.apache.kafka.streams.kstream.ValueJoinerWithKey
 import org.apache.kafka.streams.processor.TopicNameExtractor
 import org.apache.kafka.streams.state.KeyValueStore
 
@@ -94,20 +98,48 @@ fun <K, V> KStream<K, V>.split(
   }
 
 
-//
-//  fun <GK, GV, RV> join(
-//    globalTable: GlobalKTable<GK, GV>?,
-//    keySelector: KeyValueMapper<in K?, in V?, out GK>?,
-//    joiner: ValueJoinerWithKey<in K?, in V?, in GV, out RV>?,
-//    named: Named?
-//  ): KStream<K?, RV>?
-//
-//  fun <GK, GV, RV> leftJoin(
-//    globalTable: GlobalKTable<GK, GV>?,
-//    keySelector: KeyValueMapper<in K?, in V?, out GK>?,
-//    valueJoiner: ValueJoinerWithKey<in K?, in V?, in GV, out RV>?,
-//    named: Named?
-//  ): KStream<K?, RV>?
+fun <K, inV, otherK, otherV, outV> KStream<K, inV>.join(
+  table: KTable<otherK, otherV>,
+  valueJoiner: ValueJoinerWithKey<K, inV, otherV?, outV>,
+  joined: Joined<K, inV, outV>,
+): KStream<K, outV> {
+  return join(
+    table,
+    valueJoiner,
+    joined,
+  )
+}
+
+
+fun <K, inV, otherK, otherV, outV> KStream<K, inV>.join(
+  name: String,
+  globalTable: GlobalKTable<otherK, otherV>,
+  keySelector: KeyValueMapper<K, inV, otherK?>,
+  valueJoiner: ValueJoinerWithKey<K, inV, otherV?, outV>,
+): KStream<K, outV> {
+  return join(
+    globalTable,
+    keySelector,
+    valueJoiner,
+    namedAs(name),
+  )
+}
+
+fun <K, inV, otherK, otherV, outV> KStream<K, inV>.leftJoin(
+  name: String,
+  globalTable: GlobalKTable<otherK, otherV>,
+  keySelector: KeyValueMapper<K, inV, otherK?>,
+  valueJoiner: ValueJoinerWithKey<K, inV, otherV?, outV>,
+): KStream<K, outV> {
+  return leftJoin(
+    globalTable,
+    keySelector,
+    valueJoiner,
+    namedAs(name),
+  )
+}
+
+
 //
 //  fun <K1, V1> flatTransform(
 //    transformerSupplier: TransformerSupplier<in K?, in V?, Iterable<KeyValue<K1, V1>?>?>?,
@@ -140,11 +172,6 @@ fun <K, V> KStream<K, V>.split(
 //    mapper: KeyValueMapper<in K?, in V?, out KeyValue<out KR, out VR>?>?,
 //    named: Named?
 //  ): KStream<KR, VR>?
-//
-//  fun <KR> groupBy(
-//    keySelector: KeyValueMapper<in K?, in V?, KR>?,
-//    grouped: Grouped<KR, V?>?
-//  ): KGroupedStream<KR, V?>?
 //
 //  fun <KR> selectKey(mapper: KeyValueMapper<in K?, in V?, out KR>?, named: Named?): KStream<KR, V?>?
 //  fun <VO, VR> join(
@@ -190,19 +217,12 @@ fun <K, V> KStream<K, V>.split(
 //    vararg stateStoreNames: String?
 //  ): KStream<K?, VR>?
 //
-//  fun <VT, VR> join(
-//    table: KTable<K?, VT>?,
-//    joiner: ValueJoinerWithKey<in K?, in V?, in VT, out VR>?,
-//    joined: Joined<K?, V?, VT>?
-//  ): KStream<K?, VR>?
-//
 //  fun <VT, VR> leftJoin(
 //    table: KTable<K?, VT>?,
 //    joiner: ValueJoinerWithKey<in K?, in V?, in VT, out VR>?,
 //    joined: Joined<K?, V?, VT>?
 //  ): KStream<K?, VR>?
 //
-//  fun groupByKey(grouped: Grouped<K?, V?>?): KGroupedStream<K?, V?>?
 //  fun merge(stream: KStream<K?, V?>?, named: Named?): KStream<K?, V?>?
 //  fun peek(action: ForeachAction<in K?, in V?>?, named: Named?): KStream<K?, V?>?
 //  fun repartition(repartitioned: Repartitioned<K?, V?>?): KStream<K?, V?>?
