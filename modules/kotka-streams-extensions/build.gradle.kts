@@ -4,5 +4,5 @@ plugins {
 }
 
 dependencies {
-  api("org.apache.kafka:kafka-streams:3.0.0")
+  api(libs.kafka.streams)
 }
