@@ -4,11 +4,14 @@ plugins {
   kotka.convention.`maven-publish`
 }
 
+@Suppress("UnstableApiUsage") // version catalogs + platform() is incubating
 dependencies {
   api(projects.modules.kotkaStreamsExtensions)
   api(projects.modules.kotkaStreamsFramework)
 
-  api("org.apache.kafka:kafka-streams:3.0.0")
+  api(libs.kafka.streams)
 
-  api("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2")
+  api(platform(libs.kotlinx.serialization.bom))
+  api(libs.kotlinx.serialization.core)
+
 }

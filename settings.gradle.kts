@@ -7,6 +7,7 @@ include(
   ":modules:kotka-streams-kotlinx-serialization",
 )
 
+enableFeaturePreview("VERSION_CATALOGS")
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 apply(from = "./buildSrc/repositories.settings.gradle.kts")
