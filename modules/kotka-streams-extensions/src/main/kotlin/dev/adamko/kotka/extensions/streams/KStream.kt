@@ -45,6 +45,18 @@ inline fun <inK, inV, reified outK, reified outV> KStream<inK, inV>.flatMap(
 }
 
 
+/** @see KStream.flatMapValues */
+inline fun <inK, inV, reified outV> KStream<inK, inV>.flatMapValues(
+  name: String? = null,
+  crossinline mapper: (key: inK, value: inV) -> Iterable<outV>
+): KStream<inK, outV> {
+  return when (name) {
+    null -> flatMapValues { k, v -> mapper(k, v) }
+    else -> flatMapValues({ k, v -> mapper(k, v) }, namedAs(name))
+  }
+}
+
+
 /** @see KStream.groupBy */
 fun <K, V, outK> KStream<K, V>.groupBy(
   grouped: Grouped<outK, V>,
