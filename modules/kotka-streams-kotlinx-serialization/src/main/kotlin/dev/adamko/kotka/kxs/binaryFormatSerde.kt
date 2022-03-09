@@ -10,7 +10,7 @@ import org.apache.kafka.common.serialization.Serializer
 
 
 inline fun <reified T> BinaryFormat.kafkaSerializer() =
-  Serializer { topic: String, data: T ->
+  Serializer { topic: String, data: T? ->
     runCatching {
       encodeToByteArray(data)
     }.getOrElse { e ->
@@ -47,7 +47,7 @@ inline fun <reified T> BinaryFormat.kafkaDeserializer() =
 
 
 inline fun <reified T> BinaryFormat.serde() = object : Serde<T> {
-  override fun serializer(): Serializer<T> = kafkaSerializer()
+  override fun serializer(): Serializer<T?> = kafkaSerializer()
   override fun deserializer(): Deserializer<T> = kafkaDeserializer()
 }
 
