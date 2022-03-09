@@ -128,13 +128,15 @@ fun <K, V, otherV, outV> KTable<K, V>.outerJoin(
 }
 
 
+// the value of the resulting KStream is nullable, because it includes record deletions.
 fun <inK, V, outK> KTable<inK, V>.toStream(
   name: String,
   mapper: KeyValueMapper<inK, V, outK>? = null,
-): KStream<outK, V> = toStream(mapper, namedAs(name))
+): KStream<outK, V?> = toStream(mapper, namedAs(name))
 
 
-fun <K, V> KTable<K, V>.toStream(name: String): KStream<K, V> = toStream(namedAs(name))
+// the value of the resulting KStream is nullable, because it includes record deletions.
+fun <K, V> KTable<K, V>.toStream(name: String): KStream<K, V?> = toStream(namedAs(name))
 
 
 fun <K, V> KTable<K, V>.filter(
