@@ -6,6 +6,8 @@ plugins {
 
   `project-report`
   `build-dashboard`
+
+  id("org.jetbrains.kotlinx.kover")
 }
 
 group = "dev.adamko.kotka"

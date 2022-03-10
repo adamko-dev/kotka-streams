@@ -16,8 +16,11 @@ dependencies {
   val kotlinXSerializationVersion = "1.3.2"
   implementation(enforcedPlatform("org.jetbrains.kotlinx:kotlinx-serialization-bom:$kotlinXSerializationVersion"))
 
-  val gitVersioningPluginVersion = "5.1.3"
+  val gitVersioningPluginVersion = "5.1.5"
   implementation("me.qoomon:gradle-git-versioning-plugin:$gitVersioningPluginVersion")
+
+  val kotlinxKoverVersion = "0.5.0"
+  implementation("org.jetbrains.kotlinx:kover:${kotlinxKoverVersion}")
 }
 
 val projectJvmTarget = "11"

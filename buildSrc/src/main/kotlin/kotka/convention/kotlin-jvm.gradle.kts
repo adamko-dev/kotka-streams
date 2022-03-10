@@ -11,21 +11,21 @@ dependencies {
 
   implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
 
-  val junitVersion = "5.8.2"
-  testImplementation(platform("org.junit:junit-bom:$junitVersion"))
-  testImplementation("org.junit.jupiter:junit-jupiter")
-  testRuntimeOnly("org.junit.platform:junit-platform-launcher") {
-    because("Only needed to run tests in a version of IntelliJ IDEA that bundles older versions")
-  }
+//  val junitVersion = "5.8.2"
+//  testImplementation(platform("org.junit:junit-bom:$junitVersion"))
+//  testImplementation("org.junit.jupiter:junit-jupiter")
+//  testRuntimeOnly("org.junit.platform:junit-platform-launcher") {
+//    because("Only needed to run tests in a version of IntelliJ IDEA that bundles older versions")
+//  }
 
-  val kotestVersion = "5.0.3"
+  val kotestVersion = "5.1.0"
   testImplementation(platform("io.kotest:kotest-bom:$kotestVersion"))
   testImplementation("io.kotest:kotest-runner-junit5")
   testImplementation("io.kotest:kotest-assertions-core")
   testImplementation("io.kotest:kotest-property")
   testImplementation("io.kotest:kotest-assertions-json")
 
-  testImplementation("io.mockk:mockk:1.12.1")
+  testImplementation("io.mockk:mockk:1.12.3")
 
 }
 
