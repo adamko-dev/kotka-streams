@@ -10,7 +10,7 @@ import io.mockk.verify
 import org.apache.kafka.streams.processor.api.Record
 
 class RecordTests : BehaviorSpec({
-  isolationMode = IsolationMode.InstancePerLeaf
+  isolationMode = IsolationMode.InstancePerLeaf // so the mockk is fresh for each test
 
   Given("a Kafka Streams Processor API Record") {
     val mockRecord: Record<String, String> = mockk {
@@ -19,23 +19,23 @@ class RecordTests : BehaviorSpec({
       every { timestamp() } returns 12345L
     }
 
-    When("when the Record extension functions are used") {
+    When("the Record extension functions are used") {
 
-      Then("component1 should return the Record's key") {
+      Then("expect component1 returns the Record's key") {
         mockRecord.component1()
 
         verify(exactly = 1) { mockRecord.key() }
         confirmVerified(mockRecord)
       }
 
-      Then("component2 should return the Record's value") {
+      Then("expect component2 should return the Record's value") {
         mockRecord.component2()
 
         verify(exactly = 1) { mockRecord.value() }
         confirmVerified(mockRecord)
       }
 
-      Then("component3 should return the Record's timestamp") {
+      Then("expect component3 should return the Record's timestamp") {
         mockRecord.component3()
 
         verify(exactly = 1) { mockRecord.timestamp() }
@@ -44,22 +44,22 @@ class RecordTests : BehaviorSpec({
 
     }
 
-    When("when the Record is deconstructed") {
+    When("the Record is deconstructed") {
       val (key, value, timestamp) = mockRecord
 
-      Then("the Record's key should be assigned") {
+      Then("expect the Record's key is extracted") {
         key shouldBe "record-key"
       }
 
-      Then("the Record's value should be assigned") {
+      Then("expect the Record's value is extracted") {
         value shouldBe "record-value"
       }
 
-      Then("the Record's timestamp should be assigned") {
+      Then("expect the Record's timestamp is extracted") {
         timestamp shouldBe 12345L
       }
 
-      Then("all extension functions should be used") {
+      Then("expect the extension functions are used") {
         verify(exactly = 1) { mockRecord.key() }
         verify(exactly = 1) { mockRecord.value() }
         verify(exactly = 1) { mockRecord.timestamp() }
