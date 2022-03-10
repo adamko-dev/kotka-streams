@@ -9,11 +9,10 @@ import org.apache.kafka.common.serialization.Serde
 import org.apache.kafka.common.serialization.Serializer
 
 
-inline fun <reified T> StringFormat.kafkaSerializer() =
+inline fun <reified T> StringFormat.kafkaSerializer(): Serializer<T?> =
   Serializer { topic: String, data: T? ->
     runCatching {
       encodeToString(data).encodeToByteArray()
-//      jsonMapper.encodeToString(data as T).encodeToByteArray()
     }.getOrElse { e ->
       println(
         """
@@ -28,10 +27,10 @@ inline fun <reified T> StringFormat.kafkaSerializer() =
     }
   }
 
-inline fun <reified T> StringFormat.kafkaDeserializer() =
+inline fun <reified T> StringFormat.kafkaDeserializer(): Deserializer<T> =
   Deserializer { topic: String, data: ByteArray ->
     runCatching {
-      decodeFromString<T>(data.decodeToString())
+      decodeFromString<T?>(data.decodeToString())
     }.getOrElse { e ->
       println(
         """
@@ -45,6 +44,7 @@ inline fun <reified T> StringFormat.kafkaDeserializer() =
       throw e
     }
   }
+
 
 inline fun <reified T> StringFormat.serde() = object : Serde<T> {
   override fun serializer(): Serializer<T?> = kafkaSerializer()
