@@ -9,11 +9,10 @@ import org.apache.kafka.common.serialization.Serde
 import org.apache.kafka.common.serialization.Serializer
 
 
-inline fun <reified T> StringFormat.kafkaSerializer() =
-  Serializer { topic: String, data: T? ->
+inline fun <reified T> StringFormat.kafkaSerializer(): Serializer<T> =
+  Serializer { topic: String, data: T ->
     runCatching {
       encodeToString(data).encodeToByteArray()
-//      jsonMapper.encodeToString(data as T).encodeToByteArray()
     }.getOrElse { e ->
       println(
         """
@@ -28,7 +27,8 @@ inline fun <reified T> StringFormat.kafkaSerializer() =
     }
   }
 
-inline fun <reified T> StringFormat.kafkaDeserializer() =
+
+inline fun <reified T> StringFormat.kafkaDeserializer(): Deserializer<T> =
   Deserializer { topic: String, data: ByteArray ->
     runCatching {
       decodeFromString<T>(data.decodeToString())
@@ -46,10 +46,14 @@ inline fun <reified T> StringFormat.kafkaDeserializer() =
     }
   }
 
-inline fun <reified T> StringFormat.serde() = object : Serde<T> {
-  override fun serializer(): Serializer<T?> = kafkaSerializer()
-  override fun deserializer(): Deserializer<T> = kafkaDeserializer()
-}
+
+inline fun <reified T> StringFormat.serde(): Serde<T> =
+  object : Serde<T> {
+    private val serializer: Serializer<T> = kafkaSerializer()
+    private val deserializer: Deserializer<T> = kafkaDeserializer()
+    override fun serializer(): Serializer<T> = serializer
+    override fun deserializer(): Deserializer<T> = deserializer
+  }
 
 
 inline fun <reified K, reified V> StringFormat.keyValueSerdes(): KeyValueSerdes<K, V> =
