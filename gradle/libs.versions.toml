@@ -15,7 +15,8 @@ kotlinx-serialization = "1.3.2"
 
 kotlin-bom = { group = "org.jetbrains.kotlin", name = "kotlin-bom", version.ref = "kotlin" }
 
-kafka-streams = { group = "org.apache.kafka", name = "kafka-streams", version.ref = "kafka" }
+kafka-streams          = { group = "org.apache.kafka", name = "kafka-streams",            version.ref = "kafka" }
+kafka-streamsTestUtils = { group = "org.apache.kafka", name = "kafka-streams-test-utils", version.ref = "kafka" }
 
 kotlinx-serialization-bom  = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-bom", version.ref = "kotlinx-serialization" }
 kotlinx-serialization-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-core" }

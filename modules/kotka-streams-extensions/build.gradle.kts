@@ -5,4 +5,5 @@ plugins {
 
 dependencies {
   api(libs.kafka.streams)
+  testImplementation(libs.kafka.streamsTestUtils)
 }
