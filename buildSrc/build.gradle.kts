@@ -10,7 +10,7 @@ dependencies {
   val kotlinVersion = "1.6.10"
   implementation(enforcedPlatform("org.jetbrains.kotlin:kotlin-bom:$kotlinVersion"))
   implementation("org.jetbrains.kotlin:kotlin-serialization")
-  implementation("org.jetbrains.kotlin:kotlin-reflect")
+//  implementation("org.jetbrains.kotlin:kotlin-reflect")
   implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
 
   val kotlinXSerializationVersion = "1.3.2"
@@ -21,6 +21,9 @@ dependencies {
 
   val kotlinxKoverVersion = "0.5.0"
   implementation("org.jetbrains.kotlinx:kover:${kotlinxKoverVersion}")
+
+  val kotlinxKnitVersion = "0.3.0"
+  implementation("org.jetbrains.kotlinx:kotlinx-knit:${kotlinxKnitVersion}")
 }
 
 val projectJvmTarget = "11"
