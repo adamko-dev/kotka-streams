@@ -1,6 +1,7 @@
 package dev.adamko.kotka.extensions.tables
 
 import dev.adamko.kotka.extensions.namedAs
+import dev.adamko.kotka.extensions.tableJoined
 import org.apache.kafka.common.utils.Bytes
 import org.apache.kafka.streams.KeyValue
 import org.apache.kafka.streams.kstream.Grouped
@@ -9,6 +10,7 @@ import org.apache.kafka.streams.kstream.KStream
 import org.apache.kafka.streams.kstream.KTable
 import org.apache.kafka.streams.kstream.KeyValueMapper
 import org.apache.kafka.streams.kstream.Materialized
+import org.apache.kafka.streams.kstream.TableJoined
 import org.apache.kafka.streams.kstream.ValueJoiner
 import org.apache.kafka.streams.state.KeyValueStore
 
@@ -61,15 +63,32 @@ fun <K, V, otherK, otherV, outV> KTable<K, V>.join(
   materialized: Materialized<K, outV, KeyValueStore<Bytes, ByteArray>>? = null,
   foreignKeyExtractor: (V) -> otherK,
   joiner: ValueJoiner<V, otherV, outV>,
+): KTable<K, outV> =
+  join(
+    other = other,
+    tableJoined = if (name == null) null else tableJoined(name),
+    materialized = materialized,
+    foreignKeyExtractor = foreignKeyExtractor,
+    joiner = joiner,
+  )
+
+
+/** @See [KTable.join] */
+fun <K, V, otherK, otherV, outV> KTable<K, V>.join(
+  other: KTable<otherK, otherV>,
+  tableJoined: TableJoined<K, otherK>? = null,
+  materialized: Materialized<K, outV, KeyValueStore<Bytes, ByteArray>>? = null,
+  foreignKeyExtractor: (V) -> otherK,
+  joiner: ValueJoiner<V, otherV, outV>,
 ): KTable<K, outV> {
   return when {
-    name != null && materialized != null ->
-      join(other, foreignKeyExtractor, joiner, namedAs(name), materialized)
-    name != null && materialized == null ->
-      join(other, foreignKeyExtractor, joiner, namedAs(name))
-    name == null && materialized != null ->
+    tableJoined != null && materialized != null ->
+      join(other, foreignKeyExtractor, joiner, tableJoined, materialized)
+    tableJoined != null && materialized == null ->
+      join(other, foreignKeyExtractor, joiner, tableJoined)
+    tableJoined == null && materialized != null ->
       join(other, foreignKeyExtractor, joiner, materialized)
-    else                                 ->
+    else                                        ->
       join(other, foreignKeyExtractor, joiner)
   }
 }
@@ -98,15 +117,32 @@ fun <K, V, otherK, otherV, outV> KTable<K, V>.leftJoin(
   materialized: Materialized<K, outV, KeyValueStore<Bytes, ByteArray>>? = null,
   foreignKeyExtractor: (V) -> otherK,
   joiner: ValueJoiner<V, otherV, outV>,
+): KTable<K, outV> =
+  leftJoin(
+    other = other,
+    tableJoined = if (name == null) null else tableJoined(name),
+    materialized = materialized,
+    foreignKeyExtractor = foreignKeyExtractor,
+    joiner = joiner,
+  )
+
+
+/** @See [KTable.leftJoin] */
+fun <K, V, otherK, otherV, outV> KTable<K, V>.leftJoin(
+  other: KTable<otherK, otherV>,
+  tableJoined: TableJoined<K, otherK>? = null,
+  materialized: Materialized<K, outV, KeyValueStore<Bytes, ByteArray>>? = null,
+  foreignKeyExtractor: (V) -> otherK,
+  joiner: ValueJoiner<V, otherV, outV>,
 ): KTable<K, outV> {
   return when {
-    name != null && materialized != null ->
-      leftJoin(other, foreignKeyExtractor, joiner, namedAs(name), materialized)
-    name != null && materialized == null ->
-      leftJoin(other, foreignKeyExtractor, joiner, namedAs(name))
-    name == null && materialized != null ->
+    tableJoined != null && materialized != null ->
+      leftJoin(other, foreignKeyExtractor, joiner, tableJoined, materialized)
+    tableJoined != null && materialized == null ->
+      leftJoin(other, foreignKeyExtractor, joiner, tableJoined)
+    tableJoined == null && materialized != null ->
       leftJoin(other, foreignKeyExtractor, joiner, materialized)
-    else                                 ->
+    else                                        ->
       leftJoin(other, foreignKeyExtractor, joiner)
   }
 }
