@@ -9,8 +9,8 @@ import org.apache.kafka.common.serialization.Serde
 import org.apache.kafka.common.serialization.Serializer
 
 
-inline fun <reified T> BinaryFormat.kafkaSerializer() =
-  Serializer { topic: String, data: T? ->
+inline fun <reified T> BinaryFormat.kafkaSerializer(): Serializer<T> =
+  Serializer { topic: String, data: T ->
     runCatching {
       encodeToByteArray(data)
     }.getOrElse { e ->
@@ -27,7 +27,8 @@ inline fun <reified T> BinaryFormat.kafkaSerializer() =
     }
   }
 
-inline fun <reified T> BinaryFormat.kafkaDeserializer() =
+
+inline fun <reified T> BinaryFormat.kafkaDeserializer(): Deserializer<T> =
   Deserializer { topic: String, data: ByteArray ->
     runCatching {
       decodeFromByteArray<T>(data)
@@ -46,10 +47,14 @@ inline fun <reified T> BinaryFormat.kafkaDeserializer() =
   }
 
 
-inline fun <reified T> BinaryFormat.serde() = object : Serde<T> {
-  override fun serializer(): Serializer<T?> = kafkaSerializer()
-  override fun deserializer(): Deserializer<T> = kafkaDeserializer()
-}
+inline fun <reified T> BinaryFormat.serde(): Serde<T> =
+  object : Serde<T> {
+    private val serializer: Serializer<T> = kafkaSerializer()
+    private val deserializer: Deserializer<T> = kafkaDeserializer()
+    override fun serializer(): Serializer<T> = serializer
+    override fun deserializer(): Deserializer<T> = deserializer
+  }
+
 
 inline fun <reified K, reified V> BinaryFormat.keyValueSerdes(): KeyValueSerdes<K, V> =
   KeyValueSerdes(serde(), serde())
