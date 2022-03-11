@@ -9,10 +9,9 @@ import org.apache.kafka.streams.kstream.Joined
 import org.apache.kafka.streams.kstream.Named
 import org.apache.kafka.streams.kstream.Produced
 import org.apache.kafka.streams.kstream.Repartitioned
+import org.apache.kafka.streams.kstream.TableJoined
 import org.apache.kafka.streams.processor.StreamPartitioner
 import org.apache.kafka.streams.processor.TimestampExtractor
-
-/** Helpful extensions & shortcuts for Kafka Streams */
 
 
 /** @see [Named] */
@@ -93,3 +92,13 @@ fun <Key, Val> consumedAs(
 
 fun <Key, Val> branchedAs(name: String): Branched<Key, Val> =
   Branched.`as`(name)
+
+
+fun <Key, otherKey> tableJoined(
+  name: String? = null,
+  partitioner: StreamPartitioner<Key, Void>? = null,
+  otherPartitioner: StreamPartitioner<otherKey, Void>? = null,
+) : TableJoined<Key, otherKey> =
+  TableJoined.`as`<Key, otherKey>(name)
+    .withPartitioner(partitioner)
+    .withOtherPartitioner(otherPartitioner)
