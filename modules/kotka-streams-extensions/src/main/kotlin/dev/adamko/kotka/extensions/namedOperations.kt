@@ -6,7 +6,9 @@ import org.apache.kafka.streams.kstream.Branched
 import org.apache.kafka.streams.kstream.Consumed
 import org.apache.kafka.streams.kstream.Grouped
 import org.apache.kafka.streams.kstream.Joined
+import org.apache.kafka.streams.kstream.KeyValueMapper
 import org.apache.kafka.streams.kstream.Named
+import org.apache.kafka.streams.kstream.Printed
 import org.apache.kafka.streams.kstream.Produced
 import org.apache.kafka.streams.kstream.Repartitioned
 import org.apache.kafka.streams.kstream.TableJoined
@@ -98,7 +100,38 @@ fun <Key, otherKey> tableJoined(
   name: String? = null,
   partitioner: StreamPartitioner<Key, Void>? = null,
   otherPartitioner: StreamPartitioner<otherKey, Void>? = null,
-) : TableJoined<Key, otherKey> =
+): TableJoined<Key, otherKey> =
   TableJoined.`as`<Key, otherKey>(name)
     .withPartitioner(partitioner)
     .withOtherPartitioner(otherPartitioner)
+
+
+fun <Key, Val> printed(
+  name: String? = null,
+  outputStream: PrintedOutputStream,
+  label: String? = null,
+  mapper: KeyValueMapper<Key, Val, String>? = null,
+): Printed<Key, Val> {
+
+  var printed: Printed<Key, Val> = when (outputStream) {
+    is PrintedOutputStream.File -> Printed.toFile(outputStream.filePath)
+    PrintedOutputStream.SysOut  -> Printed.toSysOut()
+  }
+
+  if (name != null)
+    printed = printed.withName(name)
+
+  if (mapper != null)
+    printed = printed.withKeyValueMapper(mapper)
+
+  if (label != null)
+    printed = printed.withLabel(label)
+
+  return printed
+}
+
+
+sealed interface PrintedOutputStream {
+  object SysOut : PrintedOutputStream
+  data class File(val filePath: String) : PrintedOutputStream
+}
