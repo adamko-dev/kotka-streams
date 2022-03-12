@@ -4,6 +4,7 @@ import dev.adamko.kotka.extensions.namedAs
 import dev.adamko.kotka.extensions.toKeyValue
 import org.apache.kafka.common.utils.Bytes
 import org.apache.kafka.streams.kstream.BranchedKStream
+import org.apache.kafka.streams.kstream.ForeachAction
 import org.apache.kafka.streams.kstream.GlobalKTable
 import org.apache.kafka.streams.kstream.Grouped
 import org.apache.kafka.streams.kstream.Joined
@@ -137,6 +138,7 @@ fun <K, inV, otherK, otherV, outV> KStream<K, inV>.join(
   )
 }
 
+
 fun <K, inV, otherK, otherV, outV> KStream<K, inV>.leftJoin(
   name: String,
   globalTable: GlobalKTable<otherK, otherV>,
@@ -149,6 +151,26 @@ fun <K, inV, otherK, otherV, outV> KStream<K, inV>.leftJoin(
     valueJoiner,
     namedAs(name),
   )
+}
+
+
+/** @see KStream.foreach */
+fun <K, V> KStream<K, V>.forEach(
+  name: String? = null,
+  forEachAction: ForeachAction<K, V>,
+): Unit = when (name) {
+  null -> foreach(forEachAction)
+  else -> foreach(forEachAction, namedAs(name))
+}
+
+
+/** @see KStream.peek */
+fun <K, V> KStream<K, V>.peek(
+  name: String? = null,
+  forEachAction: ForeachAction<K, V>,
+): KStream<K, V> = when (name) {
+  null -> peek(forEachAction)
+  else -> peek(forEachAction, namedAs(name))
 }
 
 
@@ -169,16 +191,6 @@ fun <K, inV, otherK, otherV, outV> KStream<K, inV>.leftJoin(
 //    named: Named?,
 //    vararg stateStoreNames: String?
 //  ): KStream<K1, V1>?
-//
-//  fun <K1, V1> transform(
-//    transformerSupplier: TransformerSupplier<in K?, in V?, KeyValue<K1, V1>?>?,
-//    vararg stateStoreNames: String?
-//  ): KStream<K1, V1>?
-//
-//  fun <KR, VR> flatMap(
-//    mapper: KeyValueMapper<in K?, in V?, out Iterable<KeyValue<out KR, out VR>?>?>?,
-//    named: Named?
-//  ): KStream<KR, VR>?
 //
 //  fun <KR, VR> map(
 //    mapper: KeyValueMapper<in K?, in V?, out KeyValue<out KR, out VR>?>?,
@@ -207,20 +219,10 @@ fun <K, inV, otherK, otherV, outV> KStream<K, inV>.leftJoin(
 //    streamJoined: StreamJoined<K?, V?, VO>?
 //  ): KStream<K?, VR>?
 //
-//  fun <VR> flatMapValues(
-//    mapper: ValueMapperWithKey<in K?, in V?, out Iterable<VR>?>?,
-//    named: Named?
-//  ): KStream<K?, VR>?
-//
 //  fun <VR> flatTransformValues(
 //    valueTransformerSupplier: ValueTransformerWithKeySupplier<in K?, in V?, Iterable<VR>?>?,
 //    named: Named?,
 //    vararg stateStoreNames: String?
-//  ): KStream<K?, VR>?
-//
-//  fun <VR> mapValues(
-//    mapper: ValueMapperWithKey<in K?, in V?, out VR>?,
-//    named: Named?
 //  ): KStream<K?, VR>?
 //
 //  fun <VR> transformValues(
@@ -229,17 +231,8 @@ fun <K, inV, otherK, otherV, outV> KStream<K, inV>.leftJoin(
 //    vararg stateStoreNames: String?
 //  ): KStream<K?, VR>?
 //
-//  fun <VT, VR> leftJoin(
-//    table: KTable<K?, VT>?,
-//    joiner: ValueJoinerWithKey<in K?, in V?, in VT, out VR>?,
-//    joined: Joined<K?, V?, VT>?
-//  ): KStream<K?, VR>?
-//
 //  fun merge(stream: KStream<K?, V?>?, named: Named?): KStream<K?, V?>?
-//  fun peek(action: ForeachAction<in K?, in V?>?, named: Named?): KStream<K?, V?>?
 //  fun repartition(repartitioned: Repartitioned<K?, V?>?): KStream<K?, V?>?
-//  fun foreach(action: ForeachAction<in K?, in V?>?, named: Named?)
-//  fun print(printed: Printed<K?, V?>?)
 //  fun process(
 //    processorSupplier: ProcessorSupplier<in K?, in V?, Void?, Void?>?,
 //    named: Named?,
