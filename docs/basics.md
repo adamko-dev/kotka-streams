@@ -48,7 +48,7 @@ https://kafka.apache.org/documentation/streams/developer-guide/dsl-topology-nami
 ```
 
 > You can get the full code [here](./code/example/example-basics-naming-operators-01.kt).
-> 
+
 ```text
 Topologies:
    Sub-topology: 0
