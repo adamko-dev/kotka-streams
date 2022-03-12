@@ -24,6 +24,8 @@ dependencies {
 
   val kotlinxKnitVersion = "0.3.0"
   implementation("org.jetbrains.kotlinx:kotlinx-knit:${kotlinxKnitVersion}")
+
+  implementation("dev.jacomet.gradle.plugins:logging-capabilities:0.10.0")
 }
 
 val projectJvmTarget = "11"

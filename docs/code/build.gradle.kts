@@ -5,13 +5,12 @@ plugins {
 
 
 dependencies {
-//  implementation(projects.modules.kxsTsGenCore)
-
-  implementation("org.jetbrains.kotlinx:kotlinx-knit:0.3.0")
+  implementation(projects.modules.kotkaStreamsExtensions)
 
   testImplementation(kotlin("test"))
 
-  testImplementation("org.jetbrains.kotlinx:kotlinx-knit-test:0.3.0")
+  implementation(libs.kotlinx.knit)
+  testImplementation(libs.kotlinx.knitTest)
 }
 
 

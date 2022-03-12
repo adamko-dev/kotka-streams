@@ -6,6 +6,8 @@ plugins {
   id("kotka.convention.subproject")
   kotlin("jvm")
   `java-library`
+
+  id("dev.jacomet.logging-capabilities")
 }
 dependencies {
 
@@ -27,6 +29,7 @@ dependencies {
 
   testImplementation("io.mockk:mockk:1.12.3")
 
+  implementation("org.slf4j:slf4j-simple:1.7.36")
 }
 
 val projectJvmTarget = "11"
@@ -65,4 +68,8 @@ tasks.withType<Test> {
 java {
   withJavadocJar()
   withSourcesJar()
+}
+
+loggingCapabilities {
+  enforceSlf4JSimple()
 }
