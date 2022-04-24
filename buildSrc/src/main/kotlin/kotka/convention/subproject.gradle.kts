@@ -4,5 +4,7 @@ plugins {
   base
 }
 
-group = rootProject.group
-version = rootProject.version
+if (project != rootProject) {
+  project.group = rootProject.group
+  project.version = rootProject.version
+}

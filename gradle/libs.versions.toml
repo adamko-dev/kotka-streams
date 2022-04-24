@@ -2,7 +2,7 @@
 
 [versions]
 
-kotlin = "1.6.10"
+kotlin = "1.6.21"
 jvm    = "11"
 
 kafka  = "3.1.0"
