@@ -18,22 +18,24 @@ dependencies {
     because("Only needed to run tests in a version of IntelliJ IDEA that bundles older versions")
   }
 
-  val kotestVersion = "5.0.3"
+  val kotestVersion = "5.2.3"
   testImplementation(platform("io.kotest:kotest-bom:$kotestVersion"))
   testImplementation("io.kotest:kotest-runner-junit5")
   testImplementation("io.kotest:kotest-assertions-core")
   testImplementation("io.kotest:kotest-property")
   testImplementation("io.kotest:kotest-assertions-json")
 
-  testImplementation("io.mockk:mockk:1.12.1")
+  testImplementation("io.mockk:mockk:1.12.3")
 
 }
 
-val projectJvmTarget = "11"
+val projectJvmTarget = "1.8"
+val projectJvmVersion = "8"
+val projectKotlinTarget = "1.6"
 
 kotlin {
   jvmToolchain {
-    (this as JavaToolchainSpec).languageVersion.set(JavaLanguageVersion.of(projectJvmTarget))
+    (this as JavaToolchainSpec).languageVersion.set(JavaLanguageVersion.of(projectJvmVersion))
   }
 }
 
@@ -41,8 +43,8 @@ tasks.withType<KotlinCompile>().configureEach {
 
   kotlinOptions {
     jvmTarget = projectJvmTarget
-    apiVersion = "1.6"
-    languageVersion = "1.6"
+    apiVersion = projectKotlinTarget
+    languageVersion = projectKotlinTarget
   }
 
   kotlinOptions.freeCompilerArgs += listOf(

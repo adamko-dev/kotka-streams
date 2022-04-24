@@ -13,5 +13,4 @@ dependencies {
 
   api(platform(libs.kotlinx.serialization.bom))
   api(libs.kotlinx.serialization.core)
-
 }

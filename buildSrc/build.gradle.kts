@@ -2,12 +2,12 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
   `kotlin-dsl`
-  kotlin("jvm") version "1.6.10"
+  kotlin("jvm") version "1.6.21"
 }
 
 dependencies {
 
-  val kotlinVersion = "1.6.10"
+  val kotlinVersion = libs.versions.kotlin.get()
   implementation(enforcedPlatform("org.jetbrains.kotlin:kotlin-bom:$kotlinVersion"))
   implementation("org.jetbrains.kotlin:kotlin-serialization")
   implementation("org.jetbrains.kotlin:kotlin-reflect")
@@ -16,18 +16,20 @@ dependencies {
   val kotlinXSerializationVersion = "1.3.2"
   implementation(enforcedPlatform("org.jetbrains.kotlinx:kotlinx-serialization-bom:$kotlinXSerializationVersion"))
 
-  val gitVersioningPluginVersion = "5.1.3"
+  val gitVersioningPluginVersion = "5.2.0"
   implementation("me.qoomon:gradle-git-versioning-plugin:$gitVersioningPluginVersion")
 }
 
-val projectJvmTarget = "11"
+val gradleJvmTarget = "1.8"
+val gradleJvmVersion = "8"
+val gradleKotlinTarget = "1.6"
 
 tasks.withType<KotlinCompile>().configureEach {
 
   kotlinOptions {
-    jvmTarget = projectJvmTarget
-    apiVersion = "1.6"
-    languageVersion = "1.6"
+    jvmTarget = gradleJvmTarget
+    apiVersion = gradleKotlinTarget
+    languageVersion = gradleKotlinTarget
   }
 
   kotlinOptions.freeCompilerArgs += listOf(
@@ -41,10 +43,10 @@ tasks.withType<KotlinCompile>().configureEach {
 
 kotlin {
   jvmToolchain {
-    (this as JavaToolchainSpec).languageVersion.set(JavaLanguageVersion.of(projectJvmTarget))
+    (this as JavaToolchainSpec).languageVersion.set(JavaLanguageVersion.of(gradleJvmVersion))
   }
 
   kotlinDslPluginOptions {
-    jvmTarget.set(projectJvmTarget)
+    jvmTarget.set(gradleJvmTarget)
   }
 }
