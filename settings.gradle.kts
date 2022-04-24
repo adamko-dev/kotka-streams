@@ -2,6 +2,8 @@ rootProject.name = "kotka-streams"
 
 
 include(
+  ":docs:code",
+
   ":modules:kotka-streams-extensions",
   ":modules:kotka-streams-framework",
   ":modules:kotka-streams-kotlinx-serialization",

@@ -10,14 +10,22 @@ dependencies {
   val kotlinVersion = "1.6.10"
   implementation(enforcedPlatform("org.jetbrains.kotlin:kotlin-bom:$kotlinVersion"))
   implementation("org.jetbrains.kotlin:kotlin-serialization")
-  implementation("org.jetbrains.kotlin:kotlin-reflect")
+//  implementation("org.jetbrains.kotlin:kotlin-reflect")
   implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
 
   val kotlinXSerializationVersion = "1.3.2"
   implementation(enforcedPlatform("org.jetbrains.kotlinx:kotlinx-serialization-bom:$kotlinXSerializationVersion"))
 
-  val gitVersioningPluginVersion = "5.1.3"
+  val gitVersioningPluginVersion = "5.1.5"
   implementation("me.qoomon:gradle-git-versioning-plugin:$gitVersioningPluginVersion")
+
+  val kotlinxKoverVersion = "0.5.0"
+  implementation("org.jetbrains.kotlinx:kover:${kotlinxKoverVersion}")
+
+  val kotlinxKnitVersion = "0.3.0"
+  implementation("org.jetbrains.kotlinx:kotlinx-knit:${kotlinxKnitVersion}")
+
+  implementation("dev.jacomet.gradle.plugins:logging-capabilities:0.10.0")
 }
 
 val projectJvmTarget = "11"

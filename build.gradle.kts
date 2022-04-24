@@ -6,6 +6,8 @@ plugins {
 
   `project-report`
   `build-dashboard`
+
+  id("org.jetbrains.kotlinx.kover")
 }
 
 group = "dev.adamko.kotka"
@@ -27,6 +29,6 @@ dependencies {
 }
 
 tasks.wrapper {
-  gradleVersion = "7.4"
+  gradleVersion = "7.4.1"
   distributionType = Wrapper.DistributionType.ALL
 }
