@@ -1,6 +1,6 @@
 // This file was automatically generated from basics.md by Knit tool. Do not edit.
 @file:Suppress("PackageDirectoryMismatch", "unused")
-package dev.adamko.kotka.example.exampleBasicsNamingOperators01
+package dev.adamko.kotka.example.exampleBasicsNamingOperators02
 
 import dev.adamko.kotka.extensions.*
 import org.apache.kafka.streams.*
