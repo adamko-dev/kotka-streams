@@ -55,13 +55,21 @@ fun <K, V, otherV, outV> KTable<K, V>.join(
   }
 }
 
+/**
+ * A function that extracts the key ([otherK]) from this table's value ([V]).
+ * If the result is null, the update is ignored as invalid.
+ * @see [KTable.join]
+ */
+fun interface ForeignKeyExtractor<V, otherK> : (V) -> otherK?
+
 
 /** @See [KTable.join] */
+
 fun <K, V, otherK, otherV, outV> KTable<K, V>.join(
   other: KTable<otherK, otherV>,
   name: String? = null,
   materialized: Materialized<K, outV, KeyValueStore<Bytes, ByteArray>>? = null,
-  foreignKeyExtractor: (V) -> otherK,
+  foreignKeyExtractor: ForeignKeyExtractor<V, otherK>,
   joiner: ValueJoiner<V, otherV, outV>,
 ): KTable<K, outV> =
   join(
@@ -78,7 +86,7 @@ fun <K, V, otherK, otherV, outV> KTable<K, V>.join(
   other: KTable<otherK, otherV>,
   tableJoined: TableJoined<K, otherK>? = null,
   materialized: Materialized<K, outV, KeyValueStore<Bytes, ByteArray>>? = null,
-  foreignKeyExtractor: (V) -> otherK,
+  foreignKeyExtractor: ForeignKeyExtractor<V, otherK>,
   joiner: ValueJoiner<V, otherV, outV>,
 ): KTable<K, outV> {
   return when {
