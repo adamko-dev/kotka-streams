@@ -1,18 +1,20 @@
 package dev.adamko.kotka.kxs
 
 import dev.adamko.kotka.topicdata.KeyValueSerdes
+import kotlinx.serialization.KSerializer
 import kotlinx.serialization.StringFormat
-import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.encodeToString
+import kotlinx.serialization.serializer
 import org.apache.kafka.common.serialization.Deserializer
 import org.apache.kafka.common.serialization.Serde
 import org.apache.kafka.common.serialization.Serializer
 
 
-inline fun <reified T> StringFormat.kafkaSerializer(): Serializer<T> =
+inline fun <reified T> StringFormat.kafkaSerializer(
+  serializer: KSerializer<T> = serializersModule.serializer()
+): Serializer<T> =
   Serializer { topic: String, data: T ->
     runCatching {
-      encodeToString(data).encodeToByteArray()
+      encodeToString(serializer, data).encodeToByteArray()
     }.getOrElse { e ->
       println(
         """
@@ -28,10 +30,12 @@ inline fun <reified T> StringFormat.kafkaSerializer(): Serializer<T> =
   }
 
 
-inline fun <reified T> StringFormat.kafkaDeserializer(): Deserializer<T> =
+inline fun <reified T> StringFormat.kafkaDeserializer(
+  serializer: KSerializer<T> = serializersModule.serializer()
+): Deserializer<T> =
   Deserializer { topic: String, data: ByteArray ->
     runCatching {
-      decodeFromString<T>(data.decodeToString())
+      decodeFromString(serializer, data.decodeToString())
     }.getOrElse { e ->
       println(
         """
@@ -47,14 +51,24 @@ inline fun <reified T> StringFormat.kafkaDeserializer(): Deserializer<T> =
   }
 
 
-inline fun <reified T> StringFormat.serde(): Serde<T> =
+inline fun <reified T> StringFormat.serde(
+  serializer: KSerializer<T> = serializersModule.serializer()
+): Serde<T> =
   object : Serde<T> {
-    private val serializer: Serializer<T> = kafkaSerializer()
-    private val deserializer: Deserializer<T> = kafkaDeserializer()
-    override fun serializer(): Serializer<T> = serializer
-    override fun deserializer(): Deserializer<T> = deserializer
+    private val kafkaSerializer: Serializer<T> = kafkaSerializer(serializer)
+    private val kafkaDeserializer: Deserializer<T> = kafkaDeserializer(serializer)
+    override fun serializer(): Serializer<T> = kafkaSerializer
+    override fun deserializer(): Deserializer<T> = kafkaDeserializer
+
+    override fun toString(): String = "StringFormat serde: $serializer"
   }
 
 
-inline fun <reified K, reified V> StringFormat.keyValueSerdes(): KeyValueSerdes<K, V> =
-  KeyValueSerdes(serde(), serde())
+inline fun <reified K, reified V> StringFormat.keyValueSerdes(
+  keySerializer: KSerializer<K> = serializersModule.serializer(),
+  valueSerializer: KSerializer<V> = serializersModule.serializer(),
+): KeyValueSerdes<K, V> =
+  KeyValueSerdes(
+    keySerde = serde(keySerializer),
+    valueSerde = serde(valueSerializer),
+  )

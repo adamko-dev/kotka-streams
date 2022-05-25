@@ -6,5 +6,5 @@ plugins {
 dependencies {
   api(projects.modules.kotkaStreamsExtensions)
 
-  api(libs.kafka.streams)
+  implementation(libs.kafka.streams)
 }
