@@ -17,6 +17,9 @@ kotlin-bom = { group = "org.jetbrains.kotlin", name = "kotlin-bom", version.ref 
 
 kafka-streams = { group = "org.apache.kafka", name = "kafka-streams", version.ref = "kafka" }
 
-kotlinx-serialization-bom  = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-bom", version.ref = "kotlinx-serialization" }
-kotlinx-serialization-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-core" }
-kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json" }
+kotlinx-serialization-bom        = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-bom",       version.ref = "kotlinx-serialization" }
+kotlinx-serialization-core       = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-core"       }
+kotlinx-serialization-json       = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json"       }
+kotlinx-serialization-protobuf   = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-protobuf"   }
+kotlinx-serialization-cbor       = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-cbor"       }
+kotlinx-serialization-properties = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-properties" }

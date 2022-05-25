@@ -9,8 +9,11 @@ dependencies {
   api(projects.modules.kotkaStreamsExtensions)
   api(projects.modules.kotkaStreamsFramework)
 
-  api(libs.kafka.streams)
+  implementation(libs.kafka.streams)
 
-  api(platform(libs.kotlinx.serialization.bom))
-  api(libs.kotlinx.serialization.core)
+  implementation(platform(libs.kotlinx.serialization.bom))
+  implementation(libs.kotlinx.serialization.core)
+
+  testImplementation(libs.kotlinx.serialization.cbor)
+  testImplementation(libs.kotlinx.serialization.json)
 }
