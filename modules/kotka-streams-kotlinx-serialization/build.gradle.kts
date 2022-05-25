@@ -17,3 +17,9 @@ dependencies {
   testImplementation(libs.kotlinx.serialization.cbor)
   testImplementation(libs.kotlinx.serialization.json)
 }
+
+
+tasks.compileTestKotlin {
+  // use experimental binary formats for testing
+  kotlinOptions.freeCompilerArgs += "-opt-in=kotlinx.serialization.ExperimentalSerializationApi"
+}
