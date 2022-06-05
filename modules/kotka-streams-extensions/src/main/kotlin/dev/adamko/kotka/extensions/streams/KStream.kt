@@ -68,7 +68,7 @@ fun <K, V, outK> KStream<K, V>.groupBy(
 fun <K, V> KStream<K, V>.to(
   produced: Produced<K, V>,
   topicNameExtractor: TopicNameExtractor<K, V>,
-) = to(topicNameExtractor, produced)
+): Unit = to(topicNameExtractor, produced)
 
 
 fun <K, V> KStream<K, V>.filter(
@@ -127,8 +127,8 @@ fun <K, inV, otherK, otherV, outV> KStream<K, inV>.join(
   globalTable: GlobalKTable<otherK, otherV>,
   keySelector: KeyValueMapper<K, inV, otherK?>,
   valueJoiner: ValueJoinerWithKey<K, inV, otherV?, outV>,
-): KStream<K, outV> {
-  return join(
+): KStream<K, outV> =
+  join(
     globalTable,
     keySelector,
     valueJoiner,
@@ -142,8 +142,8 @@ fun <K, inV, otherK, otherV, outV> KStream<K, inV>.leftJoin(
   globalTable: GlobalKTable<otherK, otherV>,
   keySelector: KeyValueMapper<K, inV, otherK?>,
   valueJoiner: ValueJoinerWithKey<K, inV, otherV?, outV>,
-): KStream<K, outV> {
-  return leftJoin(
+): KStream<K, outV> =
+  leftJoin(
     globalTable,
     keySelector,
     valueJoiner,
