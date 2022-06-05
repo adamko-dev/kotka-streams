@@ -66,6 +66,12 @@ fun <K, V, outK> KStream<K, V>.groupBy(
 
 
 fun <K, V> KStream<K, V>.to(
+  topicName: String,
+  produced: Produced<K, V>,
+): Unit = to(topicName, produced)
+
+
+fun <K, V> KStream<K, V>.to(
   produced: Produced<K, V>,
   topicNameExtractor: TopicNameExtractor<K, V>,
 ): Unit = to(topicNameExtractor, produced)
@@ -134,7 +140,6 @@ fun <K, inV, otherK, otherV, outV> KStream<K, inV>.join(
     valueJoiner,
     namedAs(name),
   )
-}
 
 
 fun <K, inV, otherK, otherV, outV> KStream<K, inV>.leftJoin(
@@ -149,7 +154,6 @@ fun <K, inV, otherK, otherV, outV> KStream<K, inV>.leftJoin(
     valueJoiner,
     namedAs(name),
   )
-}
 
 
 /** @see KStream.foreach */
