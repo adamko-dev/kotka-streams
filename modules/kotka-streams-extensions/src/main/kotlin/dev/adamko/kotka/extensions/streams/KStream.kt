@@ -111,17 +111,15 @@ fun <K, V> KStream<K, V>.split(
   }
 
 
-fun <K, inV, otherK, otherV, outV> KStream<K, inV>.join(
-  table: KTable<otherK, otherV>,
-  valueJoiner: ValueJoinerWithKey<K, inV, otherV?, outV>,
-  joined: Joined<K, inV, outV>,
-): KStream<K, outV> {
-  return join(
-    table,
-    valueJoiner,
-    joined,
-  )
-}
+fun <K, V, otherV, outV> KStream<K, V>.join(
+  table: KTable<K, otherV>,
+  joined: Joined<K, V, otherV>,
+  valueJoiner: ValueJoinerWithKey<K, V, otherV?, outV>,
+): KStream<K, outV> = join(
+  table,
+  valueJoiner,
+  joined,
+)
 
 
 fun <K, inV, otherK, otherV, outV> KStream<K, inV>.join(
