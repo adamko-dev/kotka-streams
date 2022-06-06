@@ -17,20 +17,60 @@ class StreamsBuilderTests : FunSpec({
   context("verify StreamBuilder.stream() with vararg topics calls stream() with List<>") {
     val topicsArb = Arb.list(Arb.string())
 
-    test("without Consumed") {
+
+    test("single topic") {
+      val builderMock: StreamsBuilder = mockk {
+        every { stream<String, String>(any<Collection<String>>()) } returns mockk()
+      }
+
+      builderMock.stream<String, String>(consumed = null, "test-topic")
+
+      verify(exactly = 1) {
+        builderMock.stream<String, String>(listOf("test-topic"))
+      }
+      confirmVerified(builderMock)
+    }
+
+
+    test("multiple topics") {
+      val builderMock: StreamsBuilder = mockk {
+        every { stream<String, String>(any<Collection<String>>()) } returns mockk()
+      }
+
+      builderMock.stream<String, String>(
+        "test-topic-1",
+        "test-topic-2",
+        "test-topic-3",
+      )
+
+      verify(exactly = 1) {
+        builderMock.stream<String, String>(
+          listOf(
+            "test-topic-1",
+            "test-topic-2",
+            "test-topic-3",
+          )
+        )
+      }
+      confirmVerified(builderMock)
+    }
+
+
+    test("typed array, without Consumed") {
       checkAll(topicsArb) { topics ->
         val builderMock: StreamsBuilder = mockk {
           every { stream<String, String>(any<Collection<String>>()) } returns mockk()
         }
 
-        builderMock.stream<String, String>(topics = topics.toTypedArray(), consumed = null)
+        builderMock.stream<String, String>(topics = topics.toTypedArray())
 
         verify(exactly = 1) { builderMock.stream<String, String>(topics) }
         confirmVerified(builderMock)
       }
     }
 
-    test("with Consumed") {
+
+    test("typed array, with Consumed") {
       checkAll(topicsArb) { topics ->
         val builderMock: StreamsBuilder = mockk {
           every {
