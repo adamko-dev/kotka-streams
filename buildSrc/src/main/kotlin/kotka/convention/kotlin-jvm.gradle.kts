@@ -7,6 +7,8 @@ plugins {
   kotlin("jvm")
   `java-library`
 }
+
+
 dependencies {
 
   implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
@@ -26,7 +28,6 @@ dependencies {
   testImplementation("io.kotest:kotest-assertions-json")
 
   testImplementation("io.mockk:mockk:1.12.3")
-
 }
 
 val projectJvmTarget = "1.8"
@@ -60,7 +61,7 @@ tasks.compileTestKotlin {
   kotlinOptions.freeCompilerArgs += "-opt-in=io.kotest.common.ExperimentalKotest"
 }
 
-tasks.withType<Test> {
+tasks.withType<Test>().configureEach {
   useJUnitPlatform()
 }
 
