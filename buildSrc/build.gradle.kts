@@ -13,7 +13,7 @@ dependencies {
   implementation("org.jetbrains.kotlin:kotlin-reflect")
   implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
 
-  val kotlinXSerializationVersion = "1.3.2"
+  val kotlinXSerializationVersion = libs.versions.kotlinx.serialization.get()
   implementation(enforcedPlatform("org.jetbrains.kotlinx:kotlinx-serialization-bom:$kotlinXSerializationVersion"))
 
   val gitVersioningPluginVersion = "5.2.0"
