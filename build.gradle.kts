@@ -2,7 +2,7 @@ plugins {
   kotka.convention.`kotlin-jvm`
 
   kotka.convention.`maven-publish`
-  id("me.qoomon.git-versioning")
+  me.qoomon.`git-versioning`
 
   `project-report`
   `build-dashboard`
@@ -21,6 +21,8 @@ gitVersioning.apply {
 }
 
 dependencies {
+  implementation(platform(projects.modules.versionsPlatform))
+
   api(projects.modules.kotkaStreamsExtensions)
   api(projects.modules.kotkaStreamsFramework)
   api(projects.modules.kotkaStreamsKotlinxSerialization)

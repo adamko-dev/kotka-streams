@@ -7,17 +7,15 @@ plugins {
 
 dependencies {
 
-  val kotlinVersion = libs.versions.kotlin.get()
-  implementation(enforcedPlatform("org.jetbrains.kotlin:kotlin-bom:$kotlinVersion"))
+  implementation(enforcedPlatform(libs.kotlin.bom))
   implementation("org.jetbrains.kotlin:kotlin-serialization")
   implementation("org.jetbrains.kotlin:kotlin-reflect")
-  implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
 
-  val kotlinXSerializationVersion = libs.versions.kotlinx.serialization.get()
-  implementation(enforcedPlatform("org.jetbrains.kotlinx:kotlinx-serialization-bom:$kotlinXSerializationVersion"))
+  implementation(libs.kotlin.gradlePlugin)
 
-  val gitVersioningPluginVersion = "5.2.0"
-  implementation("me.qoomon:gradle-git-versioning-plugin:$gitVersioningPluginVersion")
+//  implementation(libs.kotest.gradlePlugin)
+
+  implementation(libs.gitVersioningPlugin)
 }
 
 val gradleJvmTarget = "1.8"

@@ -14,7 +14,8 @@ import org.apache.kafka.streams.kstream.Consumed
 
 class StreamsBuilderTests : FunSpec({
 
-  context("verify StreamBuilder.stream() with vararg topics calls stream() with List<>") {
+//  context("verify StreamBuilder.stream() with vararg topics calls stream() with List<>") {
+  context("verify StreamBuilder.stream() with vararg topics calls stream() with List") {
     val topicsArb = Arb.list(Arb.string())
 
 
