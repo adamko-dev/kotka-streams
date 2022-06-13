@@ -31,7 +31,7 @@ val projectKotlinTarget = "1.6"
 
 kotlin {
   jvmToolchain {
-    (this as JavaToolchainSpec).languageVersion.set(JavaLanguageVersion.of(projectJvmVersion))
+    languageVersion.set(JavaLanguageVersion.of(projectJvmVersion))
   }
 }
 

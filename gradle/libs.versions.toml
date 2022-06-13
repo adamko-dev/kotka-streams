@@ -14,13 +14,15 @@ kotlinx-knit = "0.5.1"                  # https://github.com/Kotlin/kotlinx-knit
 ## Test libs
 
 kotest = "5.3.0"                        # https://github.com/kotest/kotest/releases
-kotestSnapshot = "5.3.0.1010-SNAPSHOT"
+kotestSnapshot = "5.4.0.1028-SNAPSHOT"
 
 mockk = "1.12.4"                        # https://search.maven.org/artifact/io.mockk/mockk
 junit = "5.8.2"                         # https://github.com/junit-team/junit5/releases
 
 ## Plugins
 gitVersioningPlugin = "6.1.4"           # https://github.com/qoomon/gradle-git-versioning-plugin/releases
+binaryCompatValidator = "0.10.0"        # https://search.maven.org/artifact/org.jetbrains.kotlinx/binary-compatibility-validator
+
 
 ###########
 [libraries]
@@ -65,6 +67,7 @@ mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 gitVersioningPlugin = { group = "me.qoomon", name = "gradle-git-versioning-plugin", version.ref = "gitVersioningPlugin" }
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlinx-knitGradlePlugin = { group = "org.jetbrains.kotlinx", name = "kotlinx-knit", version.ref = "kotlinx-knit" }
+kotlinx-binaryCompatValidator = { group = "org.jetbrains.kotlinx", name = "binary-compatibility-validator", version.ref = "kotlin" }
 
 
 kotest-gradlePlugin = { group = "io.kotest", name = "kotest-framework-multiplatform-plugin-gradle", version.ref = "kotest" }

@@ -3,6 +3,7 @@ package dev.adamko.kotka.extensions.streams
 import dev.adamko.kotka.extensions.namedAs
 import dev.adamko.kotka.extensions.toKeyValue
 import org.apache.kafka.common.utils.Bytes
+import org.apache.kafka.streams.KeyValue
 import org.apache.kafka.streams.kstream.BranchedKStream
 import org.apache.kafka.streams.kstream.ForeachAction
 import org.apache.kafka.streams.kstream.GlobalKTable
@@ -66,15 +67,20 @@ fun <K, V, outK> KStream<K, V>.groupBy(
 
 
 fun <K, V> KStream<K, V>.to(
-  topicName: String,
-  produced: Produced<K, V>,
-): Unit = to(topicName, produced)
+  produced: Produced<K, V>? = null,
+  topicNameExtractor: TopicNameExtractorKt<K, V>,
+) {
+  val extractor = TopicNameExtractor<K, V> { key, value, recordContext ->
+    with(topicNameExtractor) {
+      TopicNameExtractorContextInternal(recordContext).extract(KeyValue(key, value))
+    }
+  }
 
-
-fun <K, V> KStream<K, V>.to(
-  produced: Produced<K, V>,
-  topicNameExtractor: TopicNameExtractor<K, V>,
-): Unit = to(topicNameExtractor, produced)
+  return when (produced) {
+    null -> to(extractor)
+    else -> to(extractor, produced)
+  }
+}
 
 
 fun <K, V> KStream<K, V>.filter(
