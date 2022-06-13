@@ -111,7 +111,9 @@ plugins.withType<JavaPlatformPlugin>().configureEach {
     dependsOn(javadocJarStub)
   }
 
-  signing.sign(javadocJarStub.get())
+  if (sonatypeRepositoryCredentials.isPresent) {
+    signing.sign(javadocJarStub.get())
+  }
 
   publishing.publications.create<MavenPublication>("mavenJavaPlatform") {
     from(components["javaPlatform"])
