@@ -26,7 +26,7 @@ fun RepositoryHandler.jitpack() {
 
 
 fun RepositoryHandler.sonatypeSnapshots() {
-  maven("https://oss.sonatype.org/content/repositories/snapshots") {
-    mavenContent { snapshotsOnly() }
-  }
+//  maven("https://oss.sonatype.org/content/repositories/snapshots") {
+//    mavenContent { snapshotsOnly() }
+//  }
 }

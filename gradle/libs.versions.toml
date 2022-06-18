@@ -13,8 +13,7 @@ kotlinx-knit = "0.5.1"                  # https://github.com/Kotlin/kotlinx-knit
 
 ## Test libs
 
-kotest = "5.3.0"                        # https://github.com/kotest/kotest/releases
-kotestSnapshot = "5.4.0.1028-SNAPSHOT"
+kotest = "5.3.1"                        # https://github.com/kotest/kotest/releases
 
 mockk = "1.12.4"                        # https://search.maven.org/artifact/io.mockk/mockk
 junit = "5.8.2"                         # https://github.com/junit-team/junit5/releases
@@ -42,7 +41,7 @@ kotlinxSerialization-properties = { group = "org.jetbrains.kotlinx", name = "kot
 ### Test libs ##
 
 # Kotest
-kotest-bom = { group = "io.kotest", name = "kotest-bom", version.ref = "kotestSnapshot" }
+kotest-bom = { group = "io.kotest", name = "kotest-bom", version.ref = "kotest" }
 kotest-assertionsCore = { group = "io.kotest", name = "kotest-assertions-core" }
 kotest-assertionsJson = { group = "io.kotest", name = "kotest-assertions-json" }
 kotest-property = { group = "io.kotest", name = "kotest-property" }
