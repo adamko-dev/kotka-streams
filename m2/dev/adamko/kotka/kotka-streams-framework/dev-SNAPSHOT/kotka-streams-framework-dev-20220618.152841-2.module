@@ -1,0 +1,154 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "dev.adamko.kotka",
+    "module": "kotka-streams-framework",
+    "version": "dev-SNAPSHOT",
+    "attributes": {
+      "org.gradle.status": "integration"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.5-rc-2"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "dev.adamko.kotka",
+          "module": "kotka-streams-extensions",
+          "version": {
+            "requires": "dev-SNAPSHOT"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-jdk8",
+          "version": {
+            "requires": "1.7.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "kotka-streams-framework-dev-SNAPSHOT.jar",
+          "url": "kotka-streams-framework-dev-SNAPSHOT.jar",
+          "size": 17610,
+          "sha512": "f39de41cae357c549d9113c831cec5552a1f4e681fe44b9464306cfd9df316598dec0cf848646735c42beaa03db64c9d1bb211b1f10b3106edf38d1e562d3923",
+          "sha256": "e49459405f9e2458cad2ddad483bee420dc9fef30e09aa45bc7f3fedb71f34f8",
+          "sha1": "9cd8717875b8ad0e0f328e65144239ba323e3b0c",
+          "md5": "f74f976814df3197d6c5657c364dd4b3"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "dev.adamko.kotka",
+          "module": "versions-platform",
+          "version": {
+            "requires": "dev-SNAPSHOT"
+          },
+          "attributes": {
+            "org.gradle.category": "platform"
+          },
+          "endorseStrictVersions": true
+        },
+        {
+          "group": "org.apache.kafka",
+          "module": "kafka-streams",
+          "version": {
+            "requires": "3.2.0"
+          }
+        },
+        {
+          "group": "dev.adamko.kotka",
+          "module": "kotka-streams-extensions",
+          "version": {
+            "requires": "dev-SNAPSHOT"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-jdk8",
+          "version": {
+            "requires": "1.7.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "kotka-streams-framework-dev-SNAPSHOT.jar",
+          "url": "kotka-streams-framework-dev-SNAPSHOT.jar",
+          "size": 17610,
+          "sha512": "f39de41cae357c549d9113c831cec5552a1f4e681fe44b9464306cfd9df316598dec0cf848646735c42beaa03db64c9d1bb211b1f10b3106edf38d1e562d3923",
+          "sha256": "e49459405f9e2458cad2ddad483bee420dc9fef30e09aa45bc7f3fedb71f34f8",
+          "sha1": "9cd8717875b8ad0e0f328e65144239ba323e3b0c",
+          "md5": "f74f976814df3197d6c5657c364dd4b3"
+        }
+      ]
+    },
+    {
+      "name": "javadocElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "javadoc",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "kotka-streams-framework-dev-SNAPSHOT-javadoc.jar",
+          "url": "kotka-streams-framework-dev-SNAPSHOT-javadoc.jar",
+          "size": 261,
+          "sha512": "f57acef13c8b16e36aac07a769d3e2cbe319805d3c90b452aa6788b07ecf26b352c34e9151ea5315762623dd4128b6db991f8562098966fd14c572cbbc7368aa",
+          "sha256": "d115dfc5fd38416316496569a6cbf9539b1ae8a5891409cdc7c3fc90e9eb9d96",
+          "sha1": "370b00d17e8b580ebcaf786540fa76c39f38a725",
+          "md5": "19fd7183911b86be935c07cff97a9b30"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "kotka-streams-framework-dev-SNAPSHOT-sources.jar",
+          "url": "kotka-streams-framework-dev-SNAPSHOT-sources.jar",
+          "size": 3848,
+          "sha512": "c77e8c4ca5c01e0f56839e08f116bd76e0254c1769694d9a6ecc59d156a65bb7cd01026e4da2cfd1efc2833fcbef50fd5ec7fb664cb53ba50f1df7de8a61dc62",
+          "sha256": "79192626c5f8b552a236612e6eab75e4f1b5913d4cf25e87f78d8f4d9c587117",
+          "sha1": "122a3133255f34adc54cdab91506a4f6ed90c712",
+          "md5": "3c956ef3b2a60f4d461c1174cbbf3fe7"
+        }
+      ]
+    }
+  ]
+}
