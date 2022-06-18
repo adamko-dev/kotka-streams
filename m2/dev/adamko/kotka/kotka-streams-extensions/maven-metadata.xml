@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>dev.adamko.kotka</groupId>
+  <artifactId>kotka-streams-extensions</artifactId>
+  <versioning>
+    <latest>dev-SNAPSHOT</latest>
+    <versions>
+      <version>dev-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20220618152457</lastUpdated>
+  </versioning>
+</metadata>
