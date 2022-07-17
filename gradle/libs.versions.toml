@@ -2,7 +2,7 @@
 
 ## Compilation
 
-kotlin = "1.7.0"                        # https://github.com/JetBrains/kotlin/releases
+kotlin = "1.7.10"                        # https://github.com/JetBrains/kotlin/releases
 jvm = "11"
 
 ## Libs
