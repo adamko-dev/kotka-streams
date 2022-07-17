@@ -4,6 +4,8 @@ plugins {
 }
 
 dependencies {
+  implementation(platform(projects.modules.versionsPlatform))
+
   api(projects.modules.kotkaStreamsExtensions)
 
   implementation(libs.kafka.streams)

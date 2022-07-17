@@ -3,6 +3,7 @@ package dev.adamko.kotka.extensions.streams
 import dev.adamko.kotka.extensions.namedAs
 import dev.adamko.kotka.extensions.toKeyValue
 import org.apache.kafka.common.utils.Bytes
+import org.apache.kafka.streams.KeyValue
 import org.apache.kafka.streams.kstream.BranchedKStream
 import org.apache.kafka.streams.kstream.ForeachAction
 import org.apache.kafka.streams.kstream.GlobalKTable
@@ -66,9 +67,20 @@ fun <K, V, outK> KStream<K, V>.groupBy(
 
 
 fun <K, V> KStream<K, V>.to(
-  produced: Produced<K, V>,
-  topicNameExtractor: TopicNameExtractor<K, V>,
-) = to(topicNameExtractor, produced)
+  produced: Produced<K, V>? = null,
+  topicNameExtractor: TopicNameExtractorKt<K, V>,
+) {
+  val extractor = TopicNameExtractor<K, V> { key, value, recordContext ->
+    with(topicNameExtractor) {
+      TopicNameExtractorContextInternal(recordContext).extract(KeyValue(key, value))
+    }
+  }
+
+  return when (produced) {
+    null -> to(extractor)
+    else -> to(extractor, produced)
+  }
+}
 
 
 fun <K, V> KStream<K, V>.filter(
@@ -111,17 +123,15 @@ fun <K, V> KStream<K, V>.split(
   }
 
 
-fun <K, inV, otherK, otherV, outV> KStream<K, inV>.join(
-  table: KTable<otherK, otherV>,
-  valueJoiner: ValueJoinerWithKey<K, inV, otherV?, outV>,
-  joined: Joined<K, inV, outV>,
-): KStream<K, outV> {
-  return join(
-    table,
-    valueJoiner,
-    joined,
-  )
-}
+fun <K, V, otherV, outV> KStream<K, V>.join(
+  table: KTable<K, otherV>,
+  joined: Joined<K, V, otherV>,
+  valueJoiner: ValueJoinerWithKey<K, V, otherV?, outV>,
+): KStream<K, outV> = join(
+  table,
+  valueJoiner,
+  joined,
+)
 
 
 fun <K, inV, otherK, otherV, outV> KStream<K, inV>.join(
@@ -129,14 +139,13 @@ fun <K, inV, otherK, otherV, outV> KStream<K, inV>.join(
   globalTable: GlobalKTable<otherK, otherV>,
   keySelector: KeyValueMapper<K, inV, otherK?>,
   valueJoiner: ValueJoinerWithKey<K, inV, otherV?, outV>,
-): KStream<K, outV> {
-  return join(
+): KStream<K, outV> =
+  join(
     globalTable,
     keySelector,
     valueJoiner,
     namedAs(name),
   )
-}
 
 
 fun <K, inV, otherK, otherV, outV> KStream<K, inV>.leftJoin(
@@ -144,14 +153,13 @@ fun <K, inV, otherK, otherV, outV> KStream<K, inV>.leftJoin(
   globalTable: GlobalKTable<otherK, otherV>,
   keySelector: KeyValueMapper<K, inV, otherK?>,
   valueJoiner: ValueJoinerWithKey<K, inV, otherV?, outV>,
-): KStream<K, outV> {
-  return leftJoin(
+): KStream<K, outV> =
+  leftJoin(
     globalTable,
     keySelector,
     valueJoiner,
     namedAs(name),
   )
-}
 
 
 /** @see KStream.foreach */

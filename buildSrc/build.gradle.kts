@@ -7,17 +7,13 @@ plugins {
 
 dependencies {
 
-  val kotlinVersion = libs.versions.kotlin.get()
-  implementation(enforcedPlatform("org.jetbrains.kotlin:kotlin-bom:$kotlinVersion"))
+  implementation(enforcedPlatform(libs.kotlin.bom))
   implementation("org.jetbrains.kotlin:kotlin-serialization")
   implementation("org.jetbrains.kotlin:kotlin-reflect")
-  implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
 
-  val kotlinXSerializationVersion = "1.3.2"
-  implementation(enforcedPlatform("org.jetbrains.kotlinx:kotlinx-serialization-bom:$kotlinXSerializationVersion"))
+  implementation(libs.kotlin.gradlePlugin)
 
-  val gitVersioningPluginVersion = "5.2.0"
-  implementation("me.qoomon:gradle-git-versioning-plugin:$gitVersioningPluginVersion")
+  implementation(libs.gitVersioningPlugin)
 }
 
 val gradleJvmTarget = "1.8"
@@ -36,8 +32,6 @@ tasks.withType<KotlinCompile>().configureEach {
     "-opt-in=kotlin.RequiresOptIn",
     "-opt-in=kotlin.ExperimentalStdlibApi",
     "-opt-in=kotlin.time.ExperimentalTime",
-//    "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
-//    "-opt-in=kotlinx.serialization.ExperimentalSerializationApi",
   )
 }
 

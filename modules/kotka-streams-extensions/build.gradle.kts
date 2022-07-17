@@ -4,5 +4,7 @@ plugins {
 }
 
 dependencies {
+  implementation(platform(projects.modules.versionsPlatform))
+
   implementation(libs.kafka.streams)
 }

@@ -17,6 +17,7 @@ dependencyResolutionManagement {
 
 }
 
+
 fun RepositoryHandler.jitpack() {
   maven("https://jitpack.io")
 }

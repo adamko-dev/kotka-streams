@@ -6,16 +6,17 @@ plugins {
 
 @Suppress("UnstableApiUsage") // version catalogs + platform() is incubating
 dependencies {
+  implementation(platform(projects.modules.versionsPlatform))
+
   api(projects.modules.kotkaStreamsExtensions)
   api(projects.modules.kotkaStreamsFramework)
 
   implementation(libs.kafka.streams)
 
-  implementation(platform(libs.kotlinx.serialization.bom))
-  implementation(libs.kotlinx.serialization.core)
+  implementation(libs.kotlinxSerialization.core)
 
-  testImplementation(libs.kotlinx.serialization.cbor)
-  testImplementation(libs.kotlinx.serialization.json)
+  testImplementation(libs.kotlinxSerialization.cbor)
+  testImplementation(libs.kotlinxSerialization.json)
 }
 
 
