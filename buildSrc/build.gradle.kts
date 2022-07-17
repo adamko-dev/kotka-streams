@@ -13,8 +13,6 @@ dependencies {
 
   implementation(libs.kotlin.gradlePlugin)
 
-//  implementation(libs.kotest.gradlePlugin)
-
   implementation(libs.gitVersioningPlugin)
 }
 
@@ -34,8 +32,6 @@ tasks.withType<KotlinCompile>().configureEach {
     "-opt-in=kotlin.RequiresOptIn",
     "-opt-in=kotlin.ExperimentalStdlibApi",
     "-opt-in=kotlin.time.ExperimentalTime",
-//    "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
-//    "-opt-in=kotlinx.serialization.ExperimentalSerializationApi",
   )
 }
 
