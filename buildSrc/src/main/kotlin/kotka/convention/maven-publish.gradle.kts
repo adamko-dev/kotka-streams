@@ -8,7 +8,7 @@ import kotka.ext.signing
 
 plugins {
   `maven-publish`
-  signing
+//  signing
 }
 
 
@@ -49,18 +49,18 @@ tasks.withType<AbstractPublishToMaven>().configureEach {
 }
 
 
-signing {
-  if (sonatypeRepositoryCredentials.isPresent) {
-    if (signingKeyId.isPresent && signingKey.isPresent && signingPassword.isPresent) {
-      useInMemoryPgpKeys(signingKeyId.get(), signingKey.get(), signingPassword.get())
-    } else {
-      useGpgCmd()
-    }
-
-    // sign all publications
-    sign(publishing.publications)
-  }
-}
+//signing {
+//  if (sonatypeRepositoryCredentials.isPresent) {
+//    if (signingKeyId.isPresent && signingKey.isPresent && signingPassword.isPresent) {
+//      useInMemoryPgpKeys(signingKeyId.get(), signingKey.get(), signingPassword.get())
+//    } else {
+//      useGpgCmd()
+//    }
+//
+//    // sign all publications
+//    sign(publishing.publications)
+//  }
+//}
 
 
 publishing {
@@ -111,9 +111,9 @@ plugins.withType<JavaPlatformPlugin>().configureEach {
     dependsOn(javadocJarStub)
   }
 
-  if (sonatypeRepositoryCredentials.isPresent) {
-    signing.sign(javadocJarStub.get())
-  }
+//  if (sonatypeRepositoryCredentials.isPresent) {
+//    signing.sign(javadocJarStub.get())
+//  }
 
   publishing.publications.create<MavenPublication>("mavenJavaPlatform") {
     from(components["javaPlatform"])
