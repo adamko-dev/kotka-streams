@@ -5,7 +5,6 @@ dependencyResolutionManagement {
     mavenCentral()
     gradlePluginPortal()
     jitpack()
-    sonatypeSnapshots()
   }
 
   pluginManagement {
@@ -13,7 +12,6 @@ dependencyResolutionManagement {
       gradlePluginPortal()
       mavenCentral()
       jitpack()
-      sonatypeSnapshots()
     }
   }
 
@@ -22,11 +20,4 @@ dependencyResolutionManagement {
 
 fun RepositoryHandler.jitpack() {
   maven("https://jitpack.io")
-}
-
-
-fun RepositoryHandler.sonatypeSnapshots() {
-//  maven("https://oss.sonatype.org/content/repositories/snapshots") {
-//    mavenContent { snapshotsOnly() }
-//  }
 }
