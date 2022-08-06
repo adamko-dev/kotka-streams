@@ -13,14 +13,14 @@ kotlinx-knit = "0.5.1"                  # https://github.com/Kotlin/kotlinx-knit
 
 ## Test libs
 
-kotest = "5.3.1"                        # https://github.com/kotest/kotest/releases
+kotest = "5.4.1"                        # https://github.com/kotest/kotest/releases
 
-mockk = "1.12.4"                        # https://search.maven.org/artifact/io.mockk/mockk
-junit = "5.8.2"                         # https://github.com/junit-team/junit5/releases
+mockk = "1.12.5"                        # https://search.maven.org/artifact/io.mockk/mockk
+junit = "5.9.0"                         # https://github.com/junit-team/junit5/releases
 
 ## Plugins
-gitVersioningPlugin = "6.1.4"           # https://github.com/qoomon/gradle-git-versioning-plugin/releases
-binaryCompatValidator = "0.10.0"        # https://search.maven.org/artifact/org.jetbrains.kotlinx/binary-compatibility-validator
+gitVersioningPlugin = "6.3.0"           # https://github.com/qoomon/gradle-git-versioning-plugin/releases
+binaryCompatValidator = "0.11.0"        # https://search.maven.org/artifact/org.jetbrains.kotlinx/binary-compatibility-validator
 
 
 ###########

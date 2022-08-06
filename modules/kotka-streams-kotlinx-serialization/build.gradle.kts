@@ -1,7 +1,7 @@
 plugins {
-  kotka.convention.`kotlin-jvm`
+  buildsrc.convention.`kotlin-jvm`
   kotlin("plugin.serialization")
-  kotka.convention.`maven-publish`
+  buildsrc.convention.`maven-publish`
 }
 
 @Suppress("UnstableApiUsage") // version catalogs + platform() is incubating

@@ -1,6 +1,6 @@
 plugins {
-  kotka.convention.`kotlin-jvm`
-  kotka.convention.`maven-publish`
+  buildsrc.convention.`kotlin-jvm`
+  buildsrc.convention.`maven-publish`
 }
 
 dependencies {

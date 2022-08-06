@@ -10,6 +10,7 @@ import org.apache.kafka.streams.kstream.Materialized
 import org.apache.kafka.streams.state.KeyValueStore
 import org.apache.kafka.streams.state.QueryableStoreTypes.timestampedKeyValueStore
 
+
 /**
  * * An update topic [topicName]
  * * plus a table-source topic [tableName]

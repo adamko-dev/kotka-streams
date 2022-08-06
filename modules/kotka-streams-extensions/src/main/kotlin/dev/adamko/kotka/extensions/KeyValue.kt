@@ -19,6 +19,14 @@ operator fun <K, V> KeyValue<K, V>.component1(): K = key
 operator fun <K, V> KeyValue<K, V>.component2(): V = value
 
 
+inline fun <reified K, reified V> Triple<K, V, Long>.toKeyValueTimestamp(): KeyValue<K, ValueAndTimestamp<V>> =
+  KeyValue.pair(first, ValueAndTimestamp.make(second, third))
+
+
+val <K, V> KeyValue<K, ValueAndTimestamp<V>>.timestamp: Long
+  get() = value.timestamp()
+
+
 @JvmName("keyValueTimestampGetKey")
 operator fun <K, V> KeyValue<K, ValueAndTimestamp<V>>.component1(): K = key
 @JvmName("keyValueTimestampGetValue")
