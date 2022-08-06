@@ -1,4 +1,4 @@
-package kotka.ext
+package buildsrc.ext
 
 import org.gradle.api.Action
 import org.gradle.api.artifacts.repositories.PasswordCredentials

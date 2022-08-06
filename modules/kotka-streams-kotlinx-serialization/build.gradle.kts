@@ -4,7 +4,9 @@ plugins {
   buildsrc.convention.`maven-publish`
 }
 
-@Suppress("UnstableApiUsage") // version catalogs + platform() is incubating
+description = "Use Kotlinx Serialization for topic key/value serdes"
+
+
 dependencies {
   implementation(platform(projects.modules.versionsPlatform))
 

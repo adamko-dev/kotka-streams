@@ -3,6 +3,9 @@ plugins {
   buildsrc.convention.`maven-publish`
 }
 
+description = "Kotlin extensions for Kafka Streams"
+
+
 dependencies {
   implementation(platform(projects.modules.versionsPlatform))
 

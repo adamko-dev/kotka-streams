@@ -3,6 +3,9 @@ plugins {
   buildsrc.convention.`maven-publish`
 }
 
+description = "A light framework for structuring Kafka Streams topics and records"
+
+
 dependencies {
   implementation(platform(projects.modules.versionsPlatform))
 

@@ -20,6 +20,7 @@ gitVersioning.apply {
   rev { version = "\${commit}" }
 }
 
+
 dependencies {
   implementation(platform(projects.modules.versionsPlatform))
 
@@ -27,6 +28,7 @@ dependencies {
   api(projects.modules.kotkaStreamsFramework)
   api(projects.modules.kotkaStreamsKotlinxSerialization)
 }
+
 
 tasks.wrapper {
   gradleVersion = "7.5.1"

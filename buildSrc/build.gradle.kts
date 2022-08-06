@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
   `kotlin-dsl`
-  kotlin("jvm") version "1.6.21"
+  kotlin("jvm") version embeddedKotlinVersion
 }
 
 dependencies {
@@ -14,18 +14,16 @@ dependencies {
   implementation(libs.kotlin.gradlePlugin)
 
   implementation(libs.gitVersioningPlugin)
+  implementation(libs.dokkaPlugin)
 }
 
 val gradleJvmTarget = "1.8"
 val gradleJvmVersion = "8"
-val gradleKotlinTarget = "1.6"
 
 tasks.withType<KotlinCompile>().configureEach {
 
   kotlinOptions {
     jvmTarget = gradleJvmTarget
-    apiVersion = gradleKotlinTarget
-    languageVersion = gradleKotlinTarget
   }
 
   kotlinOptions.freeCompilerArgs += listOf(
