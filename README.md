@@ -5,9 +5,6 @@
 Using [Kotka](https://github.com/adamko-dev/kotka-streams) means a more pleasant experience while
 using [Kafka Streams](https://kafka.apache.org/documentation/streams/).
 
-## Status
-
-This project is a proof-of-concept and is untested. Contributions are welcomed!
 
 ## Quickstart
 
