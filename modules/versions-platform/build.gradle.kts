@@ -27,14 +27,7 @@ dependencies {
   }
 }
 
-
-//val javadocJarStub by tasks.registering(Jar::class) {
-//  group = JavaBasePlugin.DOCUMENTATION_GROUP
-//  description = "Stub javadoc.jar artifact (required by Maven Central)"
-//  archiveClassifier.set("javadoc")
-//}
-
-//publishing.publications.create<MavenPublication>("mavenJavaPlatform") {
-//  from(components["javaPlatform"])
-//  artifact(javadocJarStub)
-//}
+kotkaPublishing {
+  mavenPomSubprojectName.set("Versions Platform")
+  mavenPomDescription.set(project.description)
+}

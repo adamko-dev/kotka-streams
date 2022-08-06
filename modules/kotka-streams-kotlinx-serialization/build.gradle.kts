@@ -26,3 +26,9 @@ tasks.compileTestKotlin {
   // use experimental binary formats for testing
   kotlinOptions.freeCompilerArgs += "-opt-in=kotlinx.serialization.ExperimentalSerializationApi"
 }
+
+
+kotkaPublishing {
+  mavenPomSubprojectName.set("Kotlinx Serialization Extensions")
+  mavenPomDescription.set(project.description)
+}

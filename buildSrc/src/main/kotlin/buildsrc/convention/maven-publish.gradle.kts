@@ -67,7 +67,12 @@ publishing {
   }
 
   publications.withType<MavenPublication>().configureEach {
-    createKotkaStreamsPom(kotkaPublishingSettings.mvnPomConfig.orNull)
+    createKotkaStreamsPom {
+      name.set(kotkaPublishingSettings.mavenPomSubprojectName.map {
+        "Kotka Streams :: $it"
+      })
+      description.set(kotkaPublishingSettings.mavenPomDescription)
+    }
   }
 }
 
@@ -83,15 +88,16 @@ plugins.withType<JavaPlugin>().configureEach {
 
 plugins.withType<JavaPlatformPlugin>().configureEach {
 
-  val javadocJarStub by tasks.registering(Jar::class) {
-    group = JavaBasePlugin.DOCUMENTATION_GROUP
-    description = "Stub javadoc.jar artifact (required by Maven Central)"
-    archiveClassifier.set("javadoc")
-  }
+  // Javadoc might not be necesary as the 'pom packaging' is 'pom'?
+//  val javadocJarStub by tasks.registering(Jar::class) {
+//    group = JavaBasePlugin.DOCUMENTATION_GROUP
+//    description = "Stub javadoc.jar artifact (required by Maven Central)"
+//    archiveClassifier.set("javadoc")
+//  }
 
   publishing.publications.create<MavenPublication>("mavenJavaPlatform") {
     from(components["javaPlatform"])
-    artifact(javadocJarStub)
+//    artifact(javadocJarStub)
   }
 
   configureSigning()

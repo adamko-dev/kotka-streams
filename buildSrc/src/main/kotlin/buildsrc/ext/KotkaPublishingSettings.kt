@@ -7,8 +7,6 @@ import org.gradle.api.artifacts.repositories.PasswordCredentials
 import org.gradle.api.provider.Property
 import org.gradle.api.provider.Provider
 import org.gradle.api.provider.ProviderFactory
-import org.gradle.api.publish.maven.MavenPom
-import org.gradle.api.tasks.Input
 
 
 abstract class KotkaPublishingSettings @Inject constructor(
@@ -17,8 +15,8 @@ abstract class KotkaPublishingSettings @Inject constructor(
   project: Project,
 ) {
 
-  @get:Input
-  abstract val mvnPomConfig: Property<Action<MavenPom>>
+  abstract val mavenPomSubprojectName: Property<String>
+  abstract val mavenPomDescription: Property<String>
 
   val gitHubPackagesCredentials: Provider<Action<PasswordCredentials>> =
     providers.credentialsAction("GitHubPackages")

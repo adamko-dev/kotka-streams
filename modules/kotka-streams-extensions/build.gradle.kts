@@ -11,3 +11,9 @@ dependencies {
 
   implementation(libs.kafka.streams)
 }
+
+
+kotkaPublishing {
+  mavenPomSubprojectName.set("Kafka Streams Extensions")
+  mavenPomDescription.set(project.description)
+}

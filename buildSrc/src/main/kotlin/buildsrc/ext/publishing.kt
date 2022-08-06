@@ -1,12 +1,11 @@
 package buildsrc.ext
 
-import org.gradle.api.Action
 import org.gradle.api.publish.maven.MavenPom
 import org.gradle.api.publish.maven.MavenPublication
 
 
 fun MavenPublication.createKotkaStreamsPom(
-  configure: Action<MavenPom>? = null
+  configure: MavenPom.() -> Unit = {}
 ): Unit = pom {
   url.set("https://github.com/adamko-dev/kotka-streams")
 
@@ -29,9 +28,7 @@ fun MavenPublication.createKotkaStreamsPom(
     url.set("https://github.com/adamko-dev/kotka-streams")
   }
 
-  if (configure != null) {
-    configure.execute(this)
-  }
+  configure()
 }
 
 

@@ -13,3 +13,9 @@ dependencies {
 
   implementation(libs.kafka.streams)
 }
+
+
+kotkaPublishing {
+  mavenPomSubprojectName.set("Framework")
+  mavenPomDescription.set(project.description)
+}
