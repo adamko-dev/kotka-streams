@@ -20,6 +20,7 @@ gitVersioning.apply {
   rev { version = "\${commit}" }
 }
 
+
 dependencies {
   implementation(platform(projects.modules.versionsPlatform))
 
@@ -27,6 +28,13 @@ dependencies {
   api(projects.modules.kotkaStreamsFramework)
   api(projects.modules.kotkaStreamsKotlinxSerialization)
 }
+
+
+kotkaPublishing {
+  mavenPomSubprojectName.set("Kotlin for Kafka Streams")
+  mavenPomDescription.set("Using Kotka means a more pleasant experience while using Kafka Streams")
+}
+
 
 tasks.wrapper {
   gradleVersion = "7.5.1"

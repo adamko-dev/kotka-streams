@@ -5,12 +5,15 @@ plugins {
   `java-platform`
 }
 
+description = "Aligns versions of project dependencies"
+
+
 javaPlatform {
   allowDependencies()
 }
 
-dependencies {
 
+dependencies {
   api(platform(libs.kotlin.bom))
   api(platform(libs.kotlinxSerialization.bom))
 
@@ -22,4 +25,9 @@ dependencies {
     api(libs.kotlinx.knitTest)
     api(libs.mockk)
   }
+}
+
+kotkaPublishing {
+  mavenPomSubprojectName.set("Versions Platform")
+  mavenPomDescription.set(project.description)
 }

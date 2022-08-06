@@ -20,14 +20,13 @@ fun <K, inV, outV> KTable<K, inV>.mapValues(
   name: String? = null,
   materialized: Materialized<K, outV, KeyValueStore<Bytes, ByteArray>>? = null,
   mapper: (readOnlyKey: K, value: inV) -> outV,
-): KTable<K, outV> {
-  return when {
+): KTable<K, outV> =
+  when {
     name != null && materialized != null -> mapValues(mapper, namedAs(name), materialized)
     name != null && materialized == null -> mapValues(mapper, namedAs(name))
     name == null && materialized != null -> mapValues(mapper, materialized)
     else                                 -> mapValues(mapper)
   }
-}
 
 
 /** @See [KTable.groupBy] */
@@ -46,14 +45,13 @@ fun <K, V, otherV, outV> KTable<K, V>.join(
   name: String? = null,
   materialized: Materialized<K, outV, KeyValueStore<Bytes, ByteArray>>? = null,
   joiner: ValueJoiner<V, otherV, outV>,
-): KTable<K, outV> {
-  return when {
+): KTable<K, outV> =
+  when {
     name != null && materialized != null -> join(other, joiner, namedAs(name), materialized)
     name != null && materialized == null -> join(other, joiner, namedAs(name))
     name == null && materialized != null -> join(other, joiner, materialized)
     else                                 -> join(other, joiner)
   }
-}
 
 /**
  * A function that extracts the key ([otherK]) from this table's value ([V]).
@@ -92,10 +90,13 @@ fun <K, V, otherK, otherV, outV> KTable<K, V>.join(
   return when {
     tableJoined != null && materialized != null ->
       join(other, foreignKeyExtractor, joiner, tableJoined, materialized)
+
     tableJoined != null && materialized == null ->
       join(other, foreignKeyExtractor, joiner, tableJoined)
+
     tableJoined == null && materialized != null ->
       join(other, foreignKeyExtractor, joiner, materialized)
+
     else                                        ->
       join(other, foreignKeyExtractor, joiner)
   }
@@ -146,10 +147,13 @@ fun <K, V, otherK, otherV, outV> KTable<K, V>.leftJoin(
   return when {
     tableJoined != null && materialized != null ->
       leftJoin(other, foreignKeyExtractor, joiner, tableJoined, materialized)
+
     tableJoined != null && materialized == null ->
       leftJoin(other, foreignKeyExtractor, joiner, tableJoined)
+
     tableJoined == null && materialized != null ->
       leftJoin(other, foreignKeyExtractor, joiner, materialized)
+
     else                                        ->
       leftJoin(other, foreignKeyExtractor, joiner)
   }

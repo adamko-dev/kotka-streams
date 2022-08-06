@@ -1,44 +1,22 @@
 package buildsrc.convention
 
-import kotka.ext.createKotkaStreamsPom
-import kotka.ext.credentialsAction
-import kotka.ext.publishing
-import org.gradle.kotlin.dsl.maven
-import org.gradle.kotlin.dsl.`maven-publish`
-import org.gradle.kotlin.dsl.registering
-import org.gradle.kotlin.dsl.withType
+import buildsrc.ext.KotkaPublishingSettings
+import buildsrc.ext.createKotkaStreamsPom
+import buildsrc.ext.gavString
 
 
 plugins {
   `maven-publish`
-//  signing
+  signing
 }
 
 
-val sonatypeRepositoryCredentials: Provider<Action<PasswordCredentials>> =
-  providers.credentialsAction("sonatypeRepository")
-
-val gitHubPackagesCredentials: Provider<Action<PasswordCredentials>> =
-  providers.credentialsAction("GitHubPackages")
-
-
-val sonatypeRepositoryReleaseUrl: Provider<String> = provider {
-  if (version.toString().endsWith("SNAPSHOT")) {
-    "https://s01.oss.sonatype.org/content/repositories/snapshots/"
-  } else {
-    "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
-  }
-}
-
-
-val signingKeyId: Provider<String> =
-  providers.gradleProperty("signing.keyId")
-val signingKey: Provider<String> =
-  providers.gradleProperty("signing.key")
-val signingPassword: Provider<String> =
-  providers.gradleProperty("signing.password")
-val signingSecretKeyRingFile: Provider<String> =
-  providers.gradleProperty("signing.secretKeyRingFile")
+val kotkaPublishingSettings: KotkaPublishingSettings =
+  extensions.create(
+    KotkaPublishingSettings.NAME,
+    KotkaPublishingSettings::class,
+    project,
+  )
 
 
 tasks.withType<AbstractPublishToMaven>().configureEach {
@@ -47,49 +25,54 @@ tasks.withType<AbstractPublishToMaven>().configureEach {
   dependsOn(tasks.withType<Sign>())
 
   doLast {
-    logger.lifecycle("[${this.name}] ${project.group}:${project.name}:${project.version}")
+    logger.lifecycle("[${this.name}] ${publication.gavString}")
   }
 }
 
 
-//signing {
-//  if (sonatypeRepositoryCredentials.isPresent) {
-//    if (signingKeyId.isPresent && signingKey.isPresent && signingPassword.isPresent) {
-//      useInMemoryPgpKeys(signingKeyId.get(), signingKey.get(), signingPassword.get())
-//    } else {
-//      useGpgCmd()
-//    }
-//
-//    // sign all publications
-//    sign(publishing.publications)
-//  }
-//}
+// signing must be configured *after* publications are created
+fun Project.configureSigning() = signing {
+  with(kotkaPublishingSettings) {
+    if (signingKeyId.isPresent && signingKey.isPresent && signingPassword.isPresent) {
+      useInMemoryPgpKeys(signingKeyId.get(), signingKey.get(), signingPassword.get())
+      // sign all publications
+      sign(publishing.publications)
+    }
+  }
+}
 
 
 publishing {
   repositories {
     // publish to local dir, for testing
     maven(rootProject.layout.buildDirectory.dir("maven-internal")) {
-      name = "maven-internal"
+      name = "ProjectLocalDir"
     }
 
-//    if (sonatypeRepositoryCredentials.isPresent) {
-//      maven(sonatypeRepositoryReleaseUrl) {
-//        name = "sonatype"
-//        credentials(sonatypeRepositoryCredentials.get())
-//      }
-//    }
-//
-//    if (gitHubPackagesCredentials.isPresent) {
-//      maven("https://maven.pkg.github.com/adamko-dev/kotka-streams") {
-//        name = "GitHubPackages"
-//        credentials(gitHubPackagesCredentials.get())
-//      }
-//    }
+    with(kotkaPublishingSettings) {
+      if (sonatypeRepositoryCredentials.isPresent) {
+        maven(sonatypeRepositoryReleaseUrl) {
+          name = "Sonatype"
+          credentials(sonatypeRepositoryCredentials.get())
+        }
+      }
+
+      if (gitHubPackagesCredentials.isPresent) {
+        maven("https://maven.pkg.github.com/adamko-dev/kotka-streams") {
+          name = "GitHubPackages"
+          credentials(gitHubPackagesCredentials.get())
+        }
+      }
+    }
   }
 
   publications.withType<MavenPublication>().configureEach {
-    createKotkaStreamsPom()
+    createKotkaStreamsPom {
+      name.set(kotkaPublishingSettings.mavenPomSubprojectName.map {
+        "Kotka Streams :: $it"
+      })
+      description.set(kotkaPublishingSettings.mavenPomDescription)
+    }
   }
 }
 
@@ -97,29 +80,30 @@ publishing {
 plugins.withType<JavaPlugin>().configureEach {
   publishing.publications.create<MavenPublication>("mavenJava") {
     from(components["java"])
-//    artifact(tasks["sourcesJar"])
   }
+
+  configureSigning()
 }
 
 
 plugins.withType<JavaPlatformPlugin>().configureEach {
 
-  val javadocJarStub by tasks.registering(Jar::class) {
-    group = JavaBasePlugin.DOCUMENTATION_GROUP
-    description = "Stub javadoc.jar artifact (required by Maven Central)"
-    archiveClassifier.set("javadoc")
-  }
-
-  tasks.withType<AbstractPublishToMaven>().configureEach {
-    dependsOn(javadocJarStub)
-  }
-
-//  if (sonatypeRepositoryCredentials.isPresent) {
-//    signing.sign(javadocJarStub.get())
+  // Javadoc might not be necesary as the 'pom packaging' is 'pom'?
+//  val javadocJarStub by tasks.registering(Jar::class) {
+//    group = JavaBasePlugin.DOCUMENTATION_GROUP
+//    description = "Stub javadoc.jar artifact (required by Maven Central)"
+//    archiveClassifier.set("javadoc")
 //  }
 
   publishing.publications.create<MavenPublication>("mavenJavaPlatform") {
     from(components["javaPlatform"])
-    artifact(javadocJarStub)
+//    artifact(javadocJarStub)
   }
+
+  configureSigning()
 }
+
+// workaround for https://github.com/gradle/gradle/issues/16543
+inline fun <reified T : Task> TaskContainer.provider(taskName: String): Provider<T> =
+  providers.provider { taskName }
+    .flatMap { named<T>(it) }

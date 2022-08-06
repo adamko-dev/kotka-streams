@@ -21,6 +21,7 @@ junit = "5.9.0"                         # https://github.com/junit-team/junit5/r
 ## Plugins
 gitVersioningPlugin = "6.3.0"           # https://github.com/qoomon/gradle-git-versioning-plugin/releases
 binaryCompatValidator = "0.11.0"        # https://search.maven.org/artifact/org.jetbrains.kotlinx/binary-compatibility-validator
+dokkaPlugin = "1.7.10"
 
 
 ###########
@@ -68,6 +69,7 @@ kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-pl
 kotlinx-knitGradlePlugin = { group = "org.jetbrains.kotlinx", name = "kotlinx-knit", version.ref = "kotlinx-knit" }
 kotlinx-binaryCompatValidator = { group = "org.jetbrains.kotlinx", name = "binary-compatibility-validator", version.ref = "kotlin" }
 
+dokkaPlugin = { group = "org.jetbrains.dokka", name = "dokka-gradle-plugin", version.ref = "dokkaPlugin" }
 
 kotest-gradlePlugin = { group = "io.kotest", name = "kotest-framework-multiplatform-plugin-gradle", version.ref = "kotest" }
 
@@ -82,10 +84,10 @@ kotest-gradlePlugin = { group = "io.kotest", name = "kotest-framework-multiplatf
 #########
 
 kotest = [
-    "kotest-assertionsCore",
-    "kotest-assertionsJson",
-    "kotest-property",
-    "kotest-frameworkEngine",
-    "kotest-frameworkDatatest",
-    "kotest-runnerJUnit5",
+  "kotest-assertionsCore",
+  "kotest-assertionsJson",
+  "kotest-property",
+  "kotest-frameworkEngine",
+  "kotest-frameworkDatatest",
+  "kotest-runnerJUnit5",
 ]
