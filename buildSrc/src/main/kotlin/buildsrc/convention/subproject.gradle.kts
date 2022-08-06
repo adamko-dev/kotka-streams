@@ -1,4 +1,6 @@
-package kotka.convention
+package buildsrc.convention
+
+import org.gradle.kotlin.dsl.base
 
 plugins {
   base

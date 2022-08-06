@@ -1,9 +1,12 @@
-package kotka.convention
+package buildsrc.convention
 
 import kotka.ext.createKotkaStreamsPom
 import kotka.ext.credentialsAction
 import kotka.ext.publishing
-import kotka.ext.signing
+import org.gradle.kotlin.dsl.maven
+import org.gradle.kotlin.dsl.`maven-publish`
+import org.gradle.kotlin.dsl.registering
+import org.gradle.kotlin.dsl.withType
 
 
 plugins {

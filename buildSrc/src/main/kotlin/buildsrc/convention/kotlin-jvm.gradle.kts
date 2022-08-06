@@ -1,9 +1,13 @@
-package kotka.convention
+package buildsrc.convention
 
+import org.gradle.kotlin.dsl.dependencies
+import org.gradle.kotlin.dsl.`java-library`
+import org.gradle.kotlin.dsl.kotlin
+import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-  id("kotka.convention.subproject")
+  id("buildsrc.convention.subproject")
   kotlin("jvm")
   `java-library`
 }

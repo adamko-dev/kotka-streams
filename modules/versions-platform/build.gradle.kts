@@ -1,6 +1,6 @@
 plugins {
-  kotka.convention.subproject
-  kotka.convention.`maven-publish`
+  buildsrc.convention.subproject
+  buildsrc.convention.`maven-publish`
 
   `java-platform`
 }

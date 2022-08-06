@@ -1,7 +1,7 @@
 plugins {
-  kotka.convention.`kotlin-jvm`
+  buildsrc.convention.`kotlin-jvm`
 
-  kotka.convention.`maven-publish`
+  buildsrc.convention.`maven-publish`
   me.qoomon.`git-versioning`
 
   `project-report`
