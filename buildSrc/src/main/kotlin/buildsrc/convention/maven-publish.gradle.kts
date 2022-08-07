@@ -31,7 +31,7 @@ tasks.withType<AbstractPublishToMaven>().configureEach {
 
 
 // signing must be configured *after* publications are created
-fun Project.configureSigning() = signing {
+fun Project.configureSigning(): Unit = signing {
   with(kotkaPublishingSettings) {
     if (signingKeyId.isPresent && signingKey.isPresent && signingPassword.isPresent) {
       useInMemoryPgpKeys(signingKeyId.get(), signingKey.get(), signingPassword.get())

@@ -15,5 +15,4 @@ dependencies {
 
 kotkaPublishing {
   mavenPomSubprojectName.set("Kafka Streams Extensions")
-  mavenPomDescription.set(project.description)
 }
