@@ -17,5 +17,4 @@ dependencies {
 
 kotkaPublishing {
   mavenPomSubprojectName.set("Framework")
-  mavenPomDescription.set(project.description)
 }

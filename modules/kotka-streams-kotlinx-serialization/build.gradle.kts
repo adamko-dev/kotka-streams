@@ -30,5 +30,4 @@ tasks.compileTestKotlin {
 
 kotkaPublishing {
   mavenPomSubprojectName.set("Kotlinx Serialization Extensions")
-  mavenPomDescription.set(project.description)
 }

@@ -4,19 +4,24 @@ import javax.inject.Inject
 import org.gradle.api.Action
 import org.gradle.api.Project
 import org.gradle.api.artifacts.repositories.PasswordCredentials
+import org.gradle.api.model.ObjectFactory
 import org.gradle.api.provider.Property
 import org.gradle.api.provider.Provider
 import org.gradle.api.provider.ProviderFactory
+import org.gradle.kotlin.dsl.property
 
 
 abstract class KotkaPublishingSettings @Inject constructor(
   providers: ProviderFactory,
+  objects: ObjectFactory,
 
   project: Project,
 ) {
 
   abstract val mavenPomSubprojectName: Property<String>
-  abstract val mavenPomDescription: Property<String>
+  val mavenPomDescription: Property<String> = objects.property<String>().convention(
+    providers.provider { project.description }
+  )
 
   val gitHubPackagesCredentials: Provider<Action<PasswordCredentials>> =
     providers.credentialsAction("GitHubPackages")

@@ -29,5 +29,4 @@ dependencies {
 
 kotkaPublishing {
   mavenPomSubprojectName.set("Versions Platform")
-  mavenPomDescription.set(project.description)
 }
