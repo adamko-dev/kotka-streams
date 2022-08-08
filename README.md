@@ -10,8 +10,7 @@ using [Kafka Streams](https://kafka.apache.org/documentation/streams/).
 
 ## Quickstart
 
-Add [JitPack](https://jitpack.io/) as a repository, and add a dependency
-on `kotka-streams-extensions` for the basics.
+Add a dependency on `kotka-streams-extensions` for the basics.
 
 ```kotlin
 // build.gradle.kts
