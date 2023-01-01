@@ -6,19 +6,15 @@ plugins {
 }
 
 dependencies {
+  implementation(libs.gradlePlugin.kotlin)
+  implementation(libs.gradlePlugin.kotlinxSerialization)
 
-  implementation(enforcedPlatform(libs.kotlin.bom))
-  implementation("org.jetbrains.kotlin:kotlin-serialization")
-  implementation("org.jetbrains.kotlin:kotlin-reflect")
-
-  implementation(libs.kotlin.gradlePlugin)
-
-  implementation(libs.gitVersioningPlugin)
-  implementation(libs.dokkaPlugin)
+  implementation(libs.gradlePlugin.gitVersioning)
+  // implementation(libs.gradlePlugin.dokka) // incompatible with Gradle CC
 }
 
-val gradleJvmTarget = "1.8"
-val gradleJvmVersion = "8"
+val gradleJvmTarget = "11"
+val gradleJvmVersion = "11"
 
 tasks.withType<KotlinCompile>().configureEach {
 
@@ -35,7 +31,7 @@ tasks.withType<KotlinCompile>().configureEach {
 
 kotlin {
   jvmToolchain {
-    (this as JavaToolchainSpec).languageVersion.set(JavaLanguageVersion.of(gradleJvmVersion))
+    languageVersion.set(JavaLanguageVersion.of(gradleJvmVersion))
   }
 
   kotlinDslPluginOptions {

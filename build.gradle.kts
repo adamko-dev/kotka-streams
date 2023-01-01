@@ -1,3 +1,5 @@
+import buildsrc.ext.excludeGeneratedGradleDsl
+
 plugins {
   buildsrc.convention.`kotlin-jvm`
 
@@ -5,7 +7,9 @@ plugins {
   me.qoomon.`git-versioning`
 
   `project-report`
-  `build-dashboard`
+  // `build-dashboard` // incompatible with Gradle CC
+
+  idea
 }
 
 group = "dev.adamko.kotka"
@@ -37,6 +41,18 @@ kotkaPublishing {
 
 
 tasks.wrapper {
-  gradleVersion = "7.5.1"
+  gradleVersion = "7.6"
   distributionType = Wrapper.DistributionType.ALL
+}
+
+
+idea {
+  module {
+    isDownloadSources = true
+    excludeGeneratedGradleDsl(layout)
+    excludeDirs = excludeDirs + layout.files(
+      ".idea",
+      "gradle/wrapper",
+    )
+  }
 }
