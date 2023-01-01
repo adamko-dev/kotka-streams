@@ -10,7 +10,7 @@ dependencies {
   implementation(libs.gradlePlugin.kotlinxSerialization)
 
   implementation(libs.gradlePlugin.gitVersioning)
-  implementation(libs.gradlePlugin.dokka)
+  // implementation(libs.gradlePlugin.dokka) // incompatible with Gradle CC
 }
 
 val gradleJvmTarget = "11"

@@ -7,7 +7,9 @@ plugins {
   me.qoomon.`git-versioning`
 
   `project-report`
-  `build-dashboard`
+  // `build-dashboard` // incompatible with Gradle CC
+
+  idea
 }
 
 group = "dev.adamko.kotka"

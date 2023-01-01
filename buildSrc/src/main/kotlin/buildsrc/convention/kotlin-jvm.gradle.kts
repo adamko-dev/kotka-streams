@@ -7,7 +7,7 @@ plugins {
   id("buildsrc.convention.subproject")
   kotlin("jvm")
   `java-library`
-  id("org.jetbrains.dokka")
+  // id("org.jetbrains.dokka")
 }
 
 
@@ -65,5 +65,5 @@ java {
 
 
 tasks.withType<Jar>().named("javadocJar") {
-  from(tasks.dokkaHtml)
+//  from(tasks.dokkaHtml)
 }
