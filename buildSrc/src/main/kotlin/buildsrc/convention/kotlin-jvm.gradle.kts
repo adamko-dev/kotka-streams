@@ -4,7 +4,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 
 plugins {
-  id("buildsrc.convention.subproject")
+  id("buildsrc.convention.base")
   kotlin("jvm")
   `java-library`
   // id("org.jetbrains.dokka")
