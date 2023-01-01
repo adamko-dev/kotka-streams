@@ -13,8 +13,8 @@ dependencies {
   implementation(libs.gradlePlugin.dokka)
 }
 
-val gradleJvmTarget = "1.8"
-val gradleJvmVersion = "8"
+val gradleJvmTarget = "11"
+val gradleJvmVersion = "11"
 
 tasks.withType<KotlinCompile>().configureEach {
 
