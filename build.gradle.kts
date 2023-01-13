@@ -1,4 +1,5 @@
 import buildsrc.ext.excludeGeneratedGradleDsl
+import buildsrc.ext.initIdeProjectLogo
 
 plugins {
   buildsrc.convention.`kotlin-jvm`
@@ -19,7 +20,6 @@ gitVersioning.apply {
     branch(".+") { version = "\${ref}-SNAPSHOT" }
     tag("v(?<version>.*)") { version = "\${ref.version}" }
   }
-
   // optional fallback configuration in case of no matching ref configuration
   rev { version = "\${commit}" }
 }
@@ -56,3 +56,5 @@ idea {
     )
   }
 }
+
+initIdeProjectLogo("site/src/jsMain/resources/ks-logo.svg")

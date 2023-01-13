@@ -11,6 +11,8 @@ kafka = "3.3.1"                         # https://kafka.apache.org/downloads
 kotlinx-serialization = "1.4.1"         # https://github.com/Kotlin/kotlinx.serialization/releases/tag/v1.3.3
 kotlinx-knit = "0.5.1"                  # https://github.com/Kotlin/kotlinx-knit/releases
 
+slf4j = "2.0.6"
+
 ## Test libs
 
 kotest = "5.5.4"                        # https://github.com/kotest/kotest/releases
@@ -38,6 +40,9 @@ kotlinxSerialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serializat
 kotlinxSerialization-protobuf = { module = "org.jetbrains.kotlinx:kotlinx-serialization-protobuf" }
 kotlinxSerialization-cbor = { module = "org.jetbrains.kotlinx:kotlinx-serialization-cbor" }
 kotlinxSerialization-properties = { module = "org.jetbrains.kotlinx:kotlinx-serialization-properties" }
+
+
+slf4jApi = { module = "org.slf4j:slf4j-api", version.ref = "slf4j" }
 
 ### Test libs ##
 

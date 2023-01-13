@@ -15,6 +15,8 @@ dependencies {
 
   implementation(libs.kafka.streams)
 
+  implementation(libs.slf4jApi)
+
   implementation(libs.kotlinxSerialization.core)
 
   testImplementation(libs.kotlinxSerialization.cbor)

@@ -10,6 +10,8 @@ dependencies {
   implementation(platform(projects.modules.versionsPlatform))
 
   implementation(libs.kafka.streams)
+
+  implementation("org.jetbrains.kotlinx:kotlinx-html:0.8.1")
 }
 
 

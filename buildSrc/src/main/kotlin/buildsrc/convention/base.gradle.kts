@@ -23,18 +23,18 @@ tasks.withType<Test>().configureEach {
 
   testLogging {
     // don't log console output - it's too noisy
-    showCauses = false
-    showExceptions = false
-    showStackTraces = false
-    showStandardStreams = false
+    showCauses = true
+    showExceptions = true
+    showStackTraces = true
+    showStandardStreams = true
     events(
       // only log test outcomes
       TestLogEvent.PASSED,
       TestLogEvent.FAILED,
       TestLogEvent.SKIPPED,
-      // TestLogEvent.STARTED,
-      // TestLogEvent.STANDARD_ERROR,
-      // TestLogEvent.STANDARD_OUT,
+      TestLogEvent.STARTED,
+      TestLogEvent.STANDARD_ERROR,
+      TestLogEvent.STANDARD_OUT,
     )
   }
 }

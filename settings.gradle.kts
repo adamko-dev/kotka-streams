@@ -1,5 +1,6 @@
 rootProject.name = "kotka-streams"
 
+includeBuild("site") { name = "kotka-streams-site" }
 
 include(
   ":modules:kotka-streams-extensions",
@@ -9,6 +10,7 @@ include(
 )
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+enableFeaturePreview("STABLE_CONFIGURATION_CACHE")
 
 apply(from = "./buildSrc/repositories.settings.gradle.kts")
 
