@@ -2,13 +2,13 @@
 
 ## Compilation
 
-kotlin = "1.8.0"                        # https://github.com/JetBrains/kotlin/releases
+kotlin = "1.8.10"                       # https://github.com/JetBrains/kotlin/releases
 jvm = "11"
 
 ## Libs
 
-kafka = "3.3.1"                         # https://kafka.apache.org/downloads
-kotlinx-serialization = "1.4.1"         # https://github.com/Kotlin/kotlinx.serialization/releases/tag/v1.3.3
+kafka = "3.4.0"                         # https://kafka.apache.org/downloads
+kotlinx-serialization = "1.5.0"         # https://github.com/Kotlin/kotlinx.serialization/releases/tag/v1.3.3
 kotlinx-knit = "0.5.1"                  # https://github.com/Kotlin/kotlinx-knit/releases
 kotlin-dokka = "1.8.10"                 # https://search.maven.org/artifact/org.jetbrains.dokka/dokka-gradle-plugin
 
@@ -16,13 +16,13 @@ slf4j = "2.0.6"
 
 ## Test libs
 
-kotest = "5.5.4"                        # https://github.com/kotest/kotest/releases
+kotest = "5.5.5"                        # https://github.com/kotest/kotest/releases
 
-mockk = "1.13.3"                        # https://search.maven.org/artifact/io.mockk/mockk
-junit = "5.9.1"                         # https://github.com/junit-team/junit5/releases
+mockk = "1.13.4"                        # https://search.maven.org/artifact/io.mockk/mockk
+junit = "5.9.2"                         # https://github.com/junit-team/junit5/releases
 
 ## Plugins
-gitVersioningPlugin = "6.3.0"           # https://github.com/qoomon/gradle-git-versioning-plugin/releases
+gitVersioningPlugin = "6.4.1"           # https://github.com/qoomon/gradle-git-versioning-plugin/releases
 binaryCompatValidator = "0.12.1"        # https://search.maven.org/artifact/org.jetbrains.kotlinx/binary-compatibility-validator
 dokkatoo = "0.0.4"
 
