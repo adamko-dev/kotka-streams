@@ -5,7 +5,7 @@ import org.apache.kafka.streams.kstream.BranchedKStream
 import org.apache.kafka.streams.kstream.Predicate
 
 
-/** See [BranchedKStream.branch] */
+/** @see org.apache.kafka.streams.kstream.BranchedKStream.branch */
 fun <K, V> BranchedKStream<K, V>.branch(
   branched: Branched<K, V>,
   predicate: Predicate<K, V>,
