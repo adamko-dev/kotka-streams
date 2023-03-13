@@ -3,6 +3,7 @@ package buildsrc.convention
 import buildsrc.ext.libs
 
 plugins {
+  id("buildsrc.convention.base")
   id("dev.adamko.dokkatoo-html")
 }
 

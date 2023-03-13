@@ -61,7 +61,7 @@ class KotkaSerdeModule(
       .withOtherValueSerde(otherValueSerde)
 
 
-  /** @see [Grouped.`as`] */
+  /** See [Grouped.as] */
   inline fun <reified Key, reified Val> groupedAs(
     name: String,
     keySerde: Serde<Key>? = mapper.serde(),

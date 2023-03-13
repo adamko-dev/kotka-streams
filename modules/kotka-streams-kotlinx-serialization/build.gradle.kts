@@ -2,6 +2,7 @@ plugins {
   buildsrc.convention.`kotlin-jvm`
   kotlin("plugin.serialization")
   buildsrc.convention.`maven-publish`
+  buildsrc.convention.dokkatoo
 }
 
 description = "Use Kotlinx Serialization for topic key/value serdes"
@@ -32,4 +33,11 @@ tasks.compileTestKotlin {
 
 kotkaPublishing {
   mavenPomSubprojectName.set("Kotlinx Serialization Extensions")
+}
+
+dokkatoo {
+  moduleName.set("kotka-streams-kotlinx-serialization")
+  dokkatooSourceSets.configureEach {
+    includes.from("module.md")
+  }
 }
