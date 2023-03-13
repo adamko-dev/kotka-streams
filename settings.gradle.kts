@@ -2,6 +2,8 @@ rootProject.name = "kotka-streams"
 
 
 include(
+  ":docs",
+
   ":modules:kotka-streams-extensions",
   ":modules:kotka-streams-framework",
   ":modules:kotka-streams-kotlinx-serialization",
@@ -9,6 +11,7 @@ include(
 )
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+enableFeaturePreview("STABLE_CONFIGURATION_CACHE")
 
 apply(from = "./buildSrc/repositories.settings.gradle.kts")
 

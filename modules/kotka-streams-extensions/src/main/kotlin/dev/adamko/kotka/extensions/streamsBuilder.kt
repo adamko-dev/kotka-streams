@@ -5,6 +5,7 @@ import org.apache.kafka.streams.kstream.Consumed
 import org.apache.kafka.streams.kstream.KStream
 
 
+/** @see org.apache.kafka.streams.StreamsBuilder.stream */
 fun <K, V> StreamsBuilder.stream(
   consumed: Consumed<K, V>? = null,
   vararg topics: String,
@@ -14,6 +15,7 @@ fun <K, V> StreamsBuilder.stream(
 }
 
 
+/** @see org.apache.kafka.streams.StreamsBuilder.stream */
 fun <K, V> StreamsBuilder.stream(
   vararg topics: String,
 ): KStream<K, V> = stream(topics.toList())

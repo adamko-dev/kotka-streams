@@ -16,3 +16,6 @@ text eol=lf
 # (binary is a macro for -text -diff)
 *.jar           binary
 *.war           binary
+
+# https://github.com/github/linguist/blob/v7.24.1/docs/overrides.md
+docs/**         linguist-documentation

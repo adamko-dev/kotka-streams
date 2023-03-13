@@ -2,7 +2,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
   `kotlin-dsl`
-  kotlin("jvm") version embeddedKotlinVersion
 }
 
 dependencies {
@@ -10,7 +9,12 @@ dependencies {
   implementation(libs.gradlePlugin.kotlinxSerialization)
 
   implementation(libs.gradlePlugin.gitVersioning)
-  // implementation(libs.gradlePlugin.dokka) // incompatible with Gradle CC
+
+  implementation(libs.kotlin.dokkaCore)
+  implementation(libs.gradlePlugin.dokkatoo)
+
+  // https://github.com/gradle/gradle/issues/15383#issuecomment-779893192
+  implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
 }
 
 val gradleJvmTarget = "11"
