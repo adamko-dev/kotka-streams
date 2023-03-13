@@ -3,6 +3,8 @@ rootProject.name = "kotka-streams"
 includeBuild("site") { name = "kotka-streams-site" }
 
 include(
+  ":docs",
+
   ":modules:kotka-streams-extensions",
   ":modules:kotka-streams-framework",
   ":modules:kotka-streams-kotlinx-serialization",

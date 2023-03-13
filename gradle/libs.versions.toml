@@ -10,6 +10,7 @@ jvm = "11"
 kafka = "3.3.1"                         # https://kafka.apache.org/downloads
 kotlinx-serialization = "1.4.1"         # https://github.com/Kotlin/kotlinx.serialization/releases/tag/v1.3.3
 kotlinx-knit = "0.5.1"                  # https://github.com/Kotlin/kotlinx-knit/releases
+kotlin-dokka = "1.8.10"                 # https://search.maven.org/artifact/org.jetbrains.dokka/dokka-gradle-plugin
 
 slf4j = "2.0.6"
 
@@ -23,8 +24,7 @@ junit = "5.9.1"                         # https://github.com/junit-team/junit5/r
 ## Plugins
 gitVersioningPlugin = "6.3.0"           # https://github.com/qoomon/gradle-git-versioning-plugin/releases
 binaryCompatValidator = "0.12.1"        # https://search.maven.org/artifact/org.jetbrains.kotlinx/binary-compatibility-validator
-dokkaPlugin = "1.7.20"                  # https://search.maven.org/artifact/org.jetbrains.dokka/dokka-gradle-plugin
-
+dokkatoo = "0.0.4"
 
 ###########
 [libraries]
@@ -41,8 +41,13 @@ kotlinxSerialization-protobuf = { module = "org.jetbrains.kotlinx:kotlinx-serial
 kotlinxSerialization-cbor = { module = "org.jetbrains.kotlinx:kotlinx-serialization-cbor" }
 kotlinxSerialization-properties = { module = "org.jetbrains.kotlinx:kotlinx-serialization-properties" }
 
-
 slf4jApi = { module = "org.slf4j:slf4j-api", version.ref = "slf4j" }
+
+## Dokka
+kotlin-dokkaCore = { module = "org.jetbrains.dokka:dokka-core", version.ref = "kotlin-dokka" }
+kotlin-dokkaPlugin-allModulesPage = { module = "org.jetbrains.dokka:all-modules-page-plugin", version.ref = "kotlin-dokka" }
+kotlin-dokkaPlugin-templating = { module = "org.jetbrains.dokka:templating-plugin", version.ref = "kotlin-dokka" }
+
 
 ### Test libs ##
 
@@ -74,7 +79,7 @@ gradlePlugin-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", ve
 gradlePlugin-kotlinxKnit = { module = "org.jetbrains.kotlinx:kotlinx-knit", version.ref = "kotlinx-knit" }
 gradlePlugin-kotlinxBinaryCompatValidator = { module = "org.jetbrains.kotlinx:binary-compatibility-validator", version.ref = "kotlin" }
 
-gradlePlugin-dokka = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "dokkaPlugin" }
+gradlePlugin-dokkatoo = { module = "dev.adamko.dokkatoo:dokkatoo-plugin", version.ref = "dokkatoo" }
 
 gradlePlugin-kotest = { module = "io.kotest:kotest-framework-multiplatform-plugin-gradle", version.ref = "kotest" }
 

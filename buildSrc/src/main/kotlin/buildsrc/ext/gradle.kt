@@ -1,13 +1,15 @@
 package buildsrc.ext
 
+import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Action
+import org.gradle.api.Project
 import org.gradle.api.artifacts.repositories.PasswordCredentials
 import org.gradle.api.file.ProjectLayout
+import org.gradle.api.file.RegularFile
 import org.gradle.api.provider.Provider
 import org.gradle.api.provider.ProviderFactory
+import org.gradle.kotlin.dsl.*
 import org.gradle.plugins.ide.idea.model.IdeaModule
-import org.gradle.api.Project
-import org.gradle.api.file.RegularFile
 
 
 // https://github.com/gradle/gradle/issues/20925
@@ -65,3 +67,11 @@ fun Project.initIdeProjectLogo(
     }
   }
 }
+
+/**
+ * Access the version catalog.
+ *
+ * https://github.com/gradle/gradle/issues/15383#issuecomment-779893192
+ */
+val Project.libs: LibrariesForLibs
+  get() = this.extensions.getByType()

@@ -1,10 +1,16 @@
+pluginManagement {
+  repositories {
+    gradlePluginPortal()
+    mavenCentral()
+  }
+}
+
 @Suppress("UnstableApiUsage") // Central declaration of repositories is an incubating feature
 dependencyResolutionManagement {
 
   repositories {
     mavenCentral()
     gradlePluginPortal()
-    jitpack()
     jetBrainsCompose()
     jetBrainsKotlinxHtml()
 
@@ -31,14 +37,6 @@ dependencyResolutionManagement {
         }
       }
       filter { includeGroup("com.yarnpkg") }
-    }
-  }
-
-  pluginManagement {
-    repositories {
-      gradlePluginPortal()
-      mavenCentral()
-      jitpack()
     }
   }
 }
