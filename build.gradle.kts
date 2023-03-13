@@ -1,14 +1,12 @@
 import buildsrc.ext.excludeGeneratedGradleDsl
+import buildsrc.ext.initIdeProjectLogo
 
 plugins {
   buildsrc.convention.`kotlin-jvm`
-
   buildsrc.convention.`maven-publish`
   me.qoomon.`git-versioning`
-
   `project-report`
   // `build-dashboard` // incompatible with Gradle CC
-
   idea
 }
 
@@ -19,7 +17,6 @@ gitVersioning.apply {
     branch(".+") { version = "\${ref}-SNAPSHOT" }
     tag("v(?<version>.*)") { version = "\${ref.version}" }
   }
-
   // optional fallback configuration in case of no matching ref configuration
   rev { version = "\${commit}" }
 }
@@ -39,13 +36,6 @@ kotkaPublishing {
   mavenPomDescription.set("Using Kotka means a more pleasant experience while using Kafka Streams")
 }
 
-
-tasks.wrapper {
-  gradleVersion = "7.6"
-  distributionType = Wrapper.DistributionType.ALL
-}
-
-
 idea {
   module {
     isDownloadSources = true
@@ -56,3 +46,5 @@ idea {
     )
   }
 }
+
+initIdeProjectLogo("site/src/jsMain/resources/ks-logo.svg")

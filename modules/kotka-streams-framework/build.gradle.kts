@@ -1,6 +1,7 @@
 plugins {
   buildsrc.convention.`kotlin-jvm`
   buildsrc.convention.`maven-publish`
+  buildsrc.convention.dokkatoo
 }
 
 description = "A light framework for structuring Kafka Streams topics and records"
@@ -17,4 +18,11 @@ dependencies {
 
 kotkaPublishing {
   mavenPomSubprojectName.set("Framework")
+}
+
+dokkatoo {
+  moduleName.set("kotka-streams-framework")
+  dokkatooSourceSets.configureEach {
+    includes.from("module.md")
+  }
 }
