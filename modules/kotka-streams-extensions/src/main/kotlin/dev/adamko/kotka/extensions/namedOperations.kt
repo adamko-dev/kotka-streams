@@ -2,21 +2,12 @@ package dev.adamko.kotka.extensions
 
 import org.apache.kafka.common.serialization.Serde
 import org.apache.kafka.streams.Topology
-import org.apache.kafka.streams.kstream.Branched
-import org.apache.kafka.streams.kstream.Consumed
-import org.apache.kafka.streams.kstream.Grouped
-import org.apache.kafka.streams.kstream.Joined
-import org.apache.kafka.streams.kstream.KeyValueMapper
-import org.apache.kafka.streams.kstream.Named
-import org.apache.kafka.streams.kstream.Printed
-import org.apache.kafka.streams.kstream.Produced
-import org.apache.kafka.streams.kstream.Repartitioned
-import org.apache.kafka.streams.kstream.TableJoined
+import org.apache.kafka.streams.kstream.*
 import org.apache.kafka.streams.processor.StreamPartitioner
 import org.apache.kafka.streams.processor.TimestampExtractor
 
 
-/** @see [Named] */
+/** @see Named */
 fun namedAs(name: String): Named = Named.`as`(name)
 
 
@@ -66,7 +57,7 @@ fun <Key, Val, otherVal> joinedAs(
     .withOtherValueSerde(otherValueSerde)
 
 
-/** @see [Grouped.`as`] */
+/** @see Grouped.as */
 fun <Key, Val> groupedAs(
   name: String? = null,
   keySerde: Serde<Key>? = null,
@@ -77,7 +68,7 @@ fun <Key, Val> groupedAs(
     .withValueSerde(valueSerde)
 
 
-/** @see [Consumed.`as`] */
+/** @see Consumed.as */
 fun <Key, Val> consumedAs(
   name: String? = null,
   keySerde: Serde<Key>? = null,
@@ -92,10 +83,12 @@ fun <Key, Val> consumedAs(
     .withTimestampExtractor(timestampExtractor)
 
 
+/** @see [Branched.`as`] */
 fun <Key, Val> branchedAs(name: String): Branched<Key, Val> =
   Branched.`as`(name)
 
 
+/** @see TableJoined.as */
 fun <Key, otherKey> tableJoined(
   name: String? = null,
   partitioner: StreamPartitioner<Key, Void>? = null,
@@ -106,6 +99,7 @@ fun <Key, otherKey> tableJoined(
     .withOtherPartitioner(otherPartitioner)
 
 
+/** @see Printed */
 fun <Key, Val> printed(
   name: String? = null,
   outputStream: PrintedOutputStream,
@@ -131,7 +125,10 @@ fun <Key, Val> printed(
 }
 
 
+/** @see printed */
 sealed interface PrintedOutputStream {
+  /** @see Printed.toSysOut */
   object SysOut : PrintedOutputStream
+  /** @see Printed.toFile */
   data class File(val filePath: String) : PrintedOutputStream
 }

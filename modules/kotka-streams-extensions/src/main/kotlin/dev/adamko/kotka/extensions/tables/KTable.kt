@@ -4,18 +4,11 @@ import dev.adamko.kotka.extensions.namedAs
 import dev.adamko.kotka.extensions.tableJoined
 import org.apache.kafka.common.utils.Bytes
 import org.apache.kafka.streams.KeyValue
-import org.apache.kafka.streams.kstream.Grouped
-import org.apache.kafka.streams.kstream.KGroupedTable
-import org.apache.kafka.streams.kstream.KStream
-import org.apache.kafka.streams.kstream.KTable
-import org.apache.kafka.streams.kstream.KeyValueMapper
-import org.apache.kafka.streams.kstream.Materialized
-import org.apache.kafka.streams.kstream.TableJoined
-import org.apache.kafka.streams.kstream.ValueJoiner
+import org.apache.kafka.streams.kstream.*
 import org.apache.kafka.streams.state.KeyValueStore
 
 
-/** @see [KTable.mapValues] */
+/** @see org.apache.kafka.streams.kstream.KTable.mapValues */
 fun <K, inV, outV> KTable<K, inV>.mapValues(
   name: String? = null,
   materialized: Materialized<K, outV, KeyValueStore<Bytes, ByteArray>>? = null,
@@ -29,7 +22,7 @@ fun <K, inV, outV> KTable<K, inV>.mapValues(
   }
 
 
-/** @See [KTable.groupBy] */
+/** @see org.apache.kafka.streams.kstream.KTable.groupBy */
 fun <inK, inV, outK, outV> KTable<inK, inV>.groupBy(
   grouped: Grouped<outK, outV>? = null,
   selector: KeyValueMapper<inK, inV, KeyValue<outK, outV>>
@@ -39,7 +32,7 @@ fun <inK, inV, outK, outV> KTable<inK, inV>.groupBy(
 }
 
 
-/** @See [KTable.join] */
+/** @see org.apache.kafka.streams.kstream.KTable.join */
 fun <K, V, otherV, outV> KTable<K, V>.join(
   other: KTable<K, otherV>,
   name: String? = null,
@@ -56,12 +49,12 @@ fun <K, V, otherV, outV> KTable<K, V>.join(
 /**
  * A function that extracts the key ([otherK]) from this table's value ([V]).
  * If the result is null, the update is ignored as invalid.
- * @see [KTable.join]
+ * See [KTable.join]
  */
 fun interface ForeignKeyExtractor<V, otherK> : (V) -> otherK?
 
 
-/** @See [KTable.join] */
+/** @see org.apache.kafka.streams.kstream.KTable.join */
 
 fun <K, V, otherK, otherV, outV> KTable<K, V>.join(
   other: KTable<otherK, otherV>,
@@ -79,7 +72,7 @@ fun <K, V, otherK, otherV, outV> KTable<K, V>.join(
   )
 
 
-/** @See [KTable.join] */
+/** @see org.apache.kafka.streams.kstream.KTable.join */
 fun <K, V, otherK, otherV, outV> KTable<K, V>.join(
   other: KTable<otherK, otherV>,
   tableJoined: TableJoined<K, otherK>? = null,
@@ -103,7 +96,7 @@ fun <K, V, otherK, otherV, outV> KTable<K, V>.join(
 }
 
 
-/** @See [KTable.leftJoin] */
+/** @see org.apache.kafka.streams.kstream.KTable.leftJoin */
 fun <K, V, otherV, outV> KTable<K, V>.leftJoin(
   other: KTable<K, otherV>,
   name: String? = null,
@@ -119,7 +112,7 @@ fun <K, V, otherV, outV> KTable<K, V>.leftJoin(
 }
 
 
-/** @See [KTable.leftJoin] */
+/** @see org.apache.kafka.streams.kstream.KTable.leftJoin */
 fun <K, V, otherK, otherV, outV> KTable<K, V>.leftJoin(
   other: KTable<otherK, otherV>,
   name: String? = null,
@@ -136,7 +129,7 @@ fun <K, V, otherK, otherV, outV> KTable<K, V>.leftJoin(
   )
 
 
-/** @See [KTable.leftJoin] */
+/** @see org.apache.kafka.streams.kstream.KTable.leftJoin */
 fun <K, V, otherK, otherV, outV> KTable<K, V>.leftJoin(
   other: KTable<otherK, otherV>,
   tableJoined: TableJoined<K, otherK>? = null,
@@ -160,7 +153,7 @@ fun <K, V, otherK, otherV, outV> KTable<K, V>.leftJoin(
 }
 
 
-/** @See [KTable.outerJoin] */
+/** @see org.apache.kafka.streams.kstream.KTable.outerJoin */
 fun <K, V, otherV, outV> KTable<K, V>.outerJoin(
   other: KTable<K, otherV>,
   name: String? = null,
@@ -177,6 +170,7 @@ fun <K, V, otherV, outV> KTable<K, V>.outerJoin(
 
 
 // the value of the resulting KStream is nullable, because it includes record deletions.
+/** @see org.apache.kafka.streams.kstream.KTable.toStream */
 fun <inK, V, outK> KTable<inK, V>.toStream(
   name: String,
   mapper: KeyValueMapper<inK, V, outK>? = null,
@@ -184,9 +178,11 @@ fun <inK, V, outK> KTable<inK, V>.toStream(
 
 
 // the value of the resulting KStream is nullable, because it includes record deletions.
+/** @see org.apache.kafka.streams.kstream.KTable.toStream */
 fun <K, V> KTable<K, V>.toStream(name: String): KStream<K, V?> = toStream(namedAs(name))
 
 
+/** @see org.apache.kafka.streams.kstream.KTable.filter */
 fun <K, V> KTable<K, V>.filter(
   name: String? = null,
   materialized: Materialized<K, V, KeyValueStore<Bytes, ByteArray>>? = null,
@@ -200,7 +196,7 @@ fun <K, V> KTable<K, V>.filter(
   }
 }
 
-
+/** @see org.apache.kafka.streams.kstream.KTable.filterNot */
 fun <K, V> KTable<K, V>.filterNot(
   name: String? = null,
   materialized: Materialized<K, V, KeyValueStore<Bytes, ByteArray>>? = null,
