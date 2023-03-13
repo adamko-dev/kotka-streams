@@ -87,6 +87,11 @@ class CodeSnippetContext<T>(
       attributes["data-test-code"] = name
     }
 
+//  fun CodeSnippetExample.expectedResult(@Language("TEXT") code: String) =
+//    codeBlock(code, "plaintext") {
+//      attributes["data-test-expected"] = name
+//    }
+
   fun expectedResult(
     example: CodeSnippetExample,
     vararg examples: CodeSnippetExample,
@@ -109,7 +114,9 @@ class CodeSnippetExample(
 )
 
 
-fun CodeSnippetContext<*>.registeringExample() = CodeSnippetExampleDelegateProvider(this)
+fun CodeSnippetContext<*>.registeringExample(
+  block: CodeSnippetExample.() -> Unit = {},
+) = CodeSnippetExampleDelegateProvider(this, block)
 
 
 class CodeSnippetExampleDelegate(
@@ -120,13 +127,18 @@ class CodeSnippetExampleDelegate(
 }
 
 class CodeSnippetExampleDelegateProvider(
-  private val context: CodeSnippetContext<*>
+  private val context: CodeSnippetContext<*>,
+  private val block: CodeSnippetExample.() -> Unit = {},
 ) : PropertyDelegateProvider<Any?, CodeSnippetExampleDelegate> {
 
   override operator fun provideDelegate(
     thisRef: Any?,
     property: KProperty<*>
-  ) = CodeSnippetExampleDelegate(context.registerExample(property.name))
+  ): CodeSnippetExampleDelegate {
+    val example = context.registerExample(property.name)
+    example.block()
+    return CodeSnippetExampleDelegate(example)
+  }
 }
 
 

@@ -34,17 +34,17 @@ fun <T> TagConsumer<T>.namingOperators2(): T {
     }
 
 
-    val consumedAsWithBackticks by registeringExample()
-
-    consumedAsWithBackticks.codeBlockKotlin(
-      """
-        val stream: KStream<String, String> = builder.stream(
-            "input",
-            // 'as' is a keyword - must escape it with backticks
-            Consumed.`as`("Customer_transactions_input_topic")
-        )
-      """.trimIndent()
-    )
+    val consumedAsWithBackticks by registeringExample {
+      codeBlockKotlin(
+        """
+          val stream: KStream<String, String> = builder.stream(
+              "input",
+              // 'as' is a keyword - must escape it with backticks
+              Consumed.`as`("Customer_transactions_input_topic")
+          )
+        """.trimIndent()
+      )
+    }
 
     p {
       text("Kotka streams provides an extension function, ")
@@ -52,28 +52,30 @@ fun <T> TagConsumer<T>.namingOperators2(): T {
       text(" that performs the same functionality - no backticks required.")
     }
 
-    val consumedAsWithoutBackticks by registeringExample()
-
-    consumedAsWithoutBackticks.codeBlockKotlin(
-      """
-        import dev.adamko.kotka.extensions.*          
-        
-        val stream: KStream<String, String> = builder.stream(
-            "input",
-            consumedAs("Customer_transactions_input_topic")
-        )
-      """.trimIndent()
-    )
+    val consumedAsWithoutBackticks by registeringExample {
+      codeBlockKotlin(
+        """
+          import dev.adamko.kotka.extensions.*          
+          
+          val stream: KStream<String, String> = builder.stream(
+              "input",
+              consumedAs("Customer_transactions_input_topic")
+          )
+        """.trimIndent()
+      )
+    }
 
     p {
       text("Both functions produce the same topology, with a named Source.")
     }
 
-    expectedResult(consumedAsWithBackticks, consumedAsWithoutBackticks, code = """
+    expectedResult(
+      consumedAsWithBackticks, consumedAsWithoutBackticks, code = """
         Topologies:
            Sub-topology: 0
              Source: Customer_transactions_input_topic (topics: [input])
-    """.trimIndent())
+    """.trimIndent()
+    )
   }
 }
 
