@@ -1,3 +1,6 @@
+import dev.adamko.dokkatoo.dokka.plugins.DokkaHtmlPluginParameters
+import dev.adamko.dokkatoo.dokka.plugins.DokkaHtmlPluginParameters.Companion.DOKKA_HTML_PARAMETERS_NAME
+
 plugins {
   buildsrc.convention.dokkatoo
 }
@@ -14,26 +17,8 @@ dependencies {
 dokkatoo {
   moduleName.set("Kotka Streams")
 
-  dokkatooPublications.configureEach {
-    pluginsConfiguration.create("org.jetbrains.dokka.base.DokkaBase") {
-      serializationFormat.set(org.jetbrains.dokka.DokkaConfiguration.SerializationFormat.JSON)
-      values.set(
-        """
-          { 
-            "customStyleSheets": [
-              "${file("./styles/logo-styles.css").invariantSeparatorsPath}" 
-            ], 
-            "customAssets": [
-              "${file("./images/logo-icon.svg").invariantSeparatorsPath}"
-            ] 
-          }
-        """.trimIndent()
-      )
-    }
+  pluginsConfiguration.named<DokkaHtmlPluginParameters>(DOKKA_HTML_PARAMETERS_NAME) {
+    customStyleSheets.from("./styles/logo-styles.css")
+    customAssets.from("./images/logo-icon.svg")
   }
-}
-
-tasks.dokkatooGeneratePublicationHtml {
-  inputs.dir("styles/")
-  inputs.dir("images/")
 }

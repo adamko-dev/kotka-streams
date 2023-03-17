@@ -24,7 +24,7 @@ junit = "5.9.2"                         # https://github.com/junit-team/junit5/r
 ## Plugins
 gitVersioningPlugin = "6.4.1"           # https://github.com/qoomon/gradle-git-versioning-plugin/releases
 binaryCompatValidator = "0.12.1"        # https://search.maven.org/artifact/org.jetbrains.kotlinx/binary-compatibility-validator
-dokkatoo = "0.0.4"
+dokkatoo = "1.0.0"
 
 ###########
 [libraries]
@@ -44,7 +44,6 @@ kotlinxSerialization-properties = { module = "org.jetbrains.kotlinx:kotlinx-seri
 slf4jApi = { module = "org.slf4j:slf4j-api", version.ref = "slf4j" }
 
 ## Dokka
-kotlin-dokkaCore = { module = "org.jetbrains.dokka:dokka-core", version.ref = "kotlin-dokka" }
 kotlin-dokkaPlugin-allModulesPage = { module = "org.jetbrains.dokka:all-modules-page-plugin", version.ref = "kotlin-dokka" }
 kotlin-dokkaPlugin-templating = { module = "org.jetbrains.dokka:templating-plugin", version.ref = "kotlin-dokka" }
 
