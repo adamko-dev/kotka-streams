@@ -1,22 +1,27 @@
 package buildsrc.convention
 
 import buildsrc.ext.libs
+import dev.adamko.dokkatoo.DokkatooExtension
 
 plugins {
   id("buildsrc.convention.base")
   id("dev.adamko.dokkatoo-html")
 }
 
-val kafkaJavadocUrl = libs.versions.kafka.map { v ->
+val kafkaBaseVersion = libs.versions.kafka.map { v ->
   val (major, minor) = v.split(".")
-  "https://kafka.apache.org/${major}${minor}/javadoc/"
+  "${major}${minor}"
 }
+
+val kafkaJavadocUrl = kafkaBaseVersion.map { v -> "https://kafka.apache.org/${v}/javadoc/" }
+val kafkaPackageListUrl = kafkaJavadocUrl.map { "$it/element-list" }
 
 dokkatoo {
   dokkatooSourceSets.configureEach {
     externalDocumentationLinks.create("kafka-streams") {
       enabled.set(true)
       url(kafkaJavadocUrl)
+      packageListUrl(kafkaPackageListUrl)
     }
   }
 }

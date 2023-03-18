@@ -10,7 +10,6 @@ dependencies {
 
   implementation(libs.gradlePlugin.gitVersioning)
 
-  implementation(libs.kotlin.dokkaCore)
   implementation(libs.gradlePlugin.dokkatoo)
 
   // https://github.com/gradle/gradle/issues/15383#issuecomment-779893192
