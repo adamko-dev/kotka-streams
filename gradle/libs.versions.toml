@@ -41,7 +41,8 @@ kotlinxSerialization-protobuf = { module = "org.jetbrains.kotlinx:kotlinx-serial
 kotlinxSerialization-cbor = { module = "org.jetbrains.kotlinx:kotlinx-serialization-cbor" }
 kotlinxSerialization-properties = { module = "org.jetbrains.kotlinx:kotlinx-serialization-properties" }
 
-slf4jApi = { module = "org.slf4j:slf4j-api", version.ref = "slf4j" }
+slf4j-api = { module = "org.slf4j:slf4j-api", version.ref = "slf4j" }
+slf4j-simple = { module = "org.slf4j:slf4j-simple", version.ref = "slf4j" }
 
 ## Dokka
 kotlin-dokkaPlugin-allModulesPage = { module = "org.jetbrains.dokka:all-modules-page-plugin", version.ref = "kotlin-dokka" }
@@ -94,10 +95,10 @@ gradlePlugin-kotlinxSerialization = { module = "org.jetbrains.kotlin:kotlin-seri
 #########
 
 kotest = [
-  "kotest-assertionsCore",
-  "kotest-assertionsJson",
-  "kotest-property",
-  "kotest-frameworkEngine",
-  "kotest-frameworkDatatest",
-  "kotest-runnerJUnit5",
+    "kotest-assertionsCore",
+    "kotest-assertionsJson",
+    "kotest-property",
+    "kotest-frameworkEngine",
+    "kotest-frameworkDatatest",
+    "kotest-runnerJUnit5",
 ]
