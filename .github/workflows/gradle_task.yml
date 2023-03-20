@@ -82,8 +82,8 @@ jobs:
           ORG_GRADLE_PROJECT_signing.keyId: ${{ secrets.SONATYPE_SIGNING_KEY_ID }}
           ORG_GRADLE_PROJECT_signing.key: ${{ secrets.SONATYPE_SIGNING_KEY }}
           ORG_GRADLE_PROJECT_signing.password: ${{ secrets.SONATYPE_SIGNING_PASSWORD }}
-          ORG_GRADLE_PROJECT_sonatypeRepositoryUsername: ${{ SONATYPE_REPO_USERNAME }}
-          ORG_GRADLE_PROJECT_sonatypeRepositoryPassword: ${{ SONATYPE_REPO_PASSWORD }}
+          ORG_GRADLE_PROJECT_sonatypeRepositoryUsername: ${{ secrets.SONATYPE_REPO_USERNAME }}
+          ORG_GRADLE_PROJECT_sonatypeRepositoryPassword: ${{ secrets.SONATYPE_REPO_PASSWORD }}
 
       - name: Upload build reports
         if: failure()
