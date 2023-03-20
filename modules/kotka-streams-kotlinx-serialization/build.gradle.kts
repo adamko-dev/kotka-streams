@@ -16,12 +16,21 @@ dependencies {
 
   implementation(libs.kafka.streams)
 
-  implementation(libs.slf4jApi)
+  implementation(libs.slf4j.api)
 
   implementation(libs.kotlinxSerialization.core)
 
+  testImplementation(libs.kotest.runnerJUnit5)
+  testImplementation(libs.kotest.assertionsCore)
+  testImplementation(libs.kotest.property)
+  testImplementation(libs.kotest.assertionsJson)
+
+  testImplementation(libs.mockk)
+
   testImplementation(libs.kotlinxSerialization.cbor)
   testImplementation(libs.kotlinxSerialization.json)
+
+  testImplementation(libs.slf4j.simple)
 }
 
 

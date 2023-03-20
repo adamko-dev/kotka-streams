@@ -11,6 +11,13 @@ dependencies {
   implementation(platform(projects.modules.versionsPlatform))
 
   implementation(libs.kafka.streams)
+
+  testImplementation(libs.kotest.runnerJUnit5)
+  testImplementation(libs.kotest.assertionsCore)
+  testImplementation(libs.kotest.property)
+  testImplementation(libs.kotest.assertionsJson)
+
+  testImplementation(libs.mockk)
 }
 
 
