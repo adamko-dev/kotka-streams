@@ -28,6 +28,7 @@ jobs:
         publishAllPublicationsToSonatypeRepository
         --no-parallel
         --no-configuration-cache
+      github-environment: sonatype-publish
     secrets:
       SONATYPE_SIGNING_KEY_ID: ${{ secrets.SONATYPE_SIGNING_KEY_ID }}
       SONATYPE_SIGNING_KEY: ${{ secrets.SONATYPE_SIGNING_KEY }}

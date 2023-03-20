@@ -16,6 +16,10 @@ on:
         description: "OSes to run the task on"
         required: true
         type: string
+      github-environment:
+        description: "GitHub Environment"
+        required: false
+        type: string
     secrets:
       SONATYPE_SIGNING_KEY_ID:
         description: Sonatype signing key ID
@@ -44,6 +48,7 @@ jobs:
     runs-on: ${{ inputs.runs-on }}
     name: "./gradlew ${{ inputs.gradle-task}} @ ${{ inputs.runs-on }}"
     timeout-minutes: 60
+    environment: ${{ inputs.github-environment }}
     steps:
       - name: Checkout the repo
         uses: actions/checkout@v3
