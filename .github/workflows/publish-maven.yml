@@ -29,6 +29,7 @@ jobs:
         --no-parallel
         --no-configuration-cache
       github-environment: sonatype-publish
+      github-environment-url: https://s01.oss.sonatype.org/
     secrets:
       SONATYPE_SIGNING_KEY_ID: ${{ secrets.SONATYPE_SIGNING_KEY_ID }}
       SONATYPE_SIGNING_KEY: ${{ secrets.SONATYPE_SIGNING_KEY }}
