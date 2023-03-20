@@ -8,7 +8,7 @@ import org.gradle.api.model.ObjectFactory
 import org.gradle.api.provider.Property
 import org.gradle.api.provider.Provider
 import org.gradle.api.provider.ProviderFactory
-import org.gradle.kotlin.dsl.property
+import org.gradle.kotlin.dsl.*
 
 
 abstract class KotkaPublishingSettings @Inject constructor(
@@ -45,8 +45,6 @@ abstract class KotkaPublishingSettings @Inject constructor(
     providers.gradleProperty("signing.key")
   val signingPassword: Provider<String> =
     providers.gradleProperty("signing.password")
-  val signingSecretKeyRingFile: Provider<String> =
-    providers.gradleProperty("signing.secretKeyRingFile")
 
 
   companion object {

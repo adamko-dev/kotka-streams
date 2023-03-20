@@ -16,6 +16,16 @@ on:
         description: "OSes to run the task on"
         required: true
         type: string
+    secrets:
+      SONATYPE_SIGNING_KEY_ID:
+        description: Sonatype signing key ID
+        required: false
+      SONATYPE_SIGNING_KEY:
+        description: Sonatype signing key
+        required: false
+      SONATYPE_SIGNING_PASSWORD:
+        description: Sonatype signing password
+        required: false
 
 
 concurrency:
@@ -51,6 +61,10 @@ jobs:
       - name: Run ${{ inputs.gradle-task }}
         run: >-
           ./gradlew ${{ inputs.gradle-task }}
+        env:
+          ORG_GRADLE_PROJECT_signing.keyId: ${{ secrets.SONATYPE_SIGNING_KEY_ID }}
+          ORG_GRADLE_PROJECT_signing.key: ${{ secrets.SONATYPE_SIGNING_KEY }}
+          ORG_GRADLE_PROJECT_signing.password: ${{ secrets.SONATYPE_SIGNING_PASSWORD }}
 
       - name: Upload build reports
         if: failure()

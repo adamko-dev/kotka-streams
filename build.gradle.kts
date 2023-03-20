@@ -47,4 +47,4 @@ idea {
   }
 }
 
-initIdeProjectLogo("site/src/jsMain/resources/ks-logo.svg")
+initIdeProjectLogo("docs/images/logo-icon.svg")
