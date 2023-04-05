@@ -1,7 +1,6 @@
 package buildsrc.convention
 
 import buildsrc.ext.libs
-import dev.adamko.dokkatoo.DokkatooExtension
 
 plugins {
   id("buildsrc.convention.base")
@@ -16,12 +15,19 @@ val kafkaBaseVersion = libs.versions.kafka.map { v ->
 val kafkaJavadocUrl = kafkaBaseVersion.map { v -> "https://kafka.apache.org/${v}/javadoc/" }
 val kafkaPackageListUrl = kafkaJavadocUrl.map { "$it/element-list" }
 
+
 dokkatoo {
   dokkatooSourceSets.configureEach {
     externalDocumentationLinks.create("kafka-streams") {
       enabled.set(true)
       url(kafkaJavadocUrl)
       packageListUrl(kafkaPackageListUrl)
+    }
+
+    sourceLink {
+      localDirectory.set(file("src/main/kotlin"))
+      val relativeProjectPath = projectDir.relativeToOrNull(rootDir)?.invariantSeparatorsPath ?: ""
+      remoteUrl("https://github.com/adamko-dev/kotka-streams/tree/main/$relativeProjectPath/src/main/kotlin")
     }
   }
 }
