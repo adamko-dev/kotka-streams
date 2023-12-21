@@ -31,7 +31,6 @@ kotkaPublishing {
 
 idea {
   module {
-    isDownloadSources = true
     excludeGeneratedGradleDsl(layout)
     excludeDirs = excludeDirs + layout.files(
       ".idea",
