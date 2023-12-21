@@ -18,7 +18,7 @@ slf4j = "2.0.6"
 
 kotest = "5.5.5"                        # https://github.com/kotest/kotest/releases
 
-mockk = "1.13.4"                        # https://search.maven.org/artifact/io.mockk/mockk
+mockk = "1.13.8"                        # https://search.maven.org/artifact/io.mockk/mockk
 junit = "5.9.2"                         # https://github.com/junit-team/junit5/releases
 
 ## Plugins
