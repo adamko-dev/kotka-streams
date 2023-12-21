@@ -36,7 +36,7 @@ jobs:
     uses: ./.github/workflows/run_gradle_task.yml
     secrets: inherit
     with:
-      runs-on: macos-latest # only macOS supports building all Kotlin targets
+      runs-on: ubuntu-latest
       gradle-task: >-
         publishAllPublicationsToSonatypeRepository
         --stacktrace
@@ -52,7 +52,7 @@ jobs:
       checks: write
     uses: ./.github/workflows/run_gradle_task.yml
     with:
-      runs-on: macos-latest # only macOS supports building all Kotlin targets
+      runs-on: ubuntu-latest
       gradle-task: >-
         publishAllPublicationsToGitHubPackagesRepository
         --stacktrace
