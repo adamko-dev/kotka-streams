@@ -22,7 +22,7 @@ mockk = "1.13.4"                        # https://search.maven.org/artifact/io.m
 junit = "5.9.2"                         # https://github.com/junit-team/junit5/releases
 
 ## Plugins
-gitVersioningPlugin = "6.4.1"           # https://github.com/qoomon/gradle-git-versioning-plugin/releases
+gitVersioningPlugin = "6.4.3"           # https://github.com/qoomon/gradle-git-versioning-plugin/releases
 binaryCompatValidator = "0.12.1"        # https://search.maven.org/artifact/org.jetbrains.kotlinx/binary-compatibility-validator
 dokkatoo = "1.0.0"
 
