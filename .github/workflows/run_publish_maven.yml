@@ -38,5 +38,24 @@ jobs:
     with:
       runs-on: macos-latest # only macOS supports building all Kotlin targets
       gradle-task: >-
-        publishAllPublicationsToSonatypeReleaseRepository --stacktrace --no-configuration-cache --no-parallel
+        publishAllPublicationsToSonatypeRepository
+        --stacktrace
+        --no-configuration-cache
+        --no-parallel
+      checkout-ref: ${{ inputs.checkout-ref || github.event.repository.default_branch }}
+
+
+  github-packages-release:
+    permissions:
+      contents: read
+      packages: write
+      checks: write
+    uses: ./.github/workflows/run_gradle_task.yml
+    with:
+      runs-on: macos-latest # only macOS supports building all Kotlin targets
+      gradle-task: >-
+        publishAllPublicationsToGitHubPackagesRepository
+        --stacktrace
+        --no-configuration-cache
+        --no-parallel
       checkout-ref: ${{ inputs.checkout-ref || github.event.repository.default_branch }}
