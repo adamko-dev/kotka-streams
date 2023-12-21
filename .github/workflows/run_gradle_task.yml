@@ -18,6 +18,14 @@ on:
         description: "The repository reference to checkout"
         required: false
         type: string
+      github-environment:
+        description: "GitHub Environment name"
+        required: false
+        type: string
+      github-environment-url:
+        description: "GitHub Environment display URL"
+        required: false
+        type: string
   workflow_call:
     inputs:
       gradle-task:
@@ -30,6 +38,14 @@ on:
         type: string
       checkout-ref:
         description: "The repository reference to checkout"
+        required: false
+        type: string
+      github-environment:
+        description: "GitHub Environment name"
+        required: false
+        type: string
+      github-environment-url:
+        description: "GitHub Environment display URL"
         required: false
         type: string
 
@@ -51,6 +67,9 @@ jobs:
     runs-on: ${{ inputs.runs-on }}
     name: "./gradlew ${{ inputs.gradle-task}} @ ${{ inputs.runs-on }}"
     timeout-minutes: 60
+    environment:
+      name: ${{ inputs.github-environment }}
+      url: ${{ inputs.github-environment-url }}
     steps:
 
       ### Gradle task ###
