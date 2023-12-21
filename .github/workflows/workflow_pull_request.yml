@@ -5,7 +5,9 @@ on:
   workflow_dispatch:
   pull_request:
   merge_group:
-
+  push:
+    branches:
+      - "renovate/**"
 
 concurrency:
   group: "Pull Requests: ${{ github.workflow }} @ ${{ github.event.pull_request.head.label || github.head_ref || github.ref }}"
