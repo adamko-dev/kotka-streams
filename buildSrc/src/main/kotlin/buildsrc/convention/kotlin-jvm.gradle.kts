@@ -1,5 +1,8 @@
 package buildsrc.convention
 
+import org.gradle.kotlin.dsl.support.kotlinCompilerOptions
+import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
+import org.jetbrains.kotlin.gradle.dsl.KotlinProjectExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion.KOTLIN_1_5
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion.KOTLIN_1_8
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
@@ -16,11 +19,7 @@ kotlin {
 }
 
 tasks.withType<KotlinCompile>().configureEach {
-
   compilerOptions {
-    apiVersion.set(KOTLIN_1_5)
-    languageVersion.set(KOTLIN_1_8)
-
     freeCompilerArgs.addAll(
       "-opt-in=kotlin.ExperimentalStdlibApi",
       "-opt-in=kotlin.time.ExperimentalTime",
