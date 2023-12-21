@@ -24,7 +24,7 @@ junit = "5.9.2"                         # https://github.com/junit-team/junit5/r
 ## Plugins
 gitVersioningPlugin = "6.4.1"           # https://github.com/qoomon/gradle-git-versioning-plugin/releases
 binaryCompatValidator = "0.12.1"        # https://search.maven.org/artifact/org.jetbrains.kotlinx/binary-compatibility-validator
-dokkatoo = "1.0.0"
+dokkatoo = "1.6.0"
 
 ###########
 [libraries]
