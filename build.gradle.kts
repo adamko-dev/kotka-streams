@@ -4,23 +4,16 @@ import buildsrc.ext.initIdeProjectLogo
 plugins {
   buildsrc.convention.`kotlin-jvm`
   buildsrc.convention.`maven-publish`
-  me.qoomon.`git-versioning`
   `project-report`
   // `build-dashboard` // incompatible with Gradle CC
   idea
 }
 
 group = "dev.adamko.kotka"
-version = "0.0.0-SNAPSHOT"
-gitVersioning.apply {
-  refs {
-    branch(".+") { version = "\${ref}-SNAPSHOT" }
-    tag("v(?<version>.*)") { version = "\${ref.version}" }
-  }
-  // optional fallback configuration in case of no matching ref configuration
-  rev { version = "\${commit}" }
+version = object {
+  private val gitVersion = project.gitVersion
+  override fun toString(): String = gitVersion.get()
 }
-
 
 dependencies {
   implementation(platform(projects.modules.versionsPlatform))
@@ -38,7 +31,6 @@ kotkaPublishing {
 
 idea {
   module {
-    isDownloadSources = true
     excludeGeneratedGradleDsl(layout)
     excludeDirs = excludeDirs + layout.files(
       ".idea",
@@ -48,3 +40,14 @@ idea {
 }
 
 initIdeProjectLogo("docs/images/logo-icon.svg")
+
+val projectVersion by tasks.registering {
+  description = "prints the project version"
+  group = "help"
+  val version = providers.provider { project.version }
+  inputs.property("version", version)
+  outputs.cacheIf("logging task, it should always run") { false }
+  doLast {
+    logger.quiet("${version.orNull}")
+  }
+}

@@ -19,7 +19,7 @@ tasks.withType<AbstractArchiveTask>().configureEach {
 }
 
 tasks.withType<Test>().configureEach {
-  timeout.set(Duration.ofMinutes(10))
+  timeout.convention(Duration.ofMinutes(10))
 
   testLogging {
     // don't log console output - it's too noisy

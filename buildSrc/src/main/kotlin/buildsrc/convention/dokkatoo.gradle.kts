@@ -19,7 +19,7 @@ val kafkaPackageListUrl = kafkaJavadocUrl.map { "$it/element-list" }
 dokkatoo {
   dokkatooSourceSets.configureEach {
     externalDocumentationLinks.create("kafka-streams") {
-      enabled.set(true)
+      enabled.convention(true)
       url(kafkaJavadocUrl)
       packageListUrl(kafkaPackageListUrl)
     }

@@ -22,7 +22,6 @@ mockk = "1.13.8"                        # https://search.maven.org/artifact/io.m
 junit = "5.9.2"                         # https://github.com/junit-team/junit5/releases
 
 ## Plugins
-gitVersioningPlugin = "6.4.1"           # https://github.com/qoomon/gradle-git-versioning-plugin/releases
 binaryCompatValidator = "0.12.1"        # https://search.maven.org/artifact/org.jetbrains.kotlinx/binary-compatibility-validator
 dokkatoo = "1.6.0"
 
@@ -74,7 +73,6 @@ mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 
 ### Gradle Plugins ###
 
-gradlePlugin-gitVersioning = { module = "me.qoomon:gradle-git-versioning-plugin", version.ref = "gitVersioningPlugin" }
 gradlePlugin-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 gradlePlugin-kotlinxKnit = { module = "org.jetbrains.kotlinx:kotlinx-knit", version.ref = "kotlinx-knit" }
 gradlePlugin-kotlinxBinaryCompatValidator = { module = "org.jetbrains.kotlinx:binary-compatibility-validator", version.ref = "kotlin" }

@@ -2,8 +2,8 @@ rootProject.name = "buildSrc"
 
 pluginManagement {
   repositories {
-    gradlePluginPortal()
     mavenCentral()
+    gradlePluginPortal()
   }
 }
 
@@ -12,8 +12,8 @@ dependencyResolutionManagement {
   repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
 
   repositories {
-    mavenCentral()
     gradlePluginPortal()
+    mavenCentral()
   }
 
   versionCatalogs {
