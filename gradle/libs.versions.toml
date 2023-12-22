@@ -19,7 +19,7 @@ slf4j = "2.0.9"
 kotest = "5.5.5"                        # https://github.com/kotest/kotest/releases
 
 mockk = "1.13.8"                        # https://search.maven.org/artifact/io.mockk/mockk
-junit = "5.9.2"                         # https://github.com/junit-team/junit5/releases
+junit = "5.10.1"                         # https://github.com/junit-team/junit5/releases
 
 ## Plugins
 binaryCompatValidator = "0.12.1"        # https://search.maven.org/artifact/org.jetbrains.kotlinx/binary-compatibility-validator
