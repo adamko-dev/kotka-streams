@@ -42,6 +42,8 @@ jobs:
         --stacktrace
         --no-configuration-cache
         --no-parallel
+      github-environment: sonatype-publish
+      github-environment-url: https://s01.oss.sonatype.org/
       checkout-ref: ${{ inputs.checkout-ref || github.event.repository.default_branch }}
 
 
