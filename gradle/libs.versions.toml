@@ -16,7 +16,7 @@ slf4j = "2.0.9"
 
 ## Test libs
 
-kotest = "5.5.5"                        # https://github.com/kotest/kotest/releases
+kotest = "5.8.0"                        # https://github.com/kotest/kotest/releases
 
 mockk = "1.13.8"                        # https://search.maven.org/artifact/io.mockk/mockk
 junit = "5.10.1"                         # https://github.com/junit-team/junit5/releases
