@@ -24,7 +24,7 @@ abstract class KotkaPublishingSettings @Inject constructor(
   )
 
   val gitHubPackagesCredentials: Provider<Action<PasswordCredentials>> =
-    providers.credentialsAction("GitHubPackages")
+    providers.credentialsAction("gitHubPackages")
 
   val sonatypeRepositoryCredentials: Provider<Action<PasswordCredentials>> =
     providers.credentialsAction("sonatypeRepository")
