@@ -53,6 +53,7 @@ jobs:
       packages: write
       checks: write
     uses: ./.github/workflows/run_gradle_task.yml
+    secrets: inherit
     with:
       runs-on: ubuntu-latest
       gradle-task: >-
