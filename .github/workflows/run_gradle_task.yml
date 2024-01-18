@@ -15,15 +15,7 @@ on:
         required: true
         type: string
       checkout-ref:
-        description: "The repository reference to checkout"
-        required: false
-        type: string
-      github-environment:
-        description: "GitHub Environment name"
-        required: false
-        type: string
-      github-environment-url:
-        description: "GitHub Environment display URL"
+        description: "The branch, tag or SHA to checkout. See actions/checkout 'ref'."
         required: false
         type: string
   workflow_call:
@@ -37,15 +29,7 @@ on:
         required: true
         type: string
       checkout-ref:
-        description: "The repository reference to checkout"
-        required: false
-        type: string
-      github-environment:
-        description: "GitHub Environment name"
-        required: false
-        type: string
-      github-environment-url:
-        description: "GitHub Environment display URL"
+        description: "The branch, tag or SHA to checkout. See actions/checkout 'ref'."
         required: false
         type: string
 
@@ -75,7 +59,7 @@ jobs:
       ### Gradle task ###
 
       - name: Checkout the repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: ${{ inputs.checkout-ref || github.ref }}
 
