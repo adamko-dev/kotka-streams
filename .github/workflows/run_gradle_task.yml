@@ -18,6 +18,14 @@ on:
         description: "The branch, tag or SHA to checkout. See actions/checkout 'ref'."
         required: false
         type: string
+      github-environment:
+        description: "GitHub Environment name"
+        required: false
+        type: string
+      github-environment-url:
+        description: "GitHub Environment display URL"
+        required: false
+        type: string
   workflow_call:
     inputs:
       gradle-task:
@@ -30,6 +38,14 @@ on:
         type: string
       checkout-ref:
         description: "The branch, tag or SHA to checkout. See actions/checkout 'ref'."
+        required: false
+        type: string
+      github-environment:
+        description: "GitHub Environment name"
+        required: false
+        type: string
+      github-environment-url:
+        description: "GitHub Environment display URL"
         required: false
         type: string
 
