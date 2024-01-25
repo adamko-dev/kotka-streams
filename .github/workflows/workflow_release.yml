@@ -55,4 +55,3 @@ jobs:
       pages: write      # to deploy to Pages
     with:
       checkout-ref: ${{ inputs.checkout-ref }}
-      enable-deploy: true

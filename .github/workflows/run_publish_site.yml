@@ -8,20 +8,12 @@ on:
         description: "The branch, tag or SHA to checkout. See actions/checkout 'ref'."
         required: false
         type: string
-      enable-deploy:
-        description: "Publish to GitHub Pages."
-        required: false
-        type: boolean
   workflow_call:
     inputs:
       checkout-ref:
         description: "The branch, tag or SHA to checkout. See actions/checkout 'ref'."
         required: false
         type: string
-      enable-deploy:
-        description: "Publish to GitHub Pages."
-        required: false
-        type: boolean
 
 
 concurrency:
@@ -59,7 +51,6 @@ jobs:
           path: ./docs/build/dokka/html
 
   deploy:
-    if: inputs.enable-deploy
     needs: build
     runs-on: ubuntu-latest
     permissions:
