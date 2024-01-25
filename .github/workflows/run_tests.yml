@@ -42,8 +42,7 @@ jobs:
 
   build-site:
     # verify that the site can be built, but don't deploy it
-    uses: ./.github/workflows/run_gradle_task.yml
+    uses: ./.github/workflows/run_publish_site.yml
     with:
-      runs-on: ubuntu-latest
-      gradle-task: docusaurusBuild
       checkout-ref: ${{ inputs.checkout-ref }}
+      enable-deploy: false
