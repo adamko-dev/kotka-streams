@@ -9,9 +9,11 @@ import org.apache.kafka.streams.kstream.Produced
 import org.apache.kafka.streams.kstream.Repartitioned
 import org.apache.kafka.streams.processor.StateStore
 
+
 class KotkaSerdeModule(
   val mapper: StringFormat
 ) {
+
 
   /** @see Materialized */
   inline fun <reified Key, reified Val, Store : StateStore> materializedAs(
@@ -23,6 +25,7 @@ class KotkaSerdeModule(
       .withKeySerde(keySerde)
       .withValueSerde(valueSerde)
 
+
   /** @see Repartitioned */
   inline fun <reified Key, reified Val> repartitionedAs(
     name: String,
@@ -33,6 +36,7 @@ class KotkaSerdeModule(
       .withKeySerde(keySerde)
       .withValueSerde(valueSerde)
 
+
   /** @see Produced */
   inline fun <reified Key, reified Val> producedAs(
     name: String,
@@ -42,6 +46,7 @@ class KotkaSerdeModule(
     Produced.`as`<Key, Val>(name)
       .withKeySerde(keySerde)
       .withValueSerde(valueSerde)
+
 
   /** @see Joined */
   inline fun <reified Key, reified Val, reified V_other> joinedAs(
@@ -55,7 +60,8 @@ class KotkaSerdeModule(
       .withValueSerde(valueSerde)
       .withOtherValueSerde(otherValueSerde)
 
-  /** @see [Grouped.`as`] */
+
+  /** See [Grouped.as] */
   inline fun <reified Key, reified Val> groupedAs(
     name: String,
     keySerde: Serde<Key>? = mapper.serde(),

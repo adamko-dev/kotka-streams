@@ -1,0 +1,65 @@
+name: Publish Site
+
+
+on:
+  workflow_dispatch:
+    inputs:
+      checkout-ref:
+        description: "The branch, tag or SHA to checkout. See actions/checkout 'ref'."
+        required: false
+        type: string
+  workflow_call:
+    inputs:
+      checkout-ref:
+        description: "The branch, tag or SHA to checkout. See actions/checkout 'ref'."
+        required: false
+        type: string
+
+
+concurrency:
+  group: "Publish Site: ${{ github.workflow }}"
+  cancel-in-progress: true
+
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repo
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.checkout-ref || github.ref }}
+
+      - name: Validate Gradle Wrapper
+        uses: gradle/wrapper-validation-action@v1
+
+      - name: Setup JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 11
+
+      - uses: gradle/gradle-build-action@v2
+        with:
+          gradle-home-cache-cleanup: true
+          arguments: |
+            :docs:dokkatooGenerate
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./docs/build/dokka/html
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write      # to deploy to Pages
+      id-token: write   # to verify the deployment originates from an appropriate source
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

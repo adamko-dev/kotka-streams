@@ -1,34 +1,54 @@
+import buildsrc.ext.excludeGeneratedGradleDsl
+import buildsrc.ext.initIdeProjectLogo
+
 plugins {
-  kotka.convention.`kotlin-jvm`
-
-  kotka.convention.`maven-publish`
-  id("me.qoomon.git-versioning")
-
+  buildsrc.convention.`kotlin-jvm`
+  buildsrc.convention.`maven-publish`
   `project-report`
-  `build-dashboard`
-
+  // `build-dashboard` // incompatible with Gradle CC
+  idea
   id("org.jetbrains.kotlinx.kover")
 }
 
 group = "dev.adamko.kotka"
-version = "0.0.0-SNAPSHOT"
-gitVersioning.apply {
-  refs {
-    branch(".+") { version = "\${ref}-SNAPSHOT" }
-    tag("v(?<version>.*)") { version = "\${ref.version}" }
-  }
-
-  // optional fallback configuration in case of no matching ref configuration
-  rev { version = "\${commit}" }
+version = object {
+  private val gitVersion = project.gitVersion
+  override fun toString(): String = gitVersion.get()
 }
 
 dependencies {
+  implementation(platform(projects.modules.versionsPlatform))
+
   api(projects.modules.kotkaStreamsExtensions)
   api(projects.modules.kotkaStreamsFramework)
   api(projects.modules.kotkaStreamsKotlinxSerialization)
 }
 
-tasks.wrapper {
-  gradleVersion = "7.4.1"
-  distributionType = Wrapper.DistributionType.ALL
+
+kotkaPublishing {
+  mavenPomSubprojectName.set("Kotlin for Kafka Streams")
+  mavenPomDescription.set("Using Kotka means a more pleasant experience while using Kafka Streams")
+}
+
+idea {
+  module {
+    excludeGeneratedGradleDsl(layout)
+    excludeDirs = excludeDirs + layout.files(
+      ".idea",
+      "gradle/wrapper",
+    )
+  }
+}
+
+initIdeProjectLogo("docs/images/logo-icon.svg")
+
+val projectVersion by tasks.registering {
+  description = "prints the project version"
+  group = "help"
+  val version = providers.provider { project.version }
+  inputs.property("version", version)
+  outputs.cacheIf("logging task, it should always run") { false }
+  doLast {
+    logger.quiet("${version.orNull}")
+  }
 }

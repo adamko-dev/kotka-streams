@@ -1,6 +1,5 @@
 package dev.adamko.kotka.topicdata
 
-
 import dev.adamko.kotka.extensions.consumedAs
 import dev.adamko.kotka.extensions.groupedAs
 import dev.adamko.kotka.extensions.joinedAs
@@ -16,6 +15,7 @@ import org.apache.kafka.streams.kstream.Produced
 import org.apache.kafka.streams.kstream.Repartitioned
 import org.apache.kafka.streams.processor.StreamPartitioner
 import org.apache.kafka.streams.processor.TimestampExtractor
+
 
 /**
  * A pair of [Serde]s - [one for the Key][keySerde], [another for the Value][valueSerde].

@@ -1,27 +1,26 @@
-[![](https://jitpack.io/v/adamko-dev/kotka-streams.svg)](https://jitpack.io/#adamko-dev/kotka-streams)
+[![GitHub license](https://img.shields.io/github/license/adamko-dev/kotka-streams?style=flat-square)](https://github.com/adamko-dev/kotka-streams/blob/main/LICENSE)
+[![](https://jitpack.io/v/adamko-dev/kotka-streams.svg?style=flat-square)](https://jitpack.io/#adamko-dev/kotka-streams)
+[![Maven Central](https://img.shields.io/maven-central/v/dev.adamko.kotka/kotka-streams?color=%234c1&style=flat-square)](https://search.maven.org/search?q=g:dev.adamko.kotka)
+[![Maven Central Snapshots](https://img.shields.io/maven-metadata/v?label=snapshots&metadataUrl=https%3A%2F%2Fs01.oss.sonatype.org%2Fcontent%2Frepositories%2Fsnapshots%2Fdev%2Fadamko%2Fkotka%2Fkotka-streams%2Fmaven-metadata.xml&style=flat-square&color=%234ff)](https://s01.oss.sonatype.org/content/repositories/snapshots/dev/adamko/kotka/)
 
 # Kotka Streams - Kotlin for Kafka Streams
 
 Using [Kotka](https://github.com/adamko-dev/kotka-streams) means a more pleasant experience while
 using [Kafka Streams](https://kafka.apache.org/documentation/streams/).
 
-## Status
-
-This project is a proof-of-concept and is untested. Contributions are welcomed!
 
 ## Quickstart
 
-Add [JitPack](https://jitpack.io/) as a repository, and add a dependency
-on `kotka-streams-extensions` for the basics.
+Add a dependency on `kotka-streams-extensions` for the basics.
 
 ```kotlin
 // build.gradle.kts
 repositories {
-  maven("https://jitpack.io/")
+  mavenCentral()
 }
 
 dependencies {
-  implementation("com.github.adamko-dev.kotka-streams:kotka-streams-extensions:$kotkaVersion")
+  implementation("dev.adamko.kotka:kotka-streams-extensions:$kotkaVersion")
 }
 ```
 
@@ -32,7 +31,7 @@ at once
 
 ```kotlin
 dependencies {
-  implementation("com.github.adamko-dev.kotka-streams:kotka-streams:$kotkaVersion")
+  implementation("dev.adamko.kotka:kotka-streams:$kotkaVersion")
 }
 ```
 
@@ -41,7 +40,7 @@ dependencies {
 Contains the basic extension functions to make Kafka Streams more Kotlin-esque.
 
 ```kotlin
-  implementation("com.github.adamko-dev.kotka-streams:kotka-streams-extensions:$kotkaVersion")
+  implementation("dev.adamko.kotka:kotka-streams-extensions:$kotkaVersion")
 ```
 
 ```kotlin
@@ -66,7 +65,7 @@ builder.stream<String, MusicalBand>("musical-bands")
 A light framework for structuring topics and records.
 
 ```kotlin
-  implementation("com.github.adamko-dev.kotka-streams:kotka-streams-framework:$kotkaVersion")
+  implementation("dev.adamko.kotka:kotka-streams-framework:$kotkaVersion")
 ```
 
 Use `TopicRecord` to standardise the data on each topic. Records can now easily be converted from
@@ -121,7 +120,7 @@ Use [Kotlinx Serialization](https://github.com/Kotlin/kotlinx.serialization/) fo
 serdes.
 
 ```kotlin
-implementation("com.github.adamko-dev.kotka-streams:kotka-streams-kotlinx-serialization:$kotkaVersion")
+implementation("dev.adamko.kotka:kotka-streams-kotlinx-serialization:$kotkaVersion")
 ```
 
 ```kotlin

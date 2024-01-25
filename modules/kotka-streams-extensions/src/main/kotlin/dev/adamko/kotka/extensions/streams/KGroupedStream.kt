@@ -11,6 +11,7 @@ import org.apache.kafka.streams.kstream.Reducer
 import org.apache.kafka.streams.state.KeyValueStore
 
 
+/** @see KGroupedStream.count */
 fun <K> KGroupedStream<K, *>.count(
   name: String? = null,
   materialized: Materialized<K, Long, KeyValueStore<Bytes, ByteArray>>? = null,
@@ -30,6 +31,7 @@ fun <K> KGroupedStream<K, *>.count(
 // parameter is required.
 
 
+/** @see KGroupedStream.aggregate */
 fun <K, inV, outV> KGroupedStream<K, inV>.aggregate(
   initializer: Initializer<outV>,
   materialized: Materialized<K, outV, KeyValueStore<Bytes, ByteArray>>,
@@ -37,6 +39,7 @@ fun <K, inV, outV> KGroupedStream<K, inV>.aggregate(
 ): KTable<K, outV> = aggregate(initializer, aggregator, materialized)
 
 
+/** @see KGroupedStream.aggregate */
 fun <K, inV, outV> KGroupedStream<K, inV>.aggregate(
   name: String,
   materialized: Materialized<K, outV, KeyValueStore<Bytes, ByteArray>>,
@@ -45,12 +48,14 @@ fun <K, inV, outV> KGroupedStream<K, inV>.aggregate(
 ): KTable<K, outV> = aggregate(initializer, aggregator, namedAs(name), materialized)
 
 
+/** @see KGroupedStream.reduce */
 fun <K, V> KGroupedStream<K, V>.reduce(
   materialized: Materialized<K, V, KeyValueStore<Bytes, ByteArray>>,
   reducer: Reducer<V>,
 ): KTable<K, V> = reduce(reducer, materialized)
 
 
+/** @see KGroupedStream.reduce */
 fun <K, V> KGroupedStream<K, V>.reduce(
   name: String,
   materialized: Materialized<K, V, KeyValueStore<Bytes, ByteArray>>,

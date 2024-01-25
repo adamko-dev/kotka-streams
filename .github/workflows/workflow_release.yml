@@ -1,0 +1,57 @@
+name: Releases
+
+
+on:
+  workflow_dispatch:
+    inputs:
+      checkout-ref:
+        description: "The branch, tag or SHA to checkout. See actions/checkout 'ref'."
+        required: false
+        type: string
+  push:
+    branches: [ main ]
+  release:
+    types: [ created ]
+
+
+concurrency:
+  group: "Releases: ${{ github.workflow }} @ ${{ inputs.checkout-ref }} ${{ github.event.pull_request.head.label || github.head_ref || github.ref }}"
+  cancel-in-progress: false
+
+
+jobs:
+
+  tests:
+    uses: ./.github/workflows/run_tests.yml
+    permissions:
+      checks: write
+      contents: read
+    with:
+      checkout-ref: ${{ inputs.checkout-ref }}
+
+  publish-maven:
+    needs: tests
+    # only publish when manually triggered, or it's the main branch, or it's for a release
+    if: inputs.checkout-ref || github.ref == 'refs/heads/main' || (github.event_name == 'release' && github.event.action == 'created')
+    uses: ./.github/workflows/run_publish_maven.yml
+    secrets: inherit
+    permissions:
+      checks: write
+      contents: write
+      packages: write
+    with:
+      checkout-ref: ${{ inputs.checkout-ref }}
+
+  publish-site:
+    needs: tests
+    # only publish when manually triggered, or it's for a release
+    if: inputs.checkout-ref || (github.event_name == 'release' && github.event.action == 'created')
+    uses: ./.github/workflows/run_publish_site.yml
+    permissions:
+      checks: write
+      contents: read
+      id-token: write   # to verify the deployment originates from an appropriate source
+      packages: write
+      pages: write      # to deploy to Pages
+    with:
+      checkout-ref: ${{ inputs.checkout-ref }}

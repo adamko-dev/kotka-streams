@@ -1,17 +1,52 @@
 plugins {
-  kotka.convention.`kotlin-jvm`
+  buildsrc.convention.`kotlin-jvm`
   kotlin("plugin.serialization")
-  kotka.convention.`maven-publish`
+  buildsrc.convention.`maven-publish`
+  buildsrc.convention.dokkatoo
 }
 
-@Suppress("UnstableApiUsage") // version catalogs + platform() is incubating
+description = "Use Kotlinx Serialization for topic key/value serdes"
+
+
 dependencies {
+  implementation(platform(projects.modules.versionsPlatform))
+
   api(projects.modules.kotkaStreamsExtensions)
   api(projects.modules.kotkaStreamsFramework)
 
-  api(libs.kafka.streams)
+  implementation(libs.kafka.streams)
 
-  api(platform(libs.kotlinx.serialization.bom))
-  api(libs.kotlinx.serialization.core)
+  implementation(libs.slf4j.api)
 
+  implementation(libs.kotlinxSerialization.core)
+
+  testImplementation(libs.kotest.runnerJUnit5)
+  testImplementation(libs.kotest.assertionsCore)
+  testImplementation(libs.kotest.property)
+  testImplementation(libs.kotest.assertionsJson)
+
+  testImplementation(libs.mockk)
+
+  testImplementation(libs.kotlinxSerialization.cbor)
+  testImplementation(libs.kotlinxSerialization.json)
+
+  testImplementation(libs.slf4j.simple)
+}
+
+
+tasks.compileTestKotlin {
+  // use experimental binary formats for testing
+  kotlinOptions.freeCompilerArgs += "-opt-in=kotlinx.serialization.ExperimentalSerializationApi"
+}
+
+
+kotkaPublishing {
+  mavenPomSubprojectName.set("Kotlinx Serialization Extensions")
+}
+
+dokkatoo {
+  moduleName.set("kotka-streams-kotlinx-serialization")
+  dokkatooSourceSets.configureEach {
+    includes.from("module.md")
+  }
 }

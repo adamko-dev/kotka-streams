@@ -10,12 +10,12 @@ typealias KeyValueIteratorOperation<K, V, Result> = KeyValueIterator<K, V>.() ->
 
 
 /**
- * Iterate over [all][KeyValueStore.all] records.
+ * Iterate over [all][org.apache.kafka.streams.state.KeyValueStore.all] records.
  *
  * This function is useful because the [KeyValueIterator] will be closed automatically
  * (see: [kotlin.io.use]) after all values have been consumed.
  *
- * @see KeyValueStore.all
+ * @see org.apache.kafka.streams.state.KeyValueStore.all
  */
 inline fun <K, V, Result> KeyValueStore<K, V>.useAll(
   operation: KeyValueIteratorOperation<K, V, Result>
@@ -24,12 +24,12 @@ inline fun <K, V, Result> KeyValueStore<K, V>.useAll(
 
 
 /**
- * Reverse-iterate over [all][KeyValueStore.reverseAll] records.
+ * Reverse-iterate over [all][org.apache.kafka.streams.state.KeyValueStore.reverseAll] records.
  *
  * This function is useful because the [KeyValueIterator] will be closed automatically
  * (see: [kotlin.io.use]) after all values have been consumed.
  *
- * @see KeyValueStore.reverseAll
+ * @see org.apache.kafka.streams.state.KeyValueStore.reverseAll
  */
 inline fun <K, V, Result> KeyValueStore<K, V>.useReverseAll(
   operation: KeyValueIteratorOperation<K, V, Result>
@@ -38,12 +38,12 @@ inline fun <K, V, Result> KeyValueStore<K, V>.useReverseAll(
 
 
 /**
- * Iterate over [a range][KeyValueStore.range] of records.
+ * Iterate over [a range][org.apache.kafka.streams.state.KeyValueStore.range] of records.
  *
  * This function is useful because the [KeyValueIterator] will be closed automatically
  * (see: [kotlin.io.use]) after all values have been consumed.
  *
- * @see KeyValueStore.range
+ * @see org.apache.kafka.streams.state.KeyValueStore.range
  */
 inline fun <K, V, Result> KeyValueStore<K, V>.useRange(
   from: K? = null,
@@ -54,12 +54,12 @@ inline fun <K, V, Result> KeyValueStore<K, V>.useRange(
 
 
 /**
- * Reverse-iterate over [a range][KeyValueStore.range] of records.
+ * Reverse-iterate over [a range][org.apache.kafka.streams.state.KeyValueStore.range] of records.
  *
  * This function is useful because the [KeyValueIterator] will be closed automatically
  * (see: [kotlin.io.use]) after all values have been consumed.
  *
- * @see KeyValueStore.reverseRange
+ * @see org.apache.kafka.streams.state.KeyValueStore.reverseRange
  */
 inline fun <K, V, Result> KeyValueStore<K, V>.useReverseRange(
   from: K? = null,
@@ -75,7 +75,7 @@ inline fun <K, V, Result> KeyValueStore<K, V>.useReverseRange(
  * This function is useful because the [KeyValueIterator] will be closed automatically
  * (see: [kotlin.io.use]) after all values have been consumed.
  *
- * @see KeyValueStore.prefixScan
+ * @see org.apache.kafka.streams.state.KeyValueStore.prefixScan
  */
 inline fun <K, V, Prefix, Result> KeyValueStore<K, V>.usePrefixScan(
   prefix: Prefix,
@@ -86,36 +86,36 @@ inline fun <K, V, Prefix, Result> KeyValueStore<K, V>.usePrefixScan(
 
 
 /**
- * Generate a [Sequence] of [all][KeyValueStore.all] records.
+ * Generate a [Sequence] of [all][org.apache.kafka.streams.state.KeyValueStore.all] records.
  *
  * This function is useful because the [KeyValueIterator] will be closed automatically
  * (see: [kotlin.io.use]) after all values have been consumed.
  *
- * @see KeyValueStore.all
+ * @see org.apache.kafka.streams.state.KeyValueStore.all
  */
 fun <K, V> KeyValueStore<K, V>.allAsSequence(): Sequence<KeyValue<K, V>> =
   all().use { it.asSequence() }
 
 
 /**
- * Generate a [Sequence] of all records, in [reverse][KeyValueStore.reverseAll]
+ * Generate a [Sequence] of all records, in [reverse][org.apache.kafka.streams.state.KeyValueStore.reverseAll]
  *
  * This function is useful because the [KeyValueIterator] will be closed automatically
  * (see: [kotlin.io.use]) after all values have been consumed.
  *
- * @see KeyValueStore.reverseAll
+ * @see org.apache.kafka.streams.state.KeyValueStore.reverseAll
  */
 fun <K, V> KeyValueStore<K, V>.reverseAllAsSequence(): Sequence<KeyValue<K, V>> =
   reverseAll().use { it.asSequence() }
 
 
 /**
- * Generate a [Sequence] of [a range][KeyValueStore.range] of records.
+ * Generate a [Sequence] of [a range][org.apache.kafka.streams.state.KeyValueStore.range] of records.
  *
  * This function is useful because the [KeyValueIterator] will be closed automatically
  * (see: [kotlin.io.use]) after all values have been consumed.
  *
- * @see KeyValueStore.range
+ * @see org.apache.kafka.streams.state.KeyValueStore.range
  */
 fun <K, V> KeyValueStore<K, V>.rangeAsSequence(
   from: K? = null,
@@ -125,12 +125,12 @@ fun <K, V> KeyValueStore<K, V>.rangeAsSequence(
 
 
 /**
- * Generate a [Sequence] of [a reverse-range][KeyValueStore.range] of records.
+ * Generate a [Sequence] of [a reverse-range][org.apache.kafka.streams.state.KeyValueStore.range] of records.
  *
  * This function is useful because the [KeyValueIterator] will be closed automatically
  * (see: [kotlin.io.use]) after all values have been consumed.
  *
- * @see KeyValueStore.reverseRange
+ * @see org.apache.kafka.streams.state.KeyValueStore.reverseRange
  */
 fun <K, V> KeyValueStore<K, V>.reverseRangeAsSequence(
   from: K? = null,
@@ -145,7 +145,7 @@ fun <K, V> KeyValueStore<K, V>.reverseRangeAsSequence(
  * This function is useful because the [KeyValueIterator] will be closed automatically
  * (see: [kotlin.io.use]) after all values have been consumed.
  *
- * @see KeyValueStore.prefixScan
+ * @see org.apache.kafka.streams.state.KeyValueStore.prefixScan
  */
 fun <K, V, Prefix> KeyValueStore<K, V>.prefixScanAsSequence(
   prefix: Prefix,
