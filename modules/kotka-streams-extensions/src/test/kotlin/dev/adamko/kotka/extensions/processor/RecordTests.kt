@@ -66,7 +66,5 @@ class RecordTests : BehaviorSpec({
         confirmVerified(mockRecord)
       }
     }
-
   }
-
 })

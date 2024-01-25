@@ -11,10 +11,10 @@ private val builder = StreamsBuilder()
 
 fun main() { 
 
-val stream: KStream<String, String> = builder
+val kafkaStream: KStream<String, String> = StreamsBuilder()
   .stream("input", Consumed.`as`("Customer_transactions_input_topic"))
 
-stream
+kafkaStream
   .filter(
     { _, v -> v != "invalid_txn" },
     Named.`as`("filter_out_invalid_txns")
@@ -25,11 +25,11 @@ stream
   )
   .to("output", Produced.`as`("Mapped_transactions_output_topic"))
 
-val stream: KStream<String, String> = builder
+val kotkaStream: KStream<String, String> = StreamsBuilder()
 // no need for backticks 
   .stream("input", consumedAs("Customer_transactions_input_topic"))
 
-stream
+kotkaStream
   // tasks can be named directly using a string, 
   // and the lambda expression can be placed outside the parentheses 
   .filter("filter_out_invalid_txns") { _, v ->

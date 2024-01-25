@@ -9,7 +9,7 @@ jvm = "11"
 
 kafka = "3.6.1"                         # https://kafka.apache.org/downloads
 kotlinx-serialization = "1.6.2"         # https://github.com/Kotlin/kotlinx.serialization/releases/tag/v1.3.3
-kotlinx-knit = "0.5.1"                  # https://github.com/Kotlin/kotlinx-knit/releases
+kotlinx-knit = "0.5.0"                  # https://github.com/Kotlin/kotlinx-knit/releases
 kotlin-dokka = "1.9.10"                 # https://search.maven.org/artifact/org.jetbrains.dokka/dokka-gradle-plugin
 
 slf4j = "2.0.11"
@@ -25,8 +25,6 @@ junit = "5.10.1"                         # https://github.com/junit-team/junit5/
 binaryCompatValidator = "0.12.1"        # https://search.maven.org/artifact/org.jetbrains.kotlinx/binary-compatibility-validator
 dokkatoo = "2.0.0"
 
-kotlinx-knit = "0.3.0"
-
 ###########
 [libraries]
 ###########
@@ -34,6 +32,7 @@ kotlinx-knit = "0.3.0"
 kotlin-bom = { module = "org.jetbrains.kotlin:kotlin-bom", version.ref = "kotlin" }
 
 kafka-streams = { module = "org.apache.kafka:kafka-streams", version.ref = "kafka" }
+kafka-streamsTestUtils = { module = "org.apache.kafka:kafka-streams-test-utils", version.ref = "kafka" }
 
 kotlinxSerialization-bom = { module = "org.jetbrains.kotlinx:kotlinx-serialization-bom", version.ref = "kotlinx-serialization" }
 kotlinxSerialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core" }
@@ -61,9 +60,6 @@ kotest-frameworkEngine = { module = "io.kotest:kotest-framework-engine" }
 kotest-frameworkDatatest = { module = "io.kotest:kotest-framework-datatest" }
 kotest-runnerJUnit5 = { module = "io.kotest:kotest-runner-junit5" }
 
-kafka-streams          = { group = "org.apache.kafka", name = "kafka-streams",            version.ref = "kafka" }
-kafka-streamsTestUtils = { group = "org.apache.kafka", name = "kafka-streams-test-utils", version.ref = "kafka" }
-
 # Knit
 kotlinx-knit = { module = "org.jetbrains.kotlinx:kotlinx-knit", version.ref = "kotlinx-knit" }
 kotlinx-knitTest = { module = "org.jetbrains.kotlinx:kotlinx-knit-test", version.ref = "kotlinx-knit" }
@@ -86,9 +82,6 @@ gradlePlugin-dokkatoo = { module = "dev.adamko.dokkatoo:dokkatoo-plugin", versio
 gradlePlugin-kotest = { module = "io.kotest:kotest-framework-multiplatform-plugin-gradle", version.ref = "kotest" }
 
 gradlePlugin-kotlinxSerialization = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin" }
-
-kotlinx-knit     = { group = "org.jetbrains.kotlinx", name = "kotlinx-knit",      version.ref = "kotlinx-knit" }
-kotlinx-knitTest = { group = "org.jetbrains.kotlinx", name = "kotlinx-knit-test", version.ref = "kotlinx-knit" }
 
 #########
 [plugins]

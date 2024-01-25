@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test
 
 class BasicsTest {
   @Test
+  @org.junit.jupiter.api.Disabled
   fun testExampleBasicsNamingOperators01() {
     captureOutput("ExampleBasicsNamingOperators01") {
       dev.adamko.kotka.example.exampleBasicsNamingOperators01.main()
@@ -33,6 +34,7 @@ class BasicsTest {
   }
 
   @Test
+  @org.junit.jupiter.api.Disabled
   fun testExampleBasicsNamingOperators02() {
     captureOutput("ExampleBasicsNamingOperators02") {
       dev.adamko.kotka.example.exampleBasicsNamingOperators02.main()

@@ -1,5 +1,5 @@
 plugins {
-  kotka.convention.`kotlin-jvm`
+  buildsrc.convention.`kotlin-jvm`
   id("org.jetbrains.kotlinx.knit")
 }
 
@@ -9,8 +9,14 @@ dependencies {
 
   testImplementation(kotlin("test"))
 
+  implementation(libs.slf4j.api)
+  implementation(libs.slf4j.simple)
+
   implementation(libs.kotlinx.knit)
   testImplementation(libs.kotlinx.knitTest)
+
+  testImplementation(platform(libs.kotest.bom))
+  testImplementation(libs.kotest.assertionsCore)
 }
 
 
@@ -31,11 +37,12 @@ knit {
 
 tasks.test {
   dependsOn(tasks.knit)
+  dependsOn(tasks.processResources)
 //  finalizedBy(tasks.knitCheck)
 }
 
 tasks.compileKotlin { mustRunAfter(tasks.knit) }
 
-//tasks.knitCheck {
-//  dependsOn(tasks.test)
-//}
+tasks.knitCheck {
+  dependsOn(tasks.test)
+}

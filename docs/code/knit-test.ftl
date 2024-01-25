@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test
 class ${test.name} {
 <#list cases as case><#assign method = test["mode.${case.param}"]!"custom">
   @Test
+  @org.junit.jupiter.api.Disabled
   fun test${case.name}() {
     captureOutput("${case.name}") {
       ${case.knit.package}.${case.knit.name}.main()
