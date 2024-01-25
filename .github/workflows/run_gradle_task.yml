@@ -98,7 +98,7 @@ jobs:
           "ORG_GRADLE_PROJECT_signing.password": ${{ secrets.SONATYPE_SIGNING_PASSWORD }}
           ORG_GRADLE_PROJECT_sonatypeRepositoryUsername: ${{ secrets.SONATYPE_REPO_USERNAME }}
           ORG_GRADLE_PROJECT_sonatypeRepositoryPassword: ${{ secrets.SONATYPE_REPO_PASSWORD }}
-          ORG_GRADLE_PROJECT_gitHubPackagesUsername: ${{ env.USERNAME }}
+          ORG_GRADLE_PROJECT_gitHubPackagesUsername: ${{ env.GITHUB_ACTOR }}
           ORG_GRADLE_PROJECT_gitHubPackagesPassword: ${{ env.TOKEN }}
 
       - name: Upload build reports
