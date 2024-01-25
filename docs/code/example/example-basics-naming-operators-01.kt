@@ -7,8 +7,6 @@ import org.apache.kafka.streams.*
 import dev.adamko.kotka.extensions.streams.*
 import org.apache.kafka.streams.kstream.*
 
-//private val builder = StreamsBuilder()
-
 fun main() { 
 
 val kafkaStreamBuilder = StreamsBuilder()

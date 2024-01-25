@@ -142,11 +142,13 @@ val kotkaTransactions: KStream<String, String> = kotkaStreamBuilder
 kotkaTransactions
   // tasks can be named directly using a string, 
   // and the lambda expression can be placed outside the parentheses 
-  .filter(name = "filter_out_invalid_txns") { _, v ->
-    v != "invalid_txn"
-  }.mapValues(name = "Map_values_to_first_6_characters") { _, v ->
-    v.take(6)
-  }.to("output", producedAs("Mapped_transactions_output_topic"))
+  .filter(name = "filter_out_invalid_txns") { _, value ->
+    value != "invalid_txn"
+  }
+  .mapValues(name = "Map_values_to_first_6_characters") { _, value ->
+    value.take(6)
+  }
+  .to("output", producedAs("Mapped_transactions_output_topic"))
 ```
 
 
