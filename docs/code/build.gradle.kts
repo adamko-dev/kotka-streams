@@ -46,3 +46,12 @@ tasks.compileKotlin { mustRunAfter(tasks.knit) }
 tasks.knitCheck {
   dependsOn(tasks.test)
 }
+
+tasks.knit {
+  inputs.files(
+    layout.projectDirectory.files(
+      "knit-tests.ftl",
+      "knit-includes.ftl",
+    )
+  ).withPropertyName("knitTemplates")
+}
