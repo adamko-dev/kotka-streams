@@ -99,7 +99,7 @@ jobs:
           ORG_GRADLE_PROJECT_sonatypeRepositoryUsername: ${{ secrets.MAVEN_SONATYPE_USERNAME }}
           ORG_GRADLE_PROJECT_sonatypeRepositoryPassword: ${{ secrets.MAVEN_SONATYPE_PASSWORD }}
 
-          ORG_GRADLE_PROJECT_gitHubPackagesUsername: "aSemy"
+          ORG_GRADLE_PROJECT_gitHubPackagesUsername: ${{ github.actor }}
           ORG_GRADLE_PROJECT_gitHubPackagesPassword: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload build reports
