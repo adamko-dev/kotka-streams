@@ -9,7 +9,7 @@ jvm = "11"
 
 kafka = "3.6.1"                         # https://kafka.apache.org/downloads
 kotlinx-serialization = "1.6.2"         # https://github.com/Kotlin/kotlinx.serialization/releases/tag/v1.3.3
-kotlinx-knit = "0.5.1"                  # https://github.com/Kotlin/kotlinx-knit/releases
+kotlinx-knit = "0.5.0"                  # https://github.com/Kotlin/kotlinx-knit/releases
 kotlin-dokka = "1.9.10"                 # https://search.maven.org/artifact/org.jetbrains.dokka/dokka-gradle-plugin
 
 slf4j = "2.0.11"
@@ -32,6 +32,7 @@ dokkatoo = "2.0.0"
 kotlin-bom = { module = "org.jetbrains.kotlin:kotlin-bom", version.ref = "kotlin" }
 
 kafka-streams = { module = "org.apache.kafka:kafka-streams", version.ref = "kafka" }
+kafka-streamsTestUtils = { module = "org.apache.kafka:kafka-streams-test-utils", version.ref = "kafka" }
 
 kotlinxSerialization-bom = { module = "org.jetbrains.kotlinx:kotlinx-serialization-bom", version.ref = "kotlinx-serialization" }
 kotlinxSerialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core" }
@@ -58,7 +59,6 @@ kotest-property = { module = "io.kotest:kotest-property" }
 kotest-frameworkEngine = { module = "io.kotest:kotest-framework-engine" }
 kotest-frameworkDatatest = { module = "io.kotest:kotest-framework-datatest" }
 kotest-runnerJUnit5 = { module = "io.kotest:kotest-runner-junit5" }
-
 
 # Knit
 kotlinx-knit = { module = "org.jetbrains.kotlinx:kotlinx-knit", version.ref = "kotlinx-knit" }

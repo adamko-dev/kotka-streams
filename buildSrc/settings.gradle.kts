@@ -12,8 +12,8 @@ dependencyResolutionManagement {
   repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
 
   repositories {
-    gradlePluginPortal()
     mavenCentral()
+    gradlePluginPortal()
   }
 
   versionCatalogs {

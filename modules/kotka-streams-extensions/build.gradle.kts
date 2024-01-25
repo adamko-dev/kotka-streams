@@ -8,9 +8,13 @@ description = "Kotlin extensions for Kafka Streams"
 
 
 dependencies {
+  api(libs.kafka.streams)
+
   implementation(platform(projects.modules.versionsPlatform))
 
   implementation(libs.kafka.streams)
+
+  testImplementation(libs.kafka.streamsTestUtils)
 
   testImplementation(libs.kotest.runnerJUnit5)
   testImplementation(libs.kotest.assertionsCore)

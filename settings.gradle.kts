@@ -20,6 +20,7 @@ dependencyResolutionManagement {
 
 include(
   ":docs",
+  ":docs:code",
 
   ":modules:kotka-streams-extensions",
   ":modules:kotka-streams-framework",
