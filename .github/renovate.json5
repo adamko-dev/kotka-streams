@@ -28,14 +28,14 @@
     }
   ],
   timezone: "Etc/UTC",
-  // loosely limit to Europe daytime, so we don't get pinged in the middle of the night
+  // loosely limit to Europe work hours, so we don't get pinged in the middle of the night
   schedule: [
     "after 10am",
-    "before 5pm"
+    "before 6pm",
   ],
   automergeSchedule: [
     "after 10am",
-    "before 10pm",
+    "before 6pm",
   ],
   stabilityDays: 14,
   //  suppressNotifications: [
