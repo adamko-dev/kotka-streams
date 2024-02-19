@@ -35,7 +35,7 @@
   ],
   automergeSchedule: [
     "after 10am",
-    "before 5pm"
+    "before 10pm",
   ],
   stabilityDays: 14,
   //  suppressNotifications: [
