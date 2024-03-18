@@ -10,7 +10,7 @@ jvm = "11"
 kafka = "3.6.1"                         # https://kafka.apache.org/downloads
 kotlinx-serialization = "1.6.2"         # https://github.com/Kotlin/kotlinx.serialization/releases/tag/v1.3.3
 kotlinx-knit = "0.5.1"                  # https://github.com/Kotlin/kotlinx-knit/releases
-kotlin-dokka = "1.9.10"                 # https://search.maven.org/artifact/org.jetbrains.dokka/dokka-gradle-plugin
+kotlin-dokka = "1.9.20"                 # https://search.maven.org/artifact/org.jetbrains.dokka/dokka-gradle-plugin
 
 slf4j = "2.0.11"
 
