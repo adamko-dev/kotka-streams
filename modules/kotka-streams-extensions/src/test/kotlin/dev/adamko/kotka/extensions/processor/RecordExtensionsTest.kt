@@ -29,7 +29,7 @@ class RecordExtensionsTest : FunSpec({
 
 
     test("destructuring declaration should return (key, value, timestamp)") {
-      val (key, value, timestamp) = record
+      val (key: String, value: String, timestamp: Long) = record
 
       key shouldBe "key 123"
       key shouldBe record.key()

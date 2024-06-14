@@ -7,6 +7,7 @@ plugins {
   `project-report`
   // `build-dashboard` // incompatible with Gradle CC
   idea
+  id("org.jetbrains.kotlinx.kover")
 }
 
 group = "dev.adamko.kotka"
